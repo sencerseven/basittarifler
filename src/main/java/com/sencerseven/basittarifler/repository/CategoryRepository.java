@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface CategoryRepository extends CrudRepository<Category,Long> {
 
@@ -13,6 +14,6 @@ public interface CategoryRepository extends CrudRepository<Category,Long> {
 
     List<Category> findCategoriesByMenuActive(Pageable pageable, Boolean active);
 
-    List<Category> findCategoriesByIdAndCategoryUrl(Pageable pageable, Long catId,String catUrl);
+    Optional<Category> findCategoriesByIdAndCategoryUrl(Long catId, String catUrl);
 
 }

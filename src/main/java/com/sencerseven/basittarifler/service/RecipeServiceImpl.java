@@ -27,11 +27,14 @@ public class RecipeServiceImpl implements RecipeService {
 
     RecipeRepository recipeRepository;
 
+    CategoryService categoryService;
+
     RecipeToRecipeCommandConverter recipeToRecipeCommandConverter;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeToRecipeCommandConverter recipeToRecipeCommandConverter) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeToRecipeCommandConverter recipeToRecipeCommandConverter,CategoryService categoryService) {
         this.recipeRepository = recipeRepository;
         this.recipeToRecipeCommandConverter = recipeToRecipeCommandConverter;
+        this.categoryService = categoryService;
     }
 
     @Override
@@ -111,6 +114,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Page<Recipe> findRecipeByCategoriesInOrderByCreatedAtDesc(int page, int size, Set<Category> categories) {
+
         return null;
     }
 

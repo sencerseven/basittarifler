@@ -5,6 +5,7 @@ import com.sencerseven.basittarifler.converter.CategoryToCategoryCommandConverte
 import com.sencerseven.basittarifler.converter.RecipeToRecipeCommandConverter;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.domain.Users;
+import com.sencerseven.basittarifler.repository.CategoryRepository;
 import com.sencerseven.basittarifler.repository.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +28,9 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    CategoryService categoryService;
+
     RecipeServiceImpl recipeService;
 
     @Mock
@@ -41,7 +45,7 @@ public class RecipeServiceImplTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         recipeToRecipeCommandConverter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter);
-        recipeService = new RecipeServiceImpl(recipeRepository,recipeToRecipeCommandConverter);
+        recipeService = new RecipeServiceImpl(recipeRepository,recipeToRecipeCommandConverter,categoryService);
     }
 
     @Test

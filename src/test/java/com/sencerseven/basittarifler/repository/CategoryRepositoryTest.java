@@ -45,7 +45,9 @@ public class CategoryRepositoryTest {
 
     @Test
     public void findCategoriesByIdAndAndCategoryUrl() throws Exception{
+        Optional<Category> categories = categoryRepository.findCategoriesByIdAndCategoryUrl(1L,"oglen-yemegi");
 
+        assertNotNull(categories.isPresent());
     }
 
 
