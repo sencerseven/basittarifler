@@ -9,6 +9,7 @@ import org.mockito.*;
 import org.omg.CORBA.INTERNAL;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Controller;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
@@ -26,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 
+@Controller
 public class RecipeControllerTest {
 
     @Mock
@@ -41,7 +43,9 @@ public class RecipeControllerTest {
     CommentService commentService;
 
     @Mock
-    RecipeStatsService recipeStatsService;
+    CategoryService categoryService;
+
+
 
     @Mock
     Model model;
@@ -53,7 +57,7 @@ public class RecipeControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeController = new RecipeController(recipeService,recipeStepsService,recipeTipsService,commentService,recipeStatsService);
+        recipeController = new RecipeController(recipeService,recipeStepsService,recipeTipsService,commentService,categoryService);
 
     }
 

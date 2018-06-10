@@ -1,7 +1,9 @@
 package com.sencerseven.basittarifler.repository;
 
+import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.domain.Users;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,7 +24,10 @@ public interface RecipeRepository extends JpaRepository<Recipe,Long> {
     List<Recipe> findRecipesByUsers(Pageable pageable, Users users);
 
     List<Recipe> findRecipeByIdNot(Pageable pageable,Long id);
-    List<Recipe> findAllBy(Pageable pageable);
+    List<Recipe> findAllByOrderByViewCountDesc(Pageable pageable);
 
+    Page<Recipe> findAllByOrderByCreatedAtDesc(Pageable pageable);
+    Long countAllBy();
 
+    Page<Recipe> findRecipeByCategoriesInOrderByCreatedAtDesc(Pageable pageable,Set<Category> categories);
 }

@@ -1,7 +1,7 @@
 package com.sencerseven.basittarifler.service;
 
+import com.sencerseven.basittarifler.command.UsersCommand;
 import com.sencerseven.basittarifler.converter.CategoryToCategoryCommandConverter;
-import com.sencerseven.basittarifler.converter.RecipeCommandToRecipeConverter;
 import com.sencerseven.basittarifler.converter.RecipeToRecipeCommandConverter;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.domain.Users;
@@ -10,18 +10,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.stubbing.OngoingStubbing;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
-import javax.swing.text.html.Option;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 public class RecipeServiceImplTest {
@@ -37,6 +35,7 @@ public class RecipeServiceImplTest {
     RecipeToRecipeCommandConverter recipeToRecipeCommandConverter;
 
     public static final Long ID =1L;
+    public static final Long ID2 =2L;
 
     @Before
     public void setUp() throws Exception {
@@ -112,4 +111,33 @@ public class RecipeServiceImplTest {
     }
 
 
+    @Test
+    public void updateByUserCommand() {
+
+        Recipe recipe = new Recipe();
+        recipe.setId(ID);
+        recipe.setUsers(new Users());
+        recipe.getUsers().setId(ID);
+
+
+        UsersCommand usersCommand = new UsersCommand();
+        usersCommand.setId(ID);
+
+        when(recipeRepository.save(any(Recipe.class))).thenReturn(recipe);
+        Recipe recipeNull = recipeService.updateByUserCommand(null,null);
+        Recipe recipeNotEqual = recipeService.updateByUserCommand(recipe,usersCommand);
+
+        recipe.getUsers().setId(ID2);
+
+        Recipe recipeResult = recipeService.updateByUserCommand(recipe,usersCommand);
+
+
+        assertNull(recipeNull);
+        assertNull(recipeNotEqual);
+        assertEquals(ID2,recipeResult.getUsers().getId());
+        verify(recipeRepository,times(1)).save(any(Recipe.class));
+
+
+
+    }
 }

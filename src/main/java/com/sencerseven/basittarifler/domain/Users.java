@@ -30,12 +30,11 @@ public class Users implements Serializable {
 
     private int active;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.DETACH)
-    @JoinTable(name = "user_recipe",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name="recipe_id"))
     private Set<Recipe> recipes = new HashSet<>();
 
     @OneToOne(mappedBy = "users" ,cascade = CascadeType.ALL,fetch = FetchType.EAGER)

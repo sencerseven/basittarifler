@@ -1,5 +1,6 @@
 package com.sencerseven.basittarifler.repository;
 
+import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.domain.Users;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -74,18 +76,38 @@ public class RecipeRepositoryTest {
     public void findRecipeByRecipeNot(){
 
         Optional<Recipe> recipe = recipeRepository.findById(2L);
-        PageRequest pageRequest = PageRequest.of(0,1,Sort.Direction.ASC,"recipeStats.getTotalView");
+        PageRequest pageRequest = PageRequest.of(0,1);
         List<Recipe> recipeList = recipeRepository.findRecipeByIdNot(pageRequest,recipe.get().getId());
         assertEquals(recipeList.get(0).getId(),ID);
 
     }
     @Test
     public void findAllBy(){
-
-        Optional<Recipe> recipe = recipeRepository.findById(2L);
-        PageRequest pageRequest = PageRequest.of(0,2,Sort.Direction.ASC,"recipeStats.getTotalView");
-        List<Recipe> recipeList = recipeRepository.findAllBy(pageRequest);
+        PageRequest pageRequest = PageRequest.of(0,2);
+        List<Recipe> recipeList = recipeRepository.findAllByOrderByViewCountDesc(pageRequest);
         assertEquals(recipeList.size(),2);
 
     }
+    @Test
+    public void findAllByOrderByCreated_atDesc(){
+        PageRequest pageRequest = PageRequest.of(0,2);
+        Page recipe = recipeRepository.findAllByOrderByCreatedAtDesc(pageRequest);
+
+
+        assertEquals(recipe.getContent().size(),2);
+
+    }
+
+    @Test
+     public void findRecipeByCategories(){
+        Category category = new Category();
+        category.setId(4L);
+        Category category2 = new Category();
+        category2.setId(5L);
+        Set<Category> categories = new HashSet<>();
+        categories.add(category);
+        categories.add(category2);
+        Page<Recipe> recipeList = recipeRepository.findRecipeByCategoriesInOrderByCreatedAtDesc(PageRequest.of(0,2),categories);
+        assertEquals(recipeList.getSize(),2);
+     }
 }

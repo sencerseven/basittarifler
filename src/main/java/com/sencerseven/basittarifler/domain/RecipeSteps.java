@@ -5,17 +5,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = "recipe")
 @Entity
-public class RecipeSteps {
+public class RecipeSteps implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length=512)
     private String description;
 
     private String imageURL;

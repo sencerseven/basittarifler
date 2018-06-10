@@ -5,15 +5,16 @@ import com.sencerseven.basittarifler.repository.CategoryRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.PageRequest;
 
-import java.util.HashSet;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 public class CategoryServiceTest {
 
@@ -22,8 +23,12 @@ public class CategoryServiceTest {
 
     CategoryServiceImpl categoryService;
 
+    private static final Long ID =1L;
+
     @Before
     public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+
         categoryService = new CategoryServiceImpl(categoryRepository);
     }
 /*
@@ -46,5 +51,21 @@ public class CategoryServiceTest {
 */
     @Test
     public void findById() {
+    }
+
+    @Test
+    public void getCategoriesByMenuActive(){
+        Category category = new Category();
+        category.setId(ID);
+        List<Category> categories = new ArrayList<>();
+        categories.add(category);
+
+        when(categoryRepository.findCategoriesByMenuActive(any(PageRequest.class),any(Boolean.class))).thenReturn(categories);
+
+        Set<Category> resultCategory = categoryService.getCategoriesByMenuActive(0,1,true);
+
+        assertEquals(resultCategory.size(),1);
+        verify(categoryRepository,times(1)).findCategoriesByMenuActive(any(PageRequest.class),any(Boolean.class));
+
     }
 }
