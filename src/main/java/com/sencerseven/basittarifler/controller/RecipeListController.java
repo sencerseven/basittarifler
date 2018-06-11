@@ -45,9 +45,19 @@ public class RecipeListController {
 
 
     @GetMapping("{id}/{category}")
-    public String searchAction(Model model,@PathVariable("id") String catId,@PathVariable("category")String categoryUrl){
+    public String searchAction(Model model,@PathVariable("id") String catId,@PathVariable("category")String categoryUrl,
+    @RequestParam(value = "page",required = false,defaultValue = "1")int id){
+        Set<Category> categories = categoryService.defineCategoryParentOrSubsForPage(Long.valueOf(catId),categoryUrl);
+        Page<Recipe> recipeList = recipeService.findRecipeByCategoriesInOrderByCreatedAtDesc(id-1,6,categories);
+
+        List<Recipe> recipePopuler = recipeService.getAllPopulerRecipe(0,3);
+        Set<Category> allCategories = categoryService.getCategoriesByMenuActive(0,3,true);
 
 
+        model.addAttribute("recipePage",recipeList);
+        model.addAttribute("recipeCount",recipeService.countAllBy());
+        model.addAttribute("recipePopular",recipePopuler);
+        model.addAttribute("categories",allCategories);
 
         return "index";
     }

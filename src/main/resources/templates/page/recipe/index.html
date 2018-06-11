@@ -709,7 +709,7 @@
                                 <!--<div class="list-inner">-->
                                 <ul>
                                     <li th:each="category : ${categories}">
-                                        <a href="recipe-detail.html#" th:text="${category.categoryName}">breakfast</a>
+                                        <a href="recipe-detail.html#" th:text="${category.categoryName}" th:href="@{'/recipelist/'+${category.id} + '/' +${category.categoryUrl}}">breakfast</a>
                                         <div class="list-icons">
                                             <svg version="1.1"  class="icon-container" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              width="42px" height="42px" viewBox="0 0 42 42" enable-background="new 0 0 42 42" xml:space="preserve">

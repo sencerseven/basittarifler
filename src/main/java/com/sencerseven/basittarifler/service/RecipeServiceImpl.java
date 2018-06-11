@@ -115,7 +115,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Page<Recipe> findRecipeByCategoriesInOrderByCreatedAtDesc(int page, int size, Set<Category> categories) {
 
-        return null;
+        return recipeRepository.findRecipeByCategoriesInOrderByCreatedAtDesc(PageRequest.of(page,size),categories);
     }
 
 }

@@ -39,7 +39,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
     public List<Category> getCategory(){
 
-        Optional<Category> categoryOptional = categoryRepository.findById(1L);
+        Optional<Category> categoryOptional = categoryRepository.findById(2L);
 
         if(!categoryOptional.isPresent())
             throw  new RuntimeException("No found category !");

@@ -29,6 +29,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
         if(handler instanceof HandlerMethod && modelAndView != null){
             HandlerMethod handlerMethod = (HandlerMethod) handler;
 
+
             controllerName = handlerMethod.getBeanType().getSimpleName();
             actionName =handlerMethod.getMethod().getName();
             if(controllerName.substring(controllerName.length() - controllerDef.length()).equals(controllerDef)){
@@ -42,13 +43,22 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             }else{
                 actionName = "";
             }
+            String[] path = request.getServletPath().substring(1, request.getServletPath().length()).split("/");
+            String viewUrl="";
+            String jsUrl ="";
+            System.out.println(path[0]);
+            if(path[0].equals("admin")){
+               viewUrl = "admin/" +controllerName+"/"+actionName;
+               jsUrl = "/js/admin/page/"+controllerName+"/"+actionName+".js";
+            }else{
+                viewUrl = "page/" +controllerName+"/"+actionName;
+                jsUrl = "/js/page/"+controllerName+"/"+actionName+".js";
+            }
 
+            modelAndView.addObject("view",viewUrl);
+            modelAndView.addObject("js",jsUrl);
             modelAndView.addObject("controllerName",controllerName);
             modelAndView.addObject("actionName",actionName);
-            String viewUrl = "page/" +controllerName+"/"+actionName;
-            modelAndView.addObject("view",viewUrl);
-            String jsUrl = "/js/page/"+controllerName+"/"+actionName+".js";
-            modelAndView.addObject("js",jsUrl);
 
             UsersCommand users = null;
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
