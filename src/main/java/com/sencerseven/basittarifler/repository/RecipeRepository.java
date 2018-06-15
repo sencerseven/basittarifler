@@ -30,4 +30,7 @@ public interface RecipeRepository extends JpaRepository<Recipe,Long> {
     Long countAllBy();
 
     Page<Recipe> findRecipeByCategoriesInOrderByCreatedAtDesc(Pageable pageable,Set<Category> categories);
+
+
+
 }

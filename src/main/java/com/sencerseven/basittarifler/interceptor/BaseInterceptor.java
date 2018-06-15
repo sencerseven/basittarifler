@@ -46,10 +46,12 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             String[] path = request.getServletPath().substring(1, request.getServletPath().length()).split("/");
             String viewUrl="";
             String jsUrl ="";
+            String cssUrl ="";
             System.out.println(path[0]);
             if(path[0].equals("admin")){
-               viewUrl = "admin/" +controllerName+"/"+actionName;
+               viewUrl = "admin/page/" +controllerName+"/"+actionName;
                jsUrl = "/js/admin/page/"+controllerName+"/"+actionName+".js";
+               cssUrl = "/css/admin/page/"+controllerName+"/"+actionName+".css";
             }else{
                 viewUrl = "page/" +controllerName+"/"+actionName;
                 jsUrl = "/js/page/"+controllerName+"/"+actionName+".js";
@@ -57,6 +59,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 
             modelAndView.addObject("view",viewUrl);
             modelAndView.addObject("js",jsUrl);
+            modelAndView.addObject("css",cssUrl);
             modelAndView.addObject("controllerName",controllerName);
             modelAndView.addObject("actionName",actionName);
 
