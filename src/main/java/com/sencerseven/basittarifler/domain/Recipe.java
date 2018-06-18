@@ -39,7 +39,7 @@ public class Recipe implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     Nutrition nutrition;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
     @JoinTable(name = "CAT_RECIPE"
                 ,joinColumns = @JoinColumn(name = "recipe_id")
                 ,inverseJoinColumns = @JoinColumn(name = "category_id"))

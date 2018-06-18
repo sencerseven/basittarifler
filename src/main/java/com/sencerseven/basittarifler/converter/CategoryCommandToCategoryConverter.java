@@ -2,6 +2,7 @@ package com.sencerseven.basittarifler.converter;
 
 import com.sencerseven.basittarifler.command.CategoryCommand;
 import com.sencerseven.basittarifler.domain.Category;
+import com.sencerseven.basittarifler.service.CategoryService;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
@@ -9,6 +10,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CategoryCommandToCategoryConverter implements Converter<CategoryCommand,Category> {
+
+    CategoryService categoryService;
+
+    public CategoryCommandToCategoryConverter(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @Synchronized
     @Nullable
@@ -21,6 +28,10 @@ public class CategoryCommandToCategoryConverter implements Converter<CategoryCom
         category.setId(categoryCommand.getId());
         category.setCategoryDescription(categoryCommand.getCategoryDescription());
         category.setCategoryName(categoryCommand.getCategoryName());
+
+        if(categoryCommand.getParentCategory() != null){
+            category.setParentCategory(categoryService.getById(categoryCommand.getParentCategory()));
+        }
 
         return category;
     }

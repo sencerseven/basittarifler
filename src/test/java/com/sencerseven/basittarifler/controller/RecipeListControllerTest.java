@@ -39,12 +39,14 @@ public class RecipeListControllerTest {
         MockMvc mock = MockMvcBuilders.standaloneSetup(recipeListController).build();
 
 
-        mock.perform(get("/recipelist"))
+        mock.perform(get("/recipelist").param("test","tst"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"));
     }
 
     @Test
     public void indexAction() {
+
+
     }
 }

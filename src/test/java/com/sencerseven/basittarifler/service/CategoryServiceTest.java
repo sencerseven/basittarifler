@@ -1,5 +1,7 @@
 package com.sencerseven.basittarifler.service;
 
+import com.sencerseven.basittarifler.command.CategoryCommand;
+import com.sencerseven.basittarifler.converter.CategoryCommandToCategoryConverter;
 import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.exceptions.NotFoundException;
 import com.sencerseven.basittarifler.repository.CategoryRepository;
@@ -21,6 +23,9 @@ public class CategoryServiceTest {
 
     @Mock
     CategoryRepository categoryRepository;
+
+    @Mock
+    CategoryCommandToCategoryConverter categoryCommandToCategoryConverter;
 
     CategoryServiceImpl categoryService;
 
@@ -119,10 +124,18 @@ public class CategoryServiceTest {
         assertTrue(categoriesSet.contains(category));
         assertTrue(categoriesSet2.contains(child));
 
+    }
+
+    @Test
+    public void saveCategoryCommand(){
+        Category category = new Category();
+        category.setId(ID);
 
 
+        when(categoryCommandToCategoryConverter.convert(any())).thenReturn(category);
+        when(categoryRepository.save(any())).thenReturn(category);
+        Category returnCategory = categoryService.saveCategoryCommand(new CategoryCommand());
 
-
-
+        assertEquals(ID,returnCategory.getId());
     }
 }

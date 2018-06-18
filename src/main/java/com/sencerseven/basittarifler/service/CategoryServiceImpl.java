@@ -1,5 +1,7 @@
 package com.sencerseven.basittarifler.service;
 
+import com.sencerseven.basittarifler.command.CategoryCommand;
+import com.sencerseven.basittarifler.converter.CategoryCommandToCategoryConverter;
 import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.exceptions.NotFoundException;
 import com.sencerseven.basittarifler.repository.CategoryRepository;
@@ -8,20 +10,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
-
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
     CategoryRepository categoryRepository;
+    CategoryCommandToCategoryConverter categoryCommandToCategoryConverter;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository){
+    public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
+        this.categoryCommandToCategoryConverter = new CategoryCommandToCategoryConverter(this);
+    }
+
+    @Override
+    public Category getById(Long id) {
+        Optional<Category> categoryOptional = categoryRepository.findById(id);
+        if(!categoryOptional.isPresent())
+            return null;
+        return categoryOptional.get();
     }
 
     @Override
@@ -56,8 +66,28 @@ public class CategoryServiceImpl implements CategoryService {
 
         categories.add(categoryOptional.get());
         return categories;
+    }
 
+    @Override
+    public Category saveCategoryCommand(CategoryCommand categoryCommand) {
+        if(categoryCommand != null){
+            Category category = categoryCommandToCategoryConverter.convert(categoryCommand);
 
+            return categoryRepository.save(category);
+        }
+
+        return null;
+    }
+    @Transactional
+    @Override
+    public void deleteCategory(Long id) {
+
+        Optional<Category> category = categoryRepository.findById(id);
+
+        if(category.isPresent()){
+           category.get().getChildrenCategory().forEach(category.get()::removeChildren);
+           categoryRepository.deleteCategoryById(id);
+        }
 
     }
 

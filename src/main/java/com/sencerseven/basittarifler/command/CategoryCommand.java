@@ -19,4 +19,6 @@ public class CategoryCommand {
 
     private String categoryDescription;
 
+    private Long parentCategory;
+
 }

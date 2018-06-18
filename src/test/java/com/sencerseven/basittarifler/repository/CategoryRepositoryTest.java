@@ -19,6 +19,8 @@ import static org.junit.Assert.*;
 @DataJpaTest
 public class CategoryRepositoryTest {
 
+    private static final Long ID = 1L;
+
     @Autowired
     CategoryRepository categoryRepository;
 
@@ -50,5 +52,30 @@ public class CategoryRepositoryTest {
         assertNotNull(categories.isPresent());
     }
 
+    @Test
+    public void saveCategory() throws Exception{
+        Category category = new Category();
+        category.setId(ID);
+
+        Category parentCategory = new Category();
+        parentCategory.setId(ID);
+
+        category.setParentCategory(parentCategory);
+
+        Category savedCategory =categoryRepository.save(category);
+
+        assertEquals(ID,savedCategory.getId());
+        assertEquals(ID,savedCategory.getParentCategory().getId());
+    }
+
+    @Test
+    public void removeCategory() throws Exception{
+        Category category = new Category();
+        category.setId(ID);
+
+       categoryRepository.deleteCategoryById(category.getId());
+
+        assertEquals(ID,ID);
+    }
 
 }
