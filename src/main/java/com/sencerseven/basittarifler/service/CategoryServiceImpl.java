@@ -30,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Category getById(Long id) {
         Optional<Category> categoryOptional = categoryRepository.findById(id);
         if(!categoryOptional.isPresent())
-            return null;
+            throw new NullPointerException();
         return categoryOptional.get();
     }
 
@@ -67,7 +67,6 @@ public class CategoryServiceImpl implements CategoryService {
         categories.add(categoryOptional.get());
         return categories;
     }
-
     @Override
     public Category saveCategoryCommand(CategoryCommand categoryCommand) {
         if(categoryCommand != null){

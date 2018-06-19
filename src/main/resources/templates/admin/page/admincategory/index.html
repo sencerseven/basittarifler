@@ -46,8 +46,8 @@
                             <td th:text="${category.categoryDescription}">Edinburgh</td>
                             <td th:text="${(category.parentCategory == null) ? ' - - ' : category.parentCategory.getCategoryName() }">61</td>
                             <td>
-                                <a href="" th:href="@{'/admin/category/delete/'+${category.id}}"><i class="fa fa-pencil-square-o"></i></a>
-                                <a href=""><i class="fa fa-trash"></i></a>
+                                <a href="" th:href="@{'/admin/category/edit/'+${category.id}}"><i class="fa fa-pencil-square-o"></i></a>
+                                <a href="" th:href="@{'/admin/category/delete/'+${category.id}}"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                         </tbody>

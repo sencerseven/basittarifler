@@ -52,7 +52,7 @@ public class RecipeController {
         List<Recipe> recipeList = recipeService.getRecipeOrderByViewCountAndLimit(0, 3);
         List<Recipe> recipesUsers = recipeService.getRecipesByUsers(0, 3, recipe.getUsers());
         List<Comment> commentList = commentService.getCommentsByRecipeOrderByCreatedAtAsc(recipe);
-        Set<Category> categories = categoryService.getCategoriesByMenuActive(0,3,true);
+        Set<Category> categories = categoryService.getCategoriesByMenuActive(0,10,true);
 
 
         List<Recipe> recipesPopuler = recipeService.getAllPopulerRecipe(0,3);

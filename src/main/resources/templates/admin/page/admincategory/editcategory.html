@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
 
@@ -18,13 +17,13 @@
 </head>
 <body>
 <!-- Start Page Content -->
-<!--/*@thymesVar id="categoryCommand" type="com.sencerseven.basittarifler.command.CategoryCommand"*/-->
 <div class="row justify-content-center">
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
                 <div class="form-validation">
                     <form class="form-valide" action="#" th:action="@{/admin/category/add}" method="post" th:object="${categoryCommand}">
+                        <input th:hidden="true" th:field="*{id}" id="categoryID">
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label" for="val-username">Kategori Adı <span class="text-danger">*</span></label>
                             <div class="col-lg-6">
@@ -40,20 +39,20 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="val-skill">Üst Kategori</label>
+                            <label class="col-lg-4 col-form-label" for="val-skill">Üst Kategori <span class="text-danger">*</span></label>
                             <div class="col-lg-6">
                                 <select class="form-control" id="val-skill" name="val-skill" th:field="*{parentCategory.id}">
                                     <option value="">Please select</option>
-                                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.categoryName}"></option>
+                                    <option th:each="category : ${categories}" th:if="(*{id} != ${category.id})" th:value="${category.id}" th:text="${category.categoryName}" th:selected="(*{parentCategory.id} == ${category.id})"></option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="val-skill">Durum</label>
+                            <label class="col-lg-4 col-form-label" for="val-skill">Durum <span class="text-danger">*</span></label>
                             <div class="col-lg-6">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" data-toggle="toggle" th:field="*{menuActive}">
+                                        <input type="checkbox" data-toggle="toggle" th:field="*{menuActive}" th:checked="*{menuActive} == true">
                                         Menude Gözüksünmü ?
                                     </label>
                                 </div>

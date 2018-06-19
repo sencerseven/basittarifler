@@ -14,14 +14,19 @@ public class CategoryToCategoryCommandConverter implements Converter<Category, C
     @Nullable
     @Override
     public CategoryCommand convert(Category category) {
-        if(category == null)
+        if (category == null)
             return null;
-       final CategoryCommand categoryCommand = new CategoryCommand();
+        final CategoryCommand categoryCommand = new CategoryCommand();
 
-       categoryCommand.setId(category.getId());
-       categoryCommand.setCategoryDescription(category.getCategoryDescription());
-       categoryCommand.setCategoryName(category.getCategoryName());
+        categoryCommand.setId(category.getId());
+        categoryCommand.setCategoryDescription(category.getCategoryDescription());
+        categoryCommand.setCategoryName(category.getCategoryName());
+        categoryCommand.setMenuActive(category.isMenuActive());
 
-        return  categoryCommand;
+        if (category.getParentCategory() != null && category.getParentCategory().getId() != null) {
+            categoryCommand.setParentCategory(this.convert(category.getParentCategory()));
+        }
+
+        return categoryCommand;
     }
 }
