@@ -1,12 +1,10 @@
 package com.sencerseven.basittarifler.command;
 
-import com.sencerseven.basittarifler.domain.Recipe;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -15,8 +13,16 @@ public class CategoryCommand {
 
     private Long id;
 
+
+    @NotBlank(message = "Lütfen boş bırakmayınız.")
     private String categoryName;
 
+
+    @NotBlank(message = "Lütfen boş bırakmayınız.")
     private String categoryDescription;
+
+    private CategoryCommand parentCategory;
+
+    private boolean menuActive;
 
 }

@@ -2,29 +2,20 @@ package com.sencerseven.basittarifler.controller;
 
 import com.sencerseven.basittarifler.command.CommentCommand;
 import com.sencerseven.basittarifler.command.RecipeCommand;
-import com.sencerseven.basittarifler.command.TestCommand;
 import com.sencerseven.basittarifler.command.UsersCommand;
 import com.sencerseven.basittarifler.domain.*;
-import com.sencerseven.basittarifler.exceptions.NotFoundException;
 import com.sencerseven.basittarifler.model.JsonResponder;
-import com.sencerseven.basittarifler.repository.RecipeStepsRepository;
 import com.sencerseven.basittarifler.service.*;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.method.annotation.JsonViewResponseBodyAdvice;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/recipe")
@@ -34,22 +25,19 @@ public class RecipeController {
     RecipeStepsService recipeStepsService;
     RecipeTipsService recipeTipsService;
     CommentService commentService;
-    RecipeStatsService recipeStatsService;
+    CategoryService categoryService;
 
 
     public RecipeController(RecipeService recipeService,
                             RecipeStepsService recipeStepsService,
                             RecipeTipsService recipeTipsService,
                             CommentService commentService,
-                            RecipeStatsService recipeStatsService) {
-
+                            CategoryService categoryService) {
         this.recipeService = recipeService;
         this.recipeStepsService = recipeStepsService;
         this.recipeTipsService = recipeTipsService;
         this.commentService = commentService;
-        this.recipeStatsService = recipeStatsService;
-
-
+        this.categoryService = categoryService;
     }
 
     @GetMapping("{id}")
@@ -64,7 +52,11 @@ public class RecipeController {
         List<Recipe> recipeList = recipeService.getRecipeOrderByViewCountAndLimit(0, 3);
         List<Recipe> recipesUsers = recipeService.getRecipesByUsers(0, 3, recipe.getUsers());
         List<Comment> commentList = commentService.getCommentsByRecipeOrderByCreatedAtAsc(recipe);
-        recipeStatsService.saveByUsersCommand(users,recipe);
+        Set<Category> categories = categoryService.getCategoriesByMenuActive(0,10,true);
+
+
+        List<Recipe> recipesPopuler = recipeService.getAllPopulerRecipe(0,3);
+        recipeService.updateByUserCommand(recipe,users);
 
         model.addAttribute("recipe", recipe);
         model.addAttribute("recipeStepList", recipeStepsList);
@@ -72,8 +64,10 @@ public class RecipeController {
         model.addAttribute("recipePopuler", recipeList);
         model.addAttribute("recipesUsers", recipesUsers);
         model.addAttribute("recipeComment", commentList);
+        model.addAttribute("recipesPopuler", recipesPopuler);
 
         model.addAttribute("commentCommand", new CommentCommand());
+        model.addAttribute("categories", categories);
 
 
         return "index";

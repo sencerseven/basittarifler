@@ -2,8 +2,11 @@ package com.sencerseven.basittarifler.converter;
 
 import com.sencerseven.basittarifler.command.CategoryCommand;
 import com.sencerseven.basittarifler.domain.Category;
+import com.sencerseven.basittarifler.service.CategoryService;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.*;
 
@@ -13,9 +16,13 @@ public class CategoryCommandToCategoryConverterTest {
 
     CategoryCommandToCategoryConverter categoryConverter;
 
+    @Mock
+    CategoryService categoryService;
+
     @Before
     public void setUp() throws Exception {
-        categoryConverter = new CategoryCommandToCategoryConverter();
+        MockitoAnnotations.initMocks(this);
+        categoryConverter = new CategoryCommandToCategoryConverter(categoryService);
     }
 
     @Test

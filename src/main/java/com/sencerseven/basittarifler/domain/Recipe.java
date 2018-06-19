@@ -1,8 +1,10 @@
 package com.sencerseven.basittarifler.domain;
 
 import lombok.*;
+import org.springframework.cache.annotation.Cacheable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,8 +13,8 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(exclude = {"ingredient","categories","recipeSteps","users","recipeStats","nutrition"})
 @Entity
-public class Recipe {
-
+public class Recipe implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,13 +27,19 @@ public class Recipe {
 
     private int viewCount;
 
+    @Column(columnDefinition = "int default 0")
+    private int person;
+
+    @Column(columnDefinition = "int default 0")
+    private int portion;
+
     @Temporal(TemporalType.DATE)
-    private Date created_at;
+    private Date createdAt;
 
     @OneToOne(cascade = CascadeType.ALL)
     Nutrition nutrition;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
     @JoinTable(name = "CAT_RECIPE"
                 ,joinColumns = @JoinColumn(name = "recipe_id")
                 ,inverseJoinColumns = @JoinColumn(name = "category_id"))
@@ -54,8 +62,6 @@ public class Recipe {
     @OneToMany(mappedBy="recipe",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Comment> comments = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    RecipeStats recipeStats;
 
     public Recipe addIngredient(Ingredient ingredient){
         ingredient.setRecipe(this);
@@ -84,12 +90,6 @@ public class Recipe {
     public Recipe addRecipeComment(Comment comment){
         comment.setRecipe(this);
         this.comments.add(comment);
-        return this;
-    }
-
-    public Recipe addRecipeStats(RecipeStats recipeStats){
-        recipeStats.setRecipe(this);
-        this.recipeStats = recipeStats;
         return this;
     }
 

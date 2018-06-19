@@ -4,8 +4,11 @@ import com.sencerseven.basittarifler.command.CategoryCommand;
 import com.sencerseven.basittarifler.command.RecipeCommand;
 import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
+import com.sencerseven.basittarifler.service.CategoryService;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.*;
 
@@ -14,12 +17,16 @@ public class RecipeCommandToRecipeConverterTest {
     RecipeCommandToRecipeConverter converter;
     CategoryCommandToCategoryConverter categoryCommandToCategoryConverter;
 
+    @Mock
+    CategoryService categoryService;
+
     public static final Long ID= 1L;
 
 
     @Before
     public void setUp() throws Exception {
-        categoryCommandToCategoryConverter = new CategoryCommandToCategoryConverter();
+        MockitoAnnotations.initMocks(this);
+        categoryCommandToCategoryConverter = new CategoryCommandToCategoryConverter(categoryService);
         converter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter);
 
     }

@@ -69,8 +69,10 @@ public class IndexControllerTest {
         recipeList.add(recipe);
 
         when(recipeService.getLimitRecipes(PageRequest.of(page,size))).thenReturn(recipeList);
+        when(recipeService.getAllPopulerRecipe(page,size)).thenReturn(recipeList);
 
         ArgumentCaptor<List<Recipe>> argumentCaptor = ArgumentCaptor.forClass(List.class);
+        ArgumentCaptor<List<Recipe>> argumentCaptorPopuler = ArgumentCaptor.forClass(List.class);
 
         //when
 
@@ -79,8 +81,16 @@ public class IndexControllerTest {
         assertEquals("index",viewName);
         verify(recipeService,times(1)).getLimitRecipes(PageRequest.of(page,size));
         verify(model,times(1)).addAttribute(eq("recipes"),argumentCaptor.capture());
+
+
+        verify(recipeService,times(1)).getAllPopulerRecipe(page,size);
+        verify(model,times(1)).addAttribute(eq("pupulerRecipes"),argumentCaptorPopuler.capture());
+
         List<Recipe> captured = argumentCaptor.getValue();
+        List<Recipe> capturedPopuler = argumentCaptorPopuler.getValue();
         assertEquals(2,captured.size());
+
+        assertEquals(2,capturedPopuler.size());
 
 
     }

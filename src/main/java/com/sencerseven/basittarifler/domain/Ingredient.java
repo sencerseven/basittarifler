@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,8 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(exclude = {"recipe","ingredientDetails"})
 @Entity
-public class Ingredient {
+public class Ingredient implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

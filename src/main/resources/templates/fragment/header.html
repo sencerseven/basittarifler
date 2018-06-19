@@ -31,31 +31,12 @@
                         <div class="wrapper-main-nav ">
                             <nav class="nav-collapse responsive-menu">
                                 <ul class="main-menu">
-                                    <li><a href="/">Anasayfa</a>
-                                    </li>
-                                    <li>
-                                        <a href="recipe-listing.html">Recent Recipes</a>
-                                        <ul>
-                                            <li><a href="recipe-listing.html">recipe listing list view</a></li>
-                                            <li><a href="recipe-listing-grid.html">recipe listing grid view</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="recipe-listing.html">Recipe Detail</a>
-                                        <ul>
-                                            <li><a href="recipe-detail.html">recipe detail version 1</a></li>
-                                            <li><a href="recipe-detail2.html">recipe detail version 2</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a href="/" th:classappend="(${controllerName} == 'index') ? 'submit-recipe' : '' ">Anasayfa</a></li>
+                                    <li><a href="/recipelist" th:classappend="(${controllerName} == 'recipelist') ? 'submit-recipe' : '' ">Son Paylaşılanlar</a></li>
                                     <li><a href="our-chefs.html">Chefs</a></li>
-                                    <li><a href="blog.html">blog</a>
-                                        <ul>
-                                            <li><a href="single.html">Single post</a></li>
-                                        </ul>
-                                    </li>
                                     <li><a href="elements.html">elements</a></li>
                                     <li><a href="contact.html">contact</a></li>
-                                    <li><a class="submit-recipe" href="submit-recipe.html">Submit recipe</a></li>
+                                    <li><a href="submit-recipe.html">Submit recipe</a></li>
                                 </ul>
 
                             </nav>

@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,6 +28,7 @@ public class WebSecurityConfig {
 
         @Autowired
         CustomUserDetailsService userDetailsService;
+
 
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -51,6 +54,11 @@ public class WebSecurityConfig {
             };
         }
 
+        @Bean
+        public SessionRegistry sessionRegistry() {
+            return new SessionRegistryImpl();
+        }
+
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests().antMatchers("/h2-console","/h2-console/**").permitAll()
@@ -58,6 +66,7 @@ public class WebSecurityConfig {
             .formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").permitAll()
             .and()
             .logout().permitAll();
+            http.sessionManagement().maximumSessions(1).sessionRegistry(sessionRegistry());
 
             http.csrf().disable();
 

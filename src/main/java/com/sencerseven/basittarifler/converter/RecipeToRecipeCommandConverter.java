@@ -29,7 +29,7 @@ public class RecipeToRecipeCommandConverter implements Converter<Recipe,RecipeCo
         recipeCommand.setId(source.getId());
         recipeCommand.setRecipeTitle(source.getRecipeTitle());
         recipeCommand.setRecipeDescription(source.getRecipeDescription());
-        recipeCommand.setCreated_at(source.getCreated_at());
+        recipeCommand.setCreated_at(source.getCreatedAt());
         recipeCommand.setRecipeText(source.getRecipeText());
 
         if(source.getCategories() != null && source.getCategories().size() > 0)

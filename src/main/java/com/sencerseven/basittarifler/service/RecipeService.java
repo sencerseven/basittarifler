@@ -1,8 +1,11 @@
 package com.sencerseven.basittarifler.service;
 
 import com.sencerseven.basittarifler.command.RecipeCommand;
+import com.sencerseven.basittarifler.command.UsersCommand;
+import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.domain.Users;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 
@@ -27,4 +30,12 @@ public interface RecipeService {
     List<Recipe> getRecipeIdNotPopulerRecipe(int page,int size,Long id);
 
     List<Recipe> getAllPopulerRecipe(int page, int size);
+
+    Recipe updateByUserCommand(Recipe recipe , UsersCommand usersCommand);
+
+    Page<Recipe> findAllByOrderByCreatedAtDesc(int page, int size);
+
+    Long countAllBy();
+
+    Page<Recipe> findRecipeByCategoriesInOrderByCreatedAtDesc(int page, int size, Set<Category> categories);
 }
