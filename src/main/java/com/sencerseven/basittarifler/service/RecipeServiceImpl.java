@@ -2,6 +2,7 @@ package com.sencerseven.basittarifler.service;
 
 import com.sencerseven.basittarifler.command.RecipeCommand;
 import com.sencerseven.basittarifler.command.UsersCommand;
+import com.sencerseven.basittarifler.converter.RecipeCommandToRecipeConverter;
 import com.sencerseven.basittarifler.converter.RecipeToRecipeCommandConverter;
 import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -31,10 +33,13 @@ public class RecipeServiceImpl implements RecipeService {
 
     RecipeToRecipeCommandConverter recipeToRecipeCommandConverter;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeToRecipeCommandConverter recipeToRecipeCommandConverter,CategoryService categoryService) {
+    RecipeCommandToRecipeConverter recipeCommandToRecipeConverter;
+
+    public RecipeServiceImpl(RecipeRepository recipeRepository, CategoryService categoryService, RecipeToRecipeCommandConverter recipeToRecipeCommandConverter, RecipeCommandToRecipeConverter recipeCommandToRecipeConverter) {
         this.recipeRepository = recipeRepository;
-        this.recipeToRecipeCommandConverter = recipeToRecipeCommandConverter;
         this.categoryService = categoryService;
+        this.recipeToRecipeCommandConverter = recipeToRecipeCommandConverter;
+        this.recipeCommandToRecipeConverter = recipeCommandToRecipeConverter;
     }
 
     @Override
@@ -99,7 +104,8 @@ public class RecipeServiceImpl implements RecipeService {
 
         return recipeRepository.save(recipe);
     }
-    @Cacheable(value = "findAllByOrderByCreatedAtDesc")
+    //@Cacheable(value = "findAllByOrderByCreatedAtDesc")
+    //@Transactional
     @Override
     public Page<Recipe> findAllByOrderByCreatedAtDesc(int page, int size) {
         PageRequest request = PageRequest.of(page,size);
@@ -116,6 +122,19 @@ public class RecipeServiceImpl implements RecipeService {
     public Page<Recipe> findRecipeByCategoriesInOrderByCreatedAtDesc(int page, int size, Set<Category> categories) {
 
         return recipeRepository.findRecipeByCategoriesInOrderByCreatedAtDesc(PageRequest.of(page,size),categories);
+    }
+
+    @Override
+    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
+        if(recipeCommand == null)
+            return null;
+
+        Recipe recipe = recipeCommandToRecipeConverter.convert(recipeCommand);
+        Optional<Recipe> save = Optional.of(recipeRepository.save(recipe));
+
+        if(save.isPresent())
+            return recipeToRecipeCommandConverter.convert(save.get());
+        return null;
     }
 
 }

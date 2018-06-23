@@ -1,8 +1,8 @@
 package com.sencerseven.basittarifler.service;
 
+import com.sencerseven.basittarifler.command.RecipeCommand;
 import com.sencerseven.basittarifler.command.UsersCommand;
-import com.sencerseven.basittarifler.converter.CategoryToCategoryCommandConverter;
-import com.sencerseven.basittarifler.converter.RecipeToRecipeCommandConverter;
+import com.sencerseven.basittarifler.converter.*;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.domain.Users;
 import com.sencerseven.basittarifler.repository.CategoryRepository;
@@ -36,7 +36,17 @@ public class RecipeServiceImplTest {
     @Mock
     CategoryToCategoryCommandConverter categoryToCategoryCommandConverter;
 
+    @Mock
+    CategoryCommandToCategoryConverter categoryCommandToCategoryConverter;
+
+    @Mock
+    RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter;
+
     RecipeToRecipeCommandConverter recipeToRecipeCommandConverter;
+
+    RecipeCommandToRecipeConverter recipeCommandToRecipeConverter;
+
+    RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter;
 
     public static final Long ID =1L;
     public static final Long ID2 =2L;
@@ -44,8 +54,10 @@ public class RecipeServiceImplTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeToRecipeCommandConverter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter);
-        recipeService = new RecipeServiceImpl(recipeRepository,recipeToRecipeCommandConverter,categoryService);
+        recipeStepsToRecipeStepsCommandConverter = new RecipeStepsToRecipeStepsCommandConverter();
+        recipeToRecipeCommandConverter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter,recipeStepsToRecipeStepsCommandConverter);
+        recipeCommandToRecipeConverter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter,recipeStepsCommandToRecipeStepsConverter);
+        recipeService = new RecipeServiceImpl(recipeRepository,categoryService,recipeToRecipeCommandConverter,recipeCommandToRecipeConverter);
     }
 
     @Test
@@ -140,6 +152,31 @@ public class RecipeServiceImplTest {
         assertNull(recipeNotEqual);
         assertEquals(ID2,recipeResult.getUsers().getId());
         verify(recipeRepository,times(1)).save(any(Recipe.class));
+
+
+
+    }
+
+    @Test
+    public void saveRecipeCommand(){
+        Recipe recipe = new Recipe();
+        recipe.setId(ID);
+
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(ID);
+
+        when(recipeRepository.save(any(Recipe.class))).thenReturn(recipe);
+        RecipeCommand recipeNull = recipeService.saveRecipeCommand(null);
+        RecipeCommand recipeNotNull = recipeService.saveRecipeCommand(recipeCommand);
+
+
+        assertNull(recipeNull);
+        assertEquals(recipe.getId(),recipeNotNull.getId());
+
+        verify(recipeRepository,times(1)).save(any(Recipe.class));
+
+
+
 
 
 

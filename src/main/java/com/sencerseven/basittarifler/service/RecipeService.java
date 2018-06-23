@@ -38,4 +38,6 @@ public interface RecipeService {
     Long countAllBy();
 
     Page<Recipe> findRecipeByCategoriesInOrderByCreatedAtDesc(int page, int size, Set<Category> categories);
+
+    RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand);
 }
