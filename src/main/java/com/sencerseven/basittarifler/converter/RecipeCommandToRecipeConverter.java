@@ -28,6 +28,10 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand,R
         recipe.setRecipeDescription(source.getRecipeDescription());
         recipe.setRecipeText(source.getRecipeText());
         recipe.setRecipeTitle(source.getRecipeTitle());
+        recipe.setPerson(source.getPerson());
+        recipe.setPortion(source.getPortion());
+        recipe.setCookMin(source.getCookMin());
+        recipe.setPrepMin(source.getPrepMin());
         recipe.setCreatedAt(source.getCreated_at());
 
         if(source.getCategories() != null && source.getCategories().size() > 0 )

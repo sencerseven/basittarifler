@@ -25,6 +25,7 @@ public class Recipe implements Serializable {
 
     private String recipeText;
 
+    @Column(columnDefinition = "int default 0")
     private int viewCount;
 
     @Column(columnDefinition = "int default 0")
@@ -32,6 +33,13 @@ public class Recipe implements Serializable {
 
     @Column(columnDefinition = "int default 0")
     private int portion;
+
+    @Column(columnDefinition = "int default 0")
+    private int prepMin;
+
+    @Column(columnDefinition = "int default 0")
+    private int cookMin;
+
 
     @Temporal(TemporalType.DATE)
     private Date createdAt;

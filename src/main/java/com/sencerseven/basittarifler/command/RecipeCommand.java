@@ -22,6 +22,15 @@ public class RecipeCommand {
 
     private Date created_at;
 
+    private int person;
+
+    private int portion;
+
+    private int prepMin;
+
+    private int cookMin;
+
+
     Set<CategoryCommand> categories = new HashSet<>();
     List<RecipeStepsCommand> recipeSteps = new ArrayList<>();
 }
