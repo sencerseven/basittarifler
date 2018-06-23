@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -25,4 +23,5 @@ public class RecipeCommand {
     private Date created_at;
 
     Set<CategoryCommand> categories = new HashSet<>();
+    List<RecipeStepsCommand> recipeSteps = new ArrayList<>();
 }

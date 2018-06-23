@@ -13,8 +13,11 @@ public class RecipeToRecipeCommandConverter implements Converter<Recipe,RecipeCo
 
     CategoryToCategoryCommandConverter categoryToCategoryCommandConverter;
 
-    public RecipeToRecipeCommandConverter(CategoryToCategoryCommandConverter categoryToCategoryCommandConverter) {
+    RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter;
+
+    public RecipeToRecipeCommandConverter(CategoryToCategoryCommandConverter categoryToCategoryCommandConverter, RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter) {
         this.categoryToCategoryCommandConverter = categoryToCategoryCommandConverter;
+        this.recipeStepsToRecipeStepsCommandConverter = recipeStepsToRecipeStepsCommandConverter;
     }
 
     @Synchronized
@@ -34,6 +37,9 @@ public class RecipeToRecipeCommandConverter implements Converter<Recipe,RecipeCo
 
         if(source.getCategories() != null && source.getCategories().size() > 0)
             source.getCategories().forEach((Category category) -> recipeCommand.getCategories().add(categoryToCategoryCommandConverter.convert(category)));
+
+        if(source.getRecipeSteps() != null && source.getRecipeSteps().size() > 0)
+            source.getRecipeSteps().forEach(recipeSteps -> recipeCommand.getRecipeSteps().add(recipeStepsToRecipeStepsCommandConverter.convert(recipeSteps)));
 
         return  recipeCommand;
 
