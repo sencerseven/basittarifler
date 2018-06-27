@@ -26,13 +26,13 @@ public class Nutrition implements Serializable {
 
     private String energy;
 
-    private String saturedFat;
+    private String saturatedFat;
 
     private String carbonhydrate;
 
     private String cholesterol;
 
-    private String sodium;
+    private String sugar;
 
     @OneToOne
     private Recipe recipe;

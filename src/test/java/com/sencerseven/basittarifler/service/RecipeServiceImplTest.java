@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.ArrayList;
@@ -48,6 +49,9 @@ public class RecipeServiceImplTest {
 
     RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter;
 
+    @Mock
+    UsersCommandToUsersConverter usersCommandToUsersConverter;
+
     public static final Long ID =1L;
     public static final Long ID2 =2L;
 
@@ -57,7 +61,7 @@ public class RecipeServiceImplTest {
         recipeStepsToRecipeStepsCommandConverter = new RecipeStepsToRecipeStepsCommandConverter();
         recipeToRecipeCommandConverter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter,recipeStepsToRecipeStepsCommandConverter);
         recipeCommandToRecipeConverter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter,recipeStepsCommandToRecipeStepsConverter);
-        recipeService = new RecipeServiceImpl(recipeRepository,categoryService,recipeToRecipeCommandConverter,recipeCommandToRecipeConverter);
+        recipeService = new RecipeServiceImpl(recipeRepository,categoryService,recipeToRecipeCommandConverter,recipeCommandToRecipeConverter,usersCommandToUsersConverter);
     }
 
     @Test
@@ -162,12 +166,20 @@ public class RecipeServiceImplTest {
         Recipe recipe = new Recipe();
         recipe.setId(ID);
 
+        UsersCommand usersCommand = new UsersCommand();
+        usersCommand.setId(ID);
+
+        Users users = new Users();
+        users.setId(ID);
+
         RecipeCommand recipeCommand = new RecipeCommand();
         recipeCommand.setId(ID);
 
         when(recipeRepository.save(any(Recipe.class))).thenReturn(recipe);
-        RecipeCommand recipeNull = recipeService.saveRecipeCommand(null);
-        RecipeCommand recipeNotNull = recipeService.saveRecipeCommand(recipeCommand);
+        when(usersCommandToUsersConverter.convert(any())).thenReturn(users);
+
+        RecipeCommand recipeNull = recipeService.saveRecipeCommand(null,null);
+        RecipeCommand recipeNotNull = recipeService.saveRecipeCommand(recipeCommand,usersCommand);
 
 
         assertNull(recipeNull);

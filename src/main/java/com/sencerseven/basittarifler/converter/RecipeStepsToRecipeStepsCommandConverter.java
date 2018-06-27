@@ -15,7 +15,7 @@ public class RecipeStepsToRecipeStepsCommandConverter implements Converter<Recip
         RecipeStepsCommand recipeStepsCommand = new RecipeStepsCommand();
         recipeStepsCommand.setId(recipeSteps.getId());
         recipeStepsCommand.setDescription(recipeSteps.getDescription());
-        recipeStepsCommand.setImageURL(recipeSteps.getImageURL());
+
         recipeStepsCommand.setViewRows(recipeSteps.getViewRows());
 
         return recipeStepsCommand;

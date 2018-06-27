@@ -2,6 +2,7 @@ package com.sencerseven.basittarifler.converter;
 
 import com.sencerseven.basittarifler.command.RecipeCommand;
 import com.sencerseven.basittarifler.domain.Recipe;
+import com.sencerseven.basittarifler.functions.BasitTarifHelpers;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,7 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand,R
         recipe.setRecipeDescription(source.getRecipeDescription());
         recipe.setRecipeText(source.getRecipeText());
         recipe.setRecipeTitle(source.getRecipeTitle());
+        recipe.setRecipeUrl(BasitTarifHelpers.toSlug(source.getRecipeTitle()));
         recipe.setPerson(source.getPerson());
         recipe.setPortion(source.getPortion());
         recipe.setCookMin(source.getCookMin());
@@ -39,6 +41,8 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand,R
 
         if(source.getRecipeSteps() != null && source.getRecipeSteps().size() > 0)
             source.getRecipeSteps().forEach(recipeSteps -> recipe.addRecipeSteps(recipeStepsCommandToRecipeStepsConverter.convert(recipeSteps)));
+
+
 
         return recipe;
     }

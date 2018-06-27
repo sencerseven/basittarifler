@@ -4,6 +4,7 @@ import com.sencerseven.basittarifler.command.RecipeCommand;
 import com.sencerseven.basittarifler.command.UsersCommand;
 import com.sencerseven.basittarifler.converter.RecipeCommandToRecipeConverter;
 import com.sencerseven.basittarifler.converter.RecipeToRecipeCommandConverter;
+import com.sencerseven.basittarifler.converter.UsersCommandToUsersConverter;
 import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.domain.Users;
@@ -35,11 +36,14 @@ public class RecipeServiceImpl implements RecipeService {
 
     RecipeCommandToRecipeConverter recipeCommandToRecipeConverter;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository, CategoryService categoryService, RecipeToRecipeCommandConverter recipeToRecipeCommandConverter, RecipeCommandToRecipeConverter recipeCommandToRecipeConverter) {
+    UsersCommandToUsersConverter usersCommandToUsersConverter;
+
+    public RecipeServiceImpl(RecipeRepository recipeRepository, CategoryService categoryService, RecipeToRecipeCommandConverter recipeToRecipeCommandConverter, RecipeCommandToRecipeConverter recipeCommandToRecipeConverter, UsersCommandToUsersConverter usersCommandToUsersConverter) {
         this.recipeRepository = recipeRepository;
         this.categoryService = categoryService;
         this.recipeToRecipeCommandConverter = recipeToRecipeCommandConverter;
         this.recipeCommandToRecipeConverter = recipeCommandToRecipeConverter;
+        this.usersCommandToUsersConverter = usersCommandToUsersConverter;
     }
 
     @Override
@@ -125,11 +129,17 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
-        if(recipeCommand == null)
+    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand,UsersCommand usersCommand) {
+        if(recipeCommand == null || usersCommand == null)
+            return null;
+
+        Users detachUser = usersCommandToUsersConverter.convert(usersCommand);
+        if(detachUser == null)
             return null;
 
         Recipe recipe = recipeCommandToRecipeConverter.convert(recipeCommand);
+        recipe.addUsers(detachUser);
+
         Optional<Recipe> save = Optional.of(recipeRepository.save(recipe));
 
         if(save.isPresent())

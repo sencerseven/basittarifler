@@ -45,7 +45,8 @@ public class RecipeControllerTest {
     @Mock
     CategoryService categoryService;
 
-
+    @Mock
+    S3Services s3Services;
 
     @Mock
     Model model;
@@ -57,7 +58,7 @@ public class RecipeControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeController = new RecipeController(recipeService,recipeStepsService,recipeTipsService,commentService,categoryService);
+        recipeController = new RecipeController(recipeService,recipeStepsService,recipeTipsService,commentService,categoryService,s3Services);
 
     }
 

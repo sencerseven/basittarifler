@@ -7,6 +7,7 @@ import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.domain.RecipeSteps;
 import com.sencerseven.basittarifler.service.CategoryService;
+import com.sencerseven.basittarifler.service.S3Services;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -23,6 +24,9 @@ public class RecipeCommandToRecipeConverterTest {
     @Mock
     CategoryService categoryService;
 
+    @Mock
+    S3Services s3Services;
+
     public static final Long ID= 1L;
 
 
@@ -30,7 +34,7 @@ public class RecipeCommandToRecipeConverterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         categoryCommandToCategoryConverter = new CategoryCommandToCategoryConverter(categoryService);
-        recipeStepsCommandToRecipeStepsConverter = new RecipeStepsCommandToRecipeStepsConverter();
+        recipeStepsCommandToRecipeStepsConverter = new RecipeStepsCommandToRecipeStepsConverter(s3Services);
         converter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter,recipeStepsCommandToRecipeStepsConverter);
 
     }

@@ -39,5 +39,5 @@ public interface RecipeService {
 
     Page<Recipe> findRecipeByCategoriesInOrderByCreatedAtDesc(int page, int size, Set<Category> categories);
 
-    RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand);
+    RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand,UsersCommand usersCommand);
 }

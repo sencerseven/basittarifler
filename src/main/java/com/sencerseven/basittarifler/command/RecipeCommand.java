@@ -31,6 +31,8 @@ public class RecipeCommand {
     private int cookMin;
 
 
+    NutritionCommand nutritionCommand;
+
     Set<CategoryCommand> categories = new HashSet<>();
     List<RecipeStepsCommand> recipeSteps = new ArrayList<>();
 }
