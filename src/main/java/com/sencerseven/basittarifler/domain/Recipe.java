@@ -25,6 +25,9 @@ public class Recipe implements Serializable {
 
     private String recipeText;
 
+    private String recipeUrl;
+
+    @Column(columnDefinition = "int default 0")
     private int viewCount;
 
     @Column(columnDefinition = "int default 0")
@@ -32,6 +35,13 @@ public class Recipe implements Serializable {
 
     @Column(columnDefinition = "int default 0")
     private int portion;
+
+    @Column(columnDefinition = "int default 0")
+    private int prepMin;
+
+    @Column(columnDefinition = "int default 0")
+    private int cookMin;
+
 
     @Temporal(TemporalType.DATE)
     private Date createdAt;
@@ -62,6 +72,12 @@ public class Recipe implements Serializable {
     @OneToMany(mappedBy="recipe",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Comment> comments = new HashSet<>();
 
+
+    public Recipe addUsers(Users users){
+        this.users = users;
+        users.getRecipes().add(this);
+        return this;
+    }
 
     public Recipe addIngredient(Ingredient ingredient){
         ingredient.setRecipe(this);

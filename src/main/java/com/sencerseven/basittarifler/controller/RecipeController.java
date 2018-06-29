@@ -26,18 +26,21 @@ public class RecipeController {
     RecipeTipsService recipeTipsService;
     CommentService commentService;
     CategoryService categoryService;
+    S3Services s3Services;
 
 
     public RecipeController(RecipeService recipeService,
                             RecipeStepsService recipeStepsService,
                             RecipeTipsService recipeTipsService,
                             CommentService commentService,
-                            CategoryService categoryService) {
+                            CategoryService categoryService,
+                            S3Services s3Services) {
         this.recipeService = recipeService;
         this.recipeStepsService = recipeStepsService;
         this.recipeTipsService = recipeTipsService;
         this.commentService = commentService;
         this.categoryService = categoryService;
+        this.s3Services = s3Services;
     }
 
     @GetMapping("{id}")
@@ -57,6 +60,8 @@ public class RecipeController {
 
         List<Recipe> recipesPopuler = recipeService.getAllPopulerRecipe(0,3);
         recipeService.updateByUserCommand(recipe,users);
+
+        s3Services.getUrl("recipe/"+recipe.getRecipeUrl());
 
         model.addAttribute("recipe", recipe);
         model.addAttribute("recipeStepList", recipeStepsList);

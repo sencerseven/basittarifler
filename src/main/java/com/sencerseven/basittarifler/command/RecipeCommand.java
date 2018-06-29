@@ -1,13 +1,10 @@
 package com.sencerseven.basittarifler.command;
 
-import com.sencerseven.basittarifler.domain.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -24,5 +21,19 @@ public class RecipeCommand {
 
     private Date created_at;
 
+    private int person;
+
+    private int portion;
+
+    private int prepMin;
+
+    private int cookMin;
+
+
+    NutritionCommand nutritionCommand;
+
     Set<CategoryCommand> categories = new HashSet<>();
+    List<RecipeStepsCommand> recipeSteps = new ArrayList<>();
+
+    List<RecipeTipsCommand> recipeTipsCommands = new ArrayList<>();
 }

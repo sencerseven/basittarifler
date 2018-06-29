@@ -13,6 +13,7 @@ public class RecipeToRecipeCommandConverterTest {
 
     RecipeToRecipeCommandConverter converter;
     CategoryToCategoryCommandConverter categoryToCategoryCommandConverter;
+    RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter;
 
     public static final Long ID= 1L;
 
@@ -20,7 +21,8 @@ public class RecipeToRecipeCommandConverterTest {
     @Before
     public void setUp() throws Exception {
         categoryToCategoryCommandConverter = new CategoryToCategoryCommandConverter();
-        converter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter);
+        recipeStepsToRecipeStepsCommandConverter = new RecipeStepsToRecipeStepsCommandConverter();
+        converter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter,recipeStepsToRecipeStepsCommandConverter);
 
     }
 
