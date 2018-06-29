@@ -1,6 +1,5 @@
 package com.sencerseven.basittarifler.command;
 
-import com.sencerseven.basittarifler.domain.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,4 +34,6 @@ public class RecipeCommand {
 
     Set<CategoryCommand> categories = new HashSet<>();
     List<RecipeStepsCommand> recipeSteps = new ArrayList<>();
+
+    List<RecipeTipsCommand> recipeTipsCommands = new ArrayList<>();
 }

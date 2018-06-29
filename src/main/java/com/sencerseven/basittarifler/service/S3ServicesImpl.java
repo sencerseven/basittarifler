@@ -77,7 +77,7 @@ public class S3ServicesImpl implements S3Services {
            PutObjectResult name = s3client.putObject(putObjectRequest);
             log.info("===================== Upload File - Done! =====================");
 
-            return keyName;
+            return path+"/"+keyName;
 
         } catch (AmazonServiceException ase) {
             log.info("Caught an AmazonServiceException from PUT requests, rejected reasonss:");
@@ -97,7 +97,7 @@ public class S3ServicesImpl implements S3Services {
 
     @Override
     public String getUrl(String path){
-        URL url =  s3client.getUrl(bucketName,path);
-        return url.toString();
+        String url =  s3client.getUrl(bucketName,path).toExternalForm();
+        return url;
     }
 }

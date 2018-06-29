@@ -7,20 +7,24 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand,Recipe> {
+public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, Recipe> {
 
 
     CategoryCommandToCategoryConverter categoryCommandToCategoryConverter;
     RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter;
+    NutritionCommandToNutritionConverter nutritionCommandToNutritionConverter;
+    RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter;
 
-    public RecipeCommandToRecipeConverter(CategoryCommandToCategoryConverter categoryCommandToCategoryConverter, RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter) {
+    public RecipeCommandToRecipeConverter(CategoryCommandToCategoryConverter categoryCommandToCategoryConverter, RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter, NutritionCommandToNutritionConverter nutritionCommandToNutritionConverter, RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter) {
         this.categoryCommandToCategoryConverter = categoryCommandToCategoryConverter;
         this.recipeStepsCommandToRecipeStepsConverter = recipeStepsCommandToRecipeStepsConverter;
+        this.nutritionCommandToNutritionConverter = nutritionCommandToNutritionConverter;
+        this.recipeTipsCommandToRecipeTipsConverter = recipeTipsCommandToRecipeTipsConverter;
     }
 
     @Override
     public Recipe convert(RecipeCommand source) {
-        if(source == null)
+        if (source == null)
             return null;
 
         Recipe recipe = new Recipe();
@@ -36,12 +40,17 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand,R
         recipe.setPrepMin(source.getPrepMin());
         recipe.setCreatedAt(source.getCreated_at());
 
-        if(source.getCategories() != null && source.getCategories().size() > 0 )
+        if (source.getNutritionCommand() != null)
+            recipe.addNutrition(nutritionCommandToNutritionConverter.convert(source.getNutritionCommand()));
+
+        if (source.getCategories() != null && source.getCategories().size() > 0)
             source.getCategories().forEach(category -> recipe.getCategories().add(categoryCommandToCategoryConverter.convert(category)));
 
-        if(source.getRecipeSteps() != null && source.getRecipeSteps().size() > 0)
+        if (source.getRecipeSteps() != null && source.getRecipeSteps().size() > 0)
             source.getRecipeSteps().forEach(recipeSteps -> recipe.addRecipeSteps(recipeStepsCommandToRecipeStepsConverter.convert(recipeSteps)));
 
+        if (source.getRecipeTipsCommands() != null && source.getRecipeTipsCommands().size() > 0)
+            source.getRecipeTipsCommands().forEach(recipeTipsCommand -> recipe.addRecipeTips(recipeTipsCommandToRecipeTipsConverter.convert(recipeTipsCommand)));
 
 
         return recipe;
