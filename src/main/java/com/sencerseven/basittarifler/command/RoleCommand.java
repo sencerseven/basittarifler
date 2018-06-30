@@ -12,4 +12,12 @@ public class RoleCommand {
     private Long id;
 
     private String role;
+
+    @Override
+    public String toString() {
+        return "RoleCommand{" +
+                "id=" + id +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }

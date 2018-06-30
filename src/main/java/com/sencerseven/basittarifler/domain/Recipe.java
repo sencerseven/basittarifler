@@ -73,6 +73,9 @@ public class Recipe implements Serializable {
     private Set<Comment> comments = new HashSet<>();
 
 
+    @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<RecipeImages> recipeImages = new HashSet<>();
+
     public Recipe addUsers(Users users){
         this.users = users;
         users.getRecipes().add(this);
@@ -106,6 +109,12 @@ public class Recipe implements Serializable {
     public Recipe addRecipeComment(Comment comment){
         comment.setRecipe(this);
         this.comments.add(comment);
+        return this;
+    }
+
+    public Recipe addRecipeImages(RecipeImages recipeImages){
+        recipeImages.setRecipe(this);
+        this.recipeImages.add(recipeImages);
         return this;
     }
 

@@ -32,7 +32,7 @@ public class RecipeCommand {
 
     NutritionCommand nutritionCommand;
 
-    Set<CategoryCommand> categories = new HashSet<>();
+    List<CategoryCommand> categories = new ArrayList<>();
     List<RecipeStepsCommand> recipeSteps = new ArrayList<>();
 
     List<RecipeTipsCommand> recipeTipsCommands = new ArrayList<>();

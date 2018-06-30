@@ -334,7 +334,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="nutritional">
+                                <div class="nutritional" th:if="${not #lists.isEmpty(recipe.nutrition)}">
                                     <h3>Besin Değerleri</h3>
                                     <div class="nutrition-detail">
                                         <div class="left-box">
@@ -345,7 +345,7 @@
                                         <div class="right-box">
                                             Doymuş Yağ
                                             <br/>
-                                            <span th:text="${recipe.nutrition.getSaturedFat()}">39.5g</span>
+                                            <span th:text="${recipe.nutrition.getSaturatedFat()}">39.5g</span>
                                         </div>
                                     </div>
                                     <div class="separator-post"></div>
@@ -358,7 +358,7 @@
                                         <div class="right-box">
                                             Sodyum
                                             <br/>
-                                            <span th:text="${recipe.nutrition.getSodium()}">10g</span>
+                                            <span th:text="${recipe.nutrition.getSugar()}">10g</span>
                                         </div>
                                     </div>
                                     <div class="separator-post"></div>
