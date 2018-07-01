@@ -1,5 +1,7 @@
 package com.sencerseven.basittarifler.command;
 
+import com.sencerseven.basittarifler.domain.Ingredient;
+import com.sencerseven.basittarifler.domain.RecipeImages;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,4 +38,9 @@ public class RecipeCommand {
     List<RecipeStepsCommand> recipeSteps = new ArrayList<>();
 
     List<RecipeTipsCommand> recipeTipsCommands = new ArrayList<>();
+
+    List<RecipeImagesCommand> recipeImagesCommands = new ArrayList<>();
+
+    List<IngredientCommand> ingredientCommands = new ArrayList<>();
+
 }

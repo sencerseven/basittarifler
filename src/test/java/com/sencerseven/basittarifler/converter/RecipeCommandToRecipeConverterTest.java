@@ -28,6 +28,9 @@ public class RecipeCommandToRecipeConverterTest {
     RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter;
 
     @Mock
+    RecipeImagesCommandToRecipeImagesConverter recipeImagesCommandToRecipeImagesConverter;
+
+    @Mock
     CategoryService categoryService;
 
     @Mock
@@ -41,7 +44,7 @@ public class RecipeCommandToRecipeConverterTest {
         MockitoAnnotations.initMocks(this);
         categoryCommandToCategoryConverter = new CategoryCommandToCategoryConverter(categoryService);
         recipeStepsCommandToRecipeStepsConverter = new RecipeStepsCommandToRecipeStepsConverter(s3Services);
-        converter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter,recipeStepsCommandToRecipeStepsConverter,nutritionCommandToNutritionConverter,recipeTipsCommandToRecipeTipsConverter);
+        converter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter,recipeStepsCommandToRecipeStepsConverter,nutritionCommandToNutritionConverter,recipeTipsCommandToRecipeTipsConverter,recipeImagesCommandToRecipeImagesConverter,categoryService);
 
     }
 

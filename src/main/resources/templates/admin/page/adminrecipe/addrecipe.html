@@ -85,14 +85,14 @@
                                 <label class="col-md-3 col-form-label" for="val-suggestions">1. Resim : <span
                                         class="text-danger">*</span></label>
                                 <div class="col-md-3">
-                                    <textarea class="form-control" id="val-suggestions" th:field="*{[0].description}"
+                                    <textarea class="form-control" id="val-suggestions" th:field="*{recipeImagesCommands[0].description}"
                                               name="" rows="5"
                                               placeholder="1. Resim Açıklaması"></textarea>
                                     <a href="#" class="btn button-default removeSlider">Sil</a>
                                     <span class="text-danger"></span>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="file" class="imgInput" th:field="*{recipeSteps[0].imageFile}"/>
+                                    <input type="file" class="imgInput" th:field="*{recipeImagesCommands[0].imageFile}"/>
                                     <img class="image_upload_preview" src="http://placehold.it/100x100"
                                          style="height:100px; width:100px;" alt="your image"/>
                                 </div>
@@ -223,6 +223,28 @@
 
                         </div>
 
+
+                        <hr/>
+                        <p><h4>Tarif Malzemeler</h4></p>
+                        <h2>
+                            <button type="button" id="addRecipeMadde" class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
+                                <i class="ti-plus"></i>Başlık Ekle
+                            </button>
+                        </h2>
+                        <div id="recipeMadde">
+                            <div class="form-group row">
+
+                                <label class="col-md-3 col-form-label" for="val-suggestions">Adım 1 : <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-md-3">
+                                    <textarea class="form-control" id="val-suggestions" th:field="*{recipeSteps[0].description}"
+                                              name="" rows="5"
+                                              placeholder="1. Adımı Giriniz."></textarea>
+                                    <a href="#" class="btn button-default remScnt">Sil</a>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
 
                         <hr/>
                         <p><h4>Tarif Hakkında</h4></p>

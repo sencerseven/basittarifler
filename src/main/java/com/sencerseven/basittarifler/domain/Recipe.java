@@ -76,6 +76,13 @@ public class Recipe implements Serializable {
     @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<RecipeImages> recipeImages = new HashSet<>();
 
+    public Recipe addCategory(Category category){
+        category.getRecipes().add(this);
+        this.categories.add(category);
+        return this;
+
+    }
+
     public Recipe addUsers(Users users){
         this.users = users;
         users.getRecipes().add(this);

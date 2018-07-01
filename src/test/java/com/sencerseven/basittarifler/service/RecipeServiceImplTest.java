@@ -49,6 +49,9 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter;
 
+    @Mock
+    RecipeImagesCommandToRecipeImagesConverter recipeImagesCommandToRecipeImagesConverter;
+
 
     RecipeToRecipeCommandConverter recipeToRecipeCommandConverter;
 
@@ -67,7 +70,7 @@ public class RecipeServiceImplTest {
         MockitoAnnotations.initMocks(this);
         recipeStepsToRecipeStepsCommandConverter = new RecipeStepsToRecipeStepsCommandConverter();
         recipeToRecipeCommandConverter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter,recipeStepsToRecipeStepsCommandConverter);
-        recipeCommandToRecipeConverter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter,recipeStepsCommandToRecipeStepsConverter,nutritionCommandToNutritionConverter,recipeTipsCommandToRecipeTipsConverter);
+        recipeCommandToRecipeConverter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter,recipeStepsCommandToRecipeStepsConverter,nutritionCommandToNutritionConverter,recipeTipsCommandToRecipeTipsConverter,recipeImagesCommandToRecipeImagesConverter,categoryService);
         recipeService = new RecipeServiceImpl(recipeRepository,categoryService,recipeToRecipeCommandConverter,recipeCommandToRecipeConverter,usersCommandToUsersConverter);
     }
 

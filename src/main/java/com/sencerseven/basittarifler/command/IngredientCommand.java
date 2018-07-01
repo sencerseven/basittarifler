@@ -3,16 +3,19 @@ package com.sencerseven.basittarifler.command;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class RecipeImagesCommand {
+public class IngredientCommand {
 
     private Long id;
 
-    private MultipartFile imageFile;
-
     private String description;
+
+
+
 }

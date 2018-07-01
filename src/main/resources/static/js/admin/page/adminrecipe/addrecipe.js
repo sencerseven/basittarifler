@@ -18,12 +18,12 @@ $(function() {
         $('<div class="form-group row">'+
             '                                <label class="col-md-3 col-form-label" for="val-suggestions">'+(recipeMaddeCountSlider+1)+'. Resim :<span class="text-danger">*</span></label>' +
             '                                <div class="col-md-3">' +
-            '                                    <textarea class="form-control" id="val-suggestions" name="recipeSteps['+recipeMaddeCountSlider+'].description" rows="5" placeholder="'+(recipeMaddeCountSlider+1)+'. Resim Açıklaması" ></textarea>' +
+            '                                    <textarea class="form-control" id="val-suggestions" name="recipeImagesCommands['+recipeMaddeCountSlider+'].description" rows="5" placeholder="'+(recipeMaddeCountSlider+1)+'. Resim Açıklaması" ></textarea>' +
             '                                    <a href="" class="btn button-default" class="remScnt">Sil</a> '+
             '                                    <span class="text-danger" ></span>' +
             '                                </div>' +
             '                                <div class="col-md-3"> ' +
-            '                                    <input type="file" class="imgInput" name="recipeSteps['+recipeMaddeCountSlider+'].imageFile"/>' +
+            '                                    <input type="file" class="imgInput" name="recipeImagesCommands['+recipeMaddeCountSlider+'].imageFile"/>' +
             '                                  <img class="image_upload_preview" src="http://placehold.it/100x100" style="height:100px; width:100px;" alt="your image" />' +
             '                                </div>' +
             '                                <div class="col-md-3" > ' +

@@ -3,6 +3,7 @@ package com.sencerseven.basittarifler.converter;
 import com.sencerseven.basittarifler.command.RecipeCommand;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.functions.BasitTarifHelpers;
+import com.sencerseven.basittarifler.service.CategoryService;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -14,12 +15,16 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, 
     RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter;
     NutritionCommandToNutritionConverter nutritionCommandToNutritionConverter;
     RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter;
+    RecipeImagesCommandToRecipeImagesConverter recipeImagesCommandToRecipeImagesConverter;
+    CategoryService categoryService;
 
-    public RecipeCommandToRecipeConverter(CategoryCommandToCategoryConverter categoryCommandToCategoryConverter, RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter, NutritionCommandToNutritionConverter nutritionCommandToNutritionConverter, RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter) {
+    public RecipeCommandToRecipeConverter(CategoryCommandToCategoryConverter categoryCommandToCategoryConverter, RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter, NutritionCommandToNutritionConverter nutritionCommandToNutritionConverter, RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter, RecipeImagesCommandToRecipeImagesConverter recipeImagesCommandToRecipeImagesConverter, CategoryService categoryService) {
         this.categoryCommandToCategoryConverter = categoryCommandToCategoryConverter;
         this.recipeStepsCommandToRecipeStepsConverter = recipeStepsCommandToRecipeStepsConverter;
         this.nutritionCommandToNutritionConverter = nutritionCommandToNutritionConverter;
         this.recipeTipsCommandToRecipeTipsConverter = recipeTipsCommandToRecipeTipsConverter;
+        this.recipeImagesCommandToRecipeImagesConverter = recipeImagesCommandToRecipeImagesConverter;
+        this.categoryService = categoryService;
     }
 
     @Override
@@ -44,13 +49,17 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, 
             recipe.addNutrition(nutritionCommandToNutritionConverter.convert(source.getNutritionCommand()));
 
         if (source.getCategories() != null && source.getCategories().size() > 0)
-            source.getCategories().forEach(category -> recipe.getCategories().add(categoryCommandToCategoryConverter.convert(category)));
+            source.getCategories().forEach(category -> recipe.getCategories().add(categoryService.getById(category.getId())));
 
         if (source.getRecipeSteps() != null && source.getRecipeSteps().size() > 0)
             source.getRecipeSteps().forEach(recipeSteps -> recipe.addRecipeSteps(recipeStepsCommandToRecipeStepsConverter.convert(recipeSteps)));
 
         if (source.getRecipeTipsCommands() != null && source.getRecipeTipsCommands().size() > 0)
             source.getRecipeTipsCommands().forEach(recipeTipsCommand -> recipe.addRecipeTips(recipeTipsCommandToRecipeTipsConverter.convert(recipeTipsCommand)));
+
+        if(source.getRecipeImagesCommands() != null && source.getRecipeImagesCommands().size()>0){
+            source.getRecipeImagesCommands().forEach(recipeImagesCommand -> recipe.addRecipeImages(recipeImagesCommandToRecipeImagesConverter.convert(recipeImagesCommand)));
+        }
 
 
         return recipe;
