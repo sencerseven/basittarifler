@@ -203,54 +203,22 @@
                                     <div class="top-slider">
                                         <div id="single-slider-flex" class="flexslider slider-detail">
                                             <ul class="slides">
-                                                <li>
+                                                <li th:each="images : ${recipe.getRecipeImages()}">
                                                     <a rel="recipe-slider-1"
-                                                       href="/images/temp-/images/slide-recipe-detail.jpg"
+                                                       th:href="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/'+${images.url}}"
                                                        class="swipebox">
-                                                        <img src="/images/temp-/images/slide-recipe-detail.jpg"
-                                                             alt="Recipe Single Image"/>
+                                                        <img class="img-thumbnail" style="height: 454px;"
+                                                             th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/'+${images.url}}"
+                                                             alt="image"/>
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a rel="recipe-slider-1"
-                                                       href="/images/temp-/images/slide-recipe-detail.jpg"
-                                                       class="swipebox">
-                                                        <img src="/images/temp-/images/slide-recipe-detail.jpg"
-                                                             alt="Recipe Single Image"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a rel="recipe-slider-1"
-                                                       href="/images/temp-/images/slide-recipe-detail.jpg"
-                                                       class="swipebox">
-                                                        <img src="/images/temp-/images/slide-recipe-detail.jpg"
-                                                             alt="Recipe Single Image"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a rel="recipe-slider-1"
-                                                       href="/images/temp-/images/slide-recipe-detail.jpg"
-                                                       class="swipebox">
-                                                        <img src="/images/temp-/images/slide-recipe-detail.jpg"
-                                                             alt="Recipe Single Image"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a rel="recipe-slider-1"
-                                                       href="/images/temp-/images/slide-recipe-detail.jpg"
-                                                       class="swipebox">
-                                                        <img src="/images/temp-/images/slide-recipe-detail.jpg"
-                                                             alt="Recipe Single Image"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a rel="recipe-slider-1"
-                                                       href="/images/temp-/images/slide-recipe-detail.jpg"
-                                                       class="swipebox">
-                                                        <img src="/images/temp-/images/slide-recipe-detail.jpg"
-                                                             alt="Recipe Single Image"/>
-                                                    </a>
-                                                </li>
+
                                             </ul>
                                         </div>
                                         <span class="custom-arrows wider">
@@ -263,18 +231,16 @@
                                     <div id="recipe-slider-carousel">
                                         <div id="recipe-carousel-flex">
                                             <ul class="slides">
-                                                <li><img src="/images/temp-/images/slider-detail-thumb.jpg"
-                                                         alt="Recipe Carousel Thumbnail"/></li>
-                                                <li><img src="/images/temp-/images/slider-detail-thumb.jpg"
-                                                         alt="Recipe Carousel Thumbnail"/></li>
-                                                <li><img src="/images/temp-/images/slider-detail-thumb.jpg"
-                                                         alt="Recipe Carousel Thumbnail"/></li>
-                                                <li><img src="/images/temp-/images/slider-detail-thumb.jpg"
-                                                         alt="Recipe Carousel Thumbnail"/></li>
-                                                <li><img src="/images/temp-/images/slider-detail-thumb.jpg"
-                                                         alt="Recipe Carousel Thumbnail"/></li>
-                                                <li><img src="/images/temp-/images/slider-detail-thumb.jpg"
-                                                         alt="Recipe Carousel Thumbnail"/></li>
+                                                <li th:each="images : ${recipe.getRecipeImages()}">
+
+                                                <img class="img-thumbnail" style="width:100px; height:59px;"
+                                                     th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/'+${images.url}}"
+                                                     alt="image"/>
+                                                </li>
+
                                             </ul>
                                         </div>
                                         <span class="custom-arrows wider">
@@ -288,11 +254,11 @@
                                 <ul class="recipe-specs">
                                     <li><span class="count" th:text="${recipe.getPerson()}">5</span><span class="text">Kişilik</span></li>
                                     <li><span class="count" th:text="${recipe.getPortion()}">7</span><span class="text">Porsiyon</span></li>
-                                    <li><span class="count">20<span>m</span></span><span
+                                    <li><span class="count" th:text="${recipe.getPrepMin()}">20<span>m</span></span><span
                                             class="text">Hazırlanma Süresi</span></li>
-                                    <li><span class="count">30<span>m</span></span><span
+                                    <li><span class="count" th:text="${recipe.getCookMin()}">30<span>m</span></span><span
                                             class="text">Pişirme Süresi</span></li>
-                                    <li><span class="count">50<span>m</span></span><span class="text">Toplam Süre</span>
+                                    <li><span class="count" th:with="total=${recipe.getPrepMin() + recipe.getCookMin()}" th:text="${total}">50<span>m</span></span><span class="text">Toplam Süre</span>
                                     </li>
                                 </ul>
                             </div>
@@ -421,12 +387,12 @@
                                                    th:href="@{'https://s3.'+${@environment.getProperty('s3.region')}
                                                                 +'.'+${@environment.getProperty('s3.domain_name')}
                                                                 +'/'+${@environment.getProperty('s3.bucket')}
-                                                                +'/profile/'+${recipeStep.imageURL}}"
+                                                                +'/'+${recipeStep.imageURL}}"
                                                    rel="recipe-slider-1" class="swipebox"><img class="img-thumbnail" style="width: 220px; height: 162px"
                                                          th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
                                                                 +'.'+${@environment.getProperty('s3.domain_name')}
                                                                 +'/'+${@environment.getProperty('s3.bucket')}
-                                                                +'/profile/'+${recipeStep.imageURL}}"
+                                                                +'/'+${recipeStep.imageURL}}"
                                                         alt="image"/></a>
                                             </div>
                                             <div class="step-detail">
