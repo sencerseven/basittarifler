@@ -16,14 +16,16 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, 
     NutritionCommandToNutritionConverter nutritionCommandToNutritionConverter;
     RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter;
     RecipeImagesCommandToRecipeImagesConverter recipeImagesCommandToRecipeImagesConverter;
+    IngredientCommandToIngredientConverter ingredientCommandToIngredientConverter;
     CategoryService categoryService;
 
-    public RecipeCommandToRecipeConverter(CategoryCommandToCategoryConverter categoryCommandToCategoryConverter, RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter, NutritionCommandToNutritionConverter nutritionCommandToNutritionConverter, RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter, RecipeImagesCommandToRecipeImagesConverter recipeImagesCommandToRecipeImagesConverter, CategoryService categoryService) {
+    public RecipeCommandToRecipeConverter(CategoryCommandToCategoryConverter categoryCommandToCategoryConverter, RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter, NutritionCommandToNutritionConverter nutritionCommandToNutritionConverter, RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter, RecipeImagesCommandToRecipeImagesConverter recipeImagesCommandToRecipeImagesConverter, IngredientCommandToIngredientConverter ingredientCommandToIngredientConverter, CategoryService categoryService) {
         this.categoryCommandToCategoryConverter = categoryCommandToCategoryConverter;
         this.recipeStepsCommandToRecipeStepsConverter = recipeStepsCommandToRecipeStepsConverter;
         this.nutritionCommandToNutritionConverter = nutritionCommandToNutritionConverter;
         this.recipeTipsCommandToRecipeTipsConverter = recipeTipsCommandToRecipeTipsConverter;
         this.recipeImagesCommandToRecipeImagesConverter = recipeImagesCommandToRecipeImagesConverter;
+        this.ingredientCommandToIngredientConverter = ingredientCommandToIngredientConverter;
         this.categoryService = categoryService;
     }
 
@@ -59,6 +61,10 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, 
 
         if(source.getRecipeImagesCommands() != null && source.getRecipeImagesCommands().size()>0){
             source.getRecipeImagesCommands().forEach(recipeImagesCommand -> recipe.addRecipeImages(recipeImagesCommandToRecipeImagesConverter.convert(recipeImagesCommand)));
+        }
+
+        if(source.getIngredientCommands() != null && source.getIngredientCommands().size() > 0 ){
+            source.getIngredientCommands().forEach(ingredientCommand -> recipe.addIngredient(ingredientCommandToIngredientConverter.convert(ingredientCommand)));
         }
 
 
