@@ -32,7 +32,7 @@ public class RecipeListController {
     public String indexAction(Model model, @RequestParam(value = "page",required = false,defaultValue = "1")int id){
         Page<Recipe> recipeList = recipeService.findAllByOrderByCreatedAtDesc(id-1,6);
         List<Recipe> recipePopuler = recipeService.getAllPopulerRecipe(0,3);
-        Set<Category> categories = categoryService.getCategoriesByMenuActive(0,3,true);
+        Set<Category> categories = categoryService.getCategoriesByMenuActive(0,10,true);
 
         model.addAttribute("recipePage",recipeList);
         model.addAttribute("recipeCount",recipeService.countAllBy());

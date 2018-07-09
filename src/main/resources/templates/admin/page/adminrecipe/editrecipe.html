@@ -28,6 +28,7 @@
                 <div class="form-validation">
                     <form class="form-valide" th:action="@{/admin/recipe/add}" th:method="post"
                           th:object="${recipeCommand}" enctype="multipart/form-data">
+                        <input type="hidden" th:field="*{id}"/>
                         <p><h4>Tarif Genel</h4></p>
                         <div class="form-group row">
                             <div class="col-md-12">
@@ -105,20 +106,28 @@
                             </button>
                         </h2>
                         <div id="recipeSlider">
-                            <div class="form-group row">
+                            <div class="form-group row" th:each="images,key : ${recipeCommand.recipeImagesCommands}">
 
+                                <input type="hidden" th:field="*{recipeImagesCommands[__${key.index}__].id}"/>
                                 <label class="col-md-3 col-form-label" for="val-suggestions">1. Resim : <span
                                         class="text-danger">*</span></label>
                                 <div class="col-md-3">
-                                    <textarea class="form-control" id="val-suggestions" th:field="*{recipeImagesCommands[0].description}"
+                                    <textarea class="form-control" id="val-suggestions" th:field="*{recipeImagesCommands[__${key.index}__].description}"
                                               name="" rows="5"
                                               placeholder="1. Resim Açıklaması"></textarea>
+                                    <a href="" class="btn button-default remSlider">Sil</a>
                                     <span class="text-danger"></span>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="file" class="imgInput" th:field="*{recipeImagesCommands[0].imageFile}"/>
+                                    <input type="hidden" th:field="*{recipeImagesCommands[__${key.index}__].imageUrl}" />
+                                    <input type="file" class="imgInput" th:field="*{recipeImagesCommands[__${key.index}__].imageFile}"/>
                                     <img class="image_upload_preview" src="http://placehold.it/100x100"
-                                         style="height:100px; width:100px;" alt="your image"/>
+                                         style="height:100px; width:100px;" alt="your image"
+                                         th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/'+${images.getImageUrl()}}"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -130,7 +139,7 @@
                                 <label class="col-lg-12 col-form-label" for="val-kisi">Kişi <span
                                         class="text-danger">*</span></label>
                                 <div class="col-lg-6">
-                                    <input type="number" placeholder="" id="val-kisi" th:field="*{person}"
+                                    <input type="text" placeholder="" id="val-kisi" th:field="*{person}"
                                            class="form-control" required>
                                     <span class="text-danger"></span>
                                 </div>
@@ -171,6 +180,7 @@
                             <div class="col-md-3">
                                 <label class="col-lg-12 col-form-label" for="val-kisi">Protein <span
                                         class="text-danger">*</span></label>
+                                <input type="hidden" th:field="*{nutritionCommand.id}"/>
                                 <div class="col-lg-6">
                                     <input type="number" placeholder="" id="val-kisi"
                                            th:field="*{nutritionCommand.protine}" class="form-control">

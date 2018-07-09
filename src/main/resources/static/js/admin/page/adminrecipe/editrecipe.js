@@ -5,8 +5,14 @@ $(function() {
         readUrl(this);
     });
 
-    $('a').click(function(e) {
+    $('.card-body a').click(function(e) {
         e.preventDefault();
+        return false;
+    });
+
+    $('.remSlider').click(function(e) {
+        e.preventDefault();
+        $(this).closest('.row').remove();
         return false;
     });
 
@@ -19,7 +25,7 @@ $(function() {
             '                                <label class="col-md-3 col-form-label" for="val-suggestions">'+(recipeMaddeCountSlider+1)+'. Resim :<span class="text-danger">*</span></label>' +
             '                                <div class="col-md-3">' +
             '                                    <textarea class="form-control" id="val-suggestions" name="recipeImagesCommands['+recipeMaddeCountSlider+'].description" rows="5" placeholder="'+(recipeMaddeCountSlider+1)+'. Resim Açıklaması" ></textarea>' +
-            '                                    <a href="" class="btn button-default" class="remScnt">Sil</a> '+
+            '                                    <a href="" class="btn button-default" class="remSlider">Sil</a> '+
             '                                    <span class="text-danger" ></span>' +
             '                                </div>' +
             '                                <div class="col-md-3"> ' +
@@ -31,7 +37,7 @@ $(function() {
             '                            </div>').appendTo(recipeMaddeSlider);
         recipeMaddeCountSlider++;
 
-        $('a').click(function(e) {
+        $('.remSlider').click(function(e) {
             e.preventDefault();
             $(this).closest('.row').remove();
             return false;
@@ -55,7 +61,7 @@ $(function() {
             '                                <label class="col-md-3 col-form-label" for="val-suggestions">Adım '+(recipeMaddeCount+1)+' :<span class="text-danger">*</span></label>' +
             '                                <div class="col-md-3">' +
             '                                    <textarea class="form-control" id="val-suggestions" name="recipeSteps['+recipeMaddeCount+'].description" rows="5" placeholder="'+(recipeMaddeCount+1)+'. Adımı giriniz" ></textarea>' +
-            '                                    <a href="" class="btn button-default">Sil</a> '+
+            '                                    <a href="" class="btn button-default" class="remMadde">Sil</a> '+
             '                                    <span class="text-danger" ></span>' +
             '                                </div>' +
             '                                <div class="col-md-3"> ' +
@@ -67,7 +73,7 @@ $(function() {
             '                            </div>').appendTo(recipeMadde);
         recipeMaddeCount++;
 
-        $('a').click(function(e) {
+        $('.remMadde').click(function(e) {
             e.preventDefault();
             $(this).closest('.row').remove();
             return false;
@@ -93,7 +99,7 @@ $(function() {
             '                                <label class="col-md-3 col-form-label" for="val-suggestions">Adım '+(recipeTipsCount+1)+' :<span class="text-danger">*</span></label>' +
             '                                <div class="col-md-3">' +
             '                                    <textarea class="form-control" id="val-suggestions" name="recipeTipsCommands['+recipeTipsCount+'].description" rows="5" placeholder="'+(recipeTipsCount+1)+'. Adımı giriniz" ></textarea>' +
-            '                                    <a href="" class="btn button-default" class="remScnt">Sil</a> '+
+            '                                    <a href="" class="btn button-default" class="remTips">Sil</a> '+
             '                                    <span class="text-danger" ></span>' +
             '                                </div>' +
             '                                <div class="col-md-3" > ' +
@@ -101,20 +107,13 @@ $(function() {
             '                            </div>').appendTo(recipeTips);
         recipeTipsCount++;
 
-       $('a').click(function(e) {
+       $('.remTips').click(function(e) {
             e.preventDefault();
            $(this).closest('.row').remove();
             return false;
         });
 
     });
-
-
-       $('a').click(function(e) {
-            e.preventDefault();
-            return false;
-        });
-
 
     var recipeIngredient = $('#recipeIngredient');
 

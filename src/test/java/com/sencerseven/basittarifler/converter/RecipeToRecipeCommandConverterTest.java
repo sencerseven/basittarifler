@@ -6,6 +6,7 @@ import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import static org.junit.Assert.*;
 
@@ -15,6 +16,12 @@ public class RecipeToRecipeCommandConverterTest {
     CategoryToCategoryCommandConverter categoryToCategoryCommandConverter;
     RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter;
 
+    @Mock
+    RecipeImagesToRecipeImagesCommandConverter recipeImagesToRecipeImagesCommandConverter;
+
+    @Mock
+    NutritionToNutritionCommandConverter nutritionToNutritionCommandConverter;
+
     public static final Long ID= 1L;
 
 
@@ -22,7 +29,7 @@ public class RecipeToRecipeCommandConverterTest {
     public void setUp() throws Exception {
         categoryToCategoryCommandConverter = new CategoryToCategoryCommandConverter();
         recipeStepsToRecipeStepsCommandConverter = new RecipeStepsToRecipeStepsCommandConverter();
-        converter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter,recipeStepsToRecipeStepsCommandConverter);
+        converter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter,recipeStepsToRecipeStepsCommandConverter,recipeImagesToRecipeImagesCommandConverter,nutritionToNutritionCommandConverter);
 
     }
 

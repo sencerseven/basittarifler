@@ -206,10 +206,12 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         recipe4.getIngredients().add(ingredient1);
         recipe4.getIngredients().add(ingredient2);
 
-        recipe4.addRecipeSteps(new RecipeSteps("Ilık su ve sütü geniş bir karıştırma kabına alın. Yaş maya ve toz şekeri ekleyip karıştırdıktan sonra mayanın aktive olması için 5 dakika kadar bekletin.","zeytinyagi.jpeg",1));
-        recipe4.addRecipeSteps(new RecipeSteps("Maya tamamen eridikten sonra ayçiçek yağı, yumurta ve tuzu katın. Tüm malzemeyi elinizle karıştırın.","un.jpeg",2));
-        recipe4.addRecipeSteps(new RecipeSteps("Elenmiş unu, azar azar ekleyip hamuru toparlanana kadar yoğurmaya başlayın.","zeytinyagi.jpeg",3));
-        recipe4.addRecipeSteps(new RecipeSteps("Yumuşak ve yapışmayacak bir kıvamda bir hamur elde ettiğiniz zaman üzerini nemli bir bezle kapatıp 40-45 dakika kadar oda ısısında dinlendirin.","un.jpeg",4));
+        recipe4.addRecipeImages(new RecipeImages("recipe/chair2.jpg","yazi1"));
+
+        recipe4.addRecipeSteps(new RecipeSteps("Ilık su ve sütü geniş bir karıştırma kabına alın. Yaş maya ve toz şekeri ekleyip karıştırdıktan sonra mayanın aktive olması için 5 dakika kadar bekletin.","recipe/pilav-tarifi.jpg",1));
+        recipe4.addRecipeSteps(new RecipeSteps("Maya tamamen eridikten sonra ayçiçek yağı, yumurta ve tuzu katın. Tüm malzemeyi elinizle karıştırın.","recipe/pilav-tarifi.jpg",2));
+        recipe4.addRecipeSteps(new RecipeSteps("Elenmiş unu, azar azar ekleyip hamuru toparlanana kadar yoğurmaya başlayın.","recipe/pilav-tarifi.jpg",3));
+        recipe4.addRecipeSteps(new RecipeSteps("Yumuşak ve yapışmayacak bir kıvamda bir hamur elde ettiğiniz zaman üzerini nemli bir bezle kapatıp 40-45 dakika kadar oda ısısında dinlendirin.","recipe/pilav-tarifi.jpg",4));
 
         recipe4.addRecipeTips(new RecipeTips("Çırpılmış yumurta akına batırdığınız kurabiyelerin üzerini ceviz kırıklarına bulayıp tepsiye dizebilir, bu şekilde cevizli kurabiyeler de hazırlayabilirsiniz."));
         recipe4.addRecipeTips(new RecipeTips("Oda sıcaklığında tereyağı kullanmaya özen gösterin.Kurabiye hamuru toparlanıp ele yapışmayacak bir kıvam alana kadar azar azar un eklemeyi sürdürün."));

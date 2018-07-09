@@ -14,5 +14,7 @@ public class RecipeImagesCommand {
 
     private MultipartFile imageFile;
 
+    private String imageUrl;
+
     private String description;
 }

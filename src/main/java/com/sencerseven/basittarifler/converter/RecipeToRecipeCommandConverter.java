@@ -14,10 +14,14 @@ public class RecipeToRecipeCommandConverter implements Converter<Recipe,RecipeCo
     CategoryToCategoryCommandConverter categoryToCategoryCommandConverter;
 
     RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter;
+    RecipeImagesToRecipeImagesCommandConverter recipeImagesToRecipeImagesCommandConverter;
+    NutritionToNutritionCommandConverter nutritionToNutritionCommandConverter;
 
-    public RecipeToRecipeCommandConverter(CategoryToCategoryCommandConverter categoryToCategoryCommandConverter, RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter) {
+    public RecipeToRecipeCommandConverter(CategoryToCategoryCommandConverter categoryToCategoryCommandConverter, RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter, RecipeImagesToRecipeImagesCommandConverter recipeImagesToRecipeImagesCommandConverter, NutritionToNutritionCommandConverter nutritionToNutritionCommandConverter) {
         this.categoryToCategoryCommandConverter = categoryToCategoryCommandConverter;
         this.recipeStepsToRecipeStepsCommandConverter = recipeStepsToRecipeStepsCommandConverter;
+        this.recipeImagesToRecipeImagesCommandConverter = recipeImagesToRecipeImagesCommandConverter;
+        this.nutritionToNutritionCommandConverter = nutritionToNutritionCommandConverter;
     }
 
     @Synchronized
@@ -35,11 +39,25 @@ public class RecipeToRecipeCommandConverter implements Converter<Recipe,RecipeCo
         recipeCommand.setCreated_at(source.getCreatedAt());
         recipeCommand.setRecipeText(source.getRecipeText());
 
+        recipeCommand.setPerson(source.getPerson());
+        recipeCommand.setPortion(source.getPortion());
+        recipeCommand.setPrepMin(source.getPrepMin());
+        recipeCommand.setCookMin(source.getCookMin());
+
+
         if(source.getCategories() != null && source.getCategories().size() > 0)
             source.getCategories().forEach((Category category) -> recipeCommand.getCategories().add(categoryToCategoryCommandConverter.convert(category)));
 
         if(source.getRecipeSteps() != null && source.getRecipeSteps().size() > 0)
             source.getRecipeSteps().forEach(recipeSteps -> recipeCommand.getRecipeSteps().add(recipeStepsToRecipeStepsCommandConverter.convert(recipeSteps)));
+
+        if(source.getRecipeImages() != null && source.getRecipeImages().size() > 0){
+            source.getRecipeImages().forEach(recipeImages -> recipeCommand.getRecipeImagesCommands().add(recipeImagesToRecipeImagesCommandConverter.convert(recipeImages)));
+        }
+
+        if(source.getNutrition() != null)
+            recipeCommand.setNutritionCommand(nutritionToNutritionCommandConverter.convert(source.getNutrition()));
+
 
         return  recipeCommand;
 

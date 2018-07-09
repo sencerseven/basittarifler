@@ -7,6 +7,7 @@ import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.domain.RecipeSteps;
 import com.sencerseven.basittarifler.service.CategoryService;
+import com.sencerseven.basittarifler.service.CuisineService;
 import com.sencerseven.basittarifler.service.S3Services;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,13 @@ public class RecipeCommandToRecipeConverterTest {
     IngredientCommandToIngredientConverter ingredientCommandToIngredientConverter;
 
     @Mock
+    CuisineCommandToCuisineConverter cuisineCommandToCuisineConverter;
+
+    @Mock
     CategoryService categoryService;
+
+    @Mock
+    CuisineService cuisineService;
 
     @Mock
     S3Services s3Services;
@@ -47,7 +54,15 @@ public class RecipeCommandToRecipeConverterTest {
         MockitoAnnotations.initMocks(this);
         categoryCommandToCategoryConverter = new CategoryCommandToCategoryConverter(categoryService);
         recipeStepsCommandToRecipeStepsConverter = new RecipeStepsCommandToRecipeStepsConverter(s3Services);
-        converter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter,recipeStepsCommandToRecipeStepsConverter,nutritionCommandToNutritionConverter,recipeTipsCommandToRecipeTipsConverter,recipeImagesCommandToRecipeImagesConverter,ingredientCommandToIngredientConverter,categoryService);
+        converter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter,
+                recipeStepsCommandToRecipeStepsConverter,
+                nutritionCommandToNutritionConverter,
+                recipeTipsCommandToRecipeTipsConverter,
+                recipeImagesCommandToRecipeImagesConverter,
+                ingredientCommandToIngredientConverter,
+                categoryService,
+                cuisineCommandToCuisineConverter,
+                cuisineService);
 
     }
 

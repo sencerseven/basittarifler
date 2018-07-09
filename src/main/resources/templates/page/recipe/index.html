@@ -193,8 +193,7 @@
                                     </div>
                                 </div>
                                 <div class="recipe-media">
-                                    <a class="button-dark watch-video swipebox" href="https://vimeo.com/15306847">Watch
-                                        Video</a>
+                                    <a class="button-dark watch-video swipebox" href="https://vimeo.com/15306847">Video İzle</a>
                                 </div>
                             </div>
 
@@ -266,13 +265,12 @@
 
 
                         <div class="recipe-detail-body">
-                            <a href="recipe-detail.html#" class="print-button"><i class="fa fa-print"></i>Print
-                                Recipe</a>
+                            <a href="recipe-detail.html#" class="print-button"><i class="fa fa-print"></i>Tarifi Yazdır</a>
 
                             <ul class="pre-tags">
-                                <li><span>Cuisine : </span>Chinese</li>
-                                <li><span>Course : </span>Side Dish</li>
-                                <li><span>Skill Level : </span>Advanced</li>
+                                <li><span>Mutfak : </span><span th:if="${not (recipe.cuisine == null)}" th:text="${recipe.cuisine.cuisine}">Chinese</span></li>
+                                <li><span>Kategori : </span><span th:text="${recipe.categories[0].categoryName}">Side Dish</span></li>
+                                <li><span>Zorluk Derecesi : </span><span th:text="${recipe.difficulty}">Advanced</span></li>
                             </ul>
                             <div class="separator-post"></div>
                             <p th:text="${recipe.recipeText}">
@@ -717,8 +715,14 @@
 
                                 <li th:each="recipe : ${recipesPopuler}">
                                     <div class="thumb">
+
                                         <a href="recipe-detail.html#" th:href="${'/' + recipe.id}">
-                                            <img src="/images/temp-/images/widget-thumbnail.jpg" alt="thumbnail"/>
+                                            <img class="img-thumbnail" style="height: 100%;" th:if="${recipe.getRecipeImages() == null}"
+                                                 th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/no-thumbnail.png'}"
+                                                 alt="image"/>
                                         </a>
                                     </div>
                                     <div class="detail">

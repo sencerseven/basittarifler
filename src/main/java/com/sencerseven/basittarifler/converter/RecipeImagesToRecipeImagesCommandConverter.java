@@ -18,6 +18,7 @@ public class RecipeImagesToRecipeImagesCommandConverter implements Converter<Rec
 
         recipeImagesCommand.setId(recipeImages.getId());
         recipeImagesCommand.setDescription(recipeImages.getDescription());
+        recipeImagesCommand.setImageUrl(recipeImages.getUrl());
 
 
         return recipeImagesCommand;

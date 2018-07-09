@@ -21,6 +21,8 @@ public class RecipeCommand {
 
     private String recipeText;
 
+    private String difficulty;
+
     private Date created_at;
 
     private int person;
@@ -42,5 +44,7 @@ public class RecipeCommand {
     List<RecipeImagesCommand> recipeImagesCommands = new ArrayList<>();
 
     List<IngredientCommand> ingredientCommands = new ArrayList<>();
+
+    CuisineCommand cuisineCommand;
 
 }

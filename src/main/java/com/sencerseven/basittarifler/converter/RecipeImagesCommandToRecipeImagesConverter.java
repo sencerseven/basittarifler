@@ -24,6 +24,9 @@ public class RecipeImagesCommandToRecipeImagesConverter implements Converter<Rec
         recipeImages.setId(recipeImagesCommand.getId());
         recipeImages.setDescription(recipeImagesCommand.getDescription());
 
+        if(recipeImagesCommand.getImageUrl() != null)
+        recipeImages.setUrl(recipeImagesCommand.getImageUrl());
+
         if(recipeImagesCommand.getImageFile() != null && recipeImagesCommand.getImageFile().getSize() > 0)
         recipeImages.setUrl(s3Services.uploadFile(recipeImagesCommand.getImageFile().getOriginalFilename(), "recipe", recipeImagesCommand.getImageFile()));
 

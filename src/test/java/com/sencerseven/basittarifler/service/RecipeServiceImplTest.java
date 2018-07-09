@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.PageRequest;
 
+import javax.persistence.MapsId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,6 +54,17 @@ public class RecipeServiceImplTest {
     @Mock
     IngredientCommandToIngredientConverter ingredientCommandToIngredientConverter;
 
+    @Mock
+    CuisineCommandToCuisineConverter cuisineCommandToCuisineConverter;
+
+    @Mock
+    CuisineService cuisineService;
+
+    @Mock
+    RecipeImagesToRecipeImagesCommandConverter recipeImagesToRecipeImagesCommandConverter;
+
+    @Mock
+    NutritionToNutritionCommandConverter nutritionToNutritionCommandConverter;
 
     RecipeToRecipeCommandConverter recipeToRecipeCommandConverter;
 
@@ -70,8 +82,8 @@ public class RecipeServiceImplTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         recipeStepsToRecipeStepsCommandConverter = new RecipeStepsToRecipeStepsCommandConverter();
-        recipeToRecipeCommandConverter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter, recipeStepsToRecipeStepsCommandConverter);
-        recipeCommandToRecipeConverter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter, recipeStepsCommandToRecipeStepsConverter, nutritionCommandToNutritionConverter, recipeTipsCommandToRecipeTipsConverter, recipeImagesCommandToRecipeImagesConverter,ingredientCommandToIngredientConverter,categoryService);
+        recipeToRecipeCommandConverter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter, recipeStepsToRecipeStepsCommandConverter,recipeImagesToRecipeImagesCommandConverter,nutritionToNutritionCommandConverter);
+        recipeCommandToRecipeConverter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter, recipeStepsCommandToRecipeStepsConverter, nutritionCommandToNutritionConverter, recipeTipsCommandToRecipeTipsConverter, recipeImagesCommandToRecipeImagesConverter,ingredientCommandToIngredientConverter,categoryService,cuisineCommandToCuisineConverter,cuisineService);
         recipeService = new RecipeServiceImpl(recipeRepository, categoryService, recipeToRecipeCommandConverter, recipeCommandToRecipeConverter, usersCommandToUsersConverter);
     }
 

@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = {"ingredient","categories","recipeSteps","users","recipeStats","nutrition"})
+@EqualsAndHashCode(exclude = {"ingredient","categories","recipeSteps","users","recipeStats","nutrition","cuisine"})
 @Entity
 public class Recipe implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -24,6 +24,8 @@ public class Recipe implements Serializable {
     private String recipeDescription;
 
     private String recipeText;
+
+    private String difficulty;
 
     private String recipeUrl;
 
@@ -48,6 +50,9 @@ public class Recipe implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     Nutrition nutrition;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    Cuisine cuisine;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
     @JoinTable(name = "CAT_RECIPE"
@@ -122,6 +127,12 @@ public class Recipe implements Serializable {
     public Recipe addRecipeImages(RecipeImages recipeImages){
         recipeImages.setRecipe(this);
         this.recipeImages.add(recipeImages);
+        return this;
+    }
+
+    public Recipe addCuisine(Cuisine cuisine){
+        cuisine.setRecipe(this);
+        this.cuisine = cuisine;
         return this;
     }
 

@@ -26,5 +26,9 @@ INSERT INTO RECIPE_TIPS(description,recipe_id,view_rows) VALUES ('oo mikemmel 2'
 
 INSERT INTO COMMENT(text,recipe_id,users_id) VALUES ('eline sağlık çok güzel olmuş',1,1);
 
+INSERT INTO CUISINE(cuisine) VALUES ('Türk Mutfağı');
+INSERT INTO CUISINE(cuisine) VALUES ('İtalyan Mutfağı');
+INSERT INTO CUISINE(cuisine) VALUES ('Fransız Mutfağı');
+
 
 
