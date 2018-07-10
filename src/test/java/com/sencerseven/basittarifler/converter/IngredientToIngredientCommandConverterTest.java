@@ -2,8 +2,10 @@ package com.sencerseven.basittarifler.converter;
 
 import com.sencerseven.basittarifler.command.IngredientCommand;
 import com.sencerseven.basittarifler.domain.Ingredient;
+import com.sencerseven.basittarifler.domain.IngredientDetails;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.*;
@@ -12,13 +14,16 @@ public class IngredientToIngredientCommandConverterTest {
 
     IngredientToIngredientCommandConverter ingredientToIngredientCommandConverter;
 
+    @Mock
+    IngredientDetailsToIngredientDetailsCommandConverter ingredientDetailsToIngredientDetailsCommandConverter;
+
     private static final Long ID = 1L;
 
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        ingredientToIngredientCommandConverter = new IngredientToIngredientCommandConverter();
+        ingredientToIngredientCommandConverter = new IngredientToIngredientCommandConverter(ingredientDetailsToIngredientDetailsCommandConverter);
     }
 
     @Test

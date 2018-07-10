@@ -23,6 +23,9 @@ public class RecipeStepsCommandToRecipeStepsConverter implements Converter<Recip
         recipeSteps.setId(recipeStepsCommand.getId());
         recipeSteps.setDescription(recipeStepsCommand.getDescription());
 
+        if(recipeStepsCommand.getImgURL() != null )
+            recipeSteps.setImageURL(recipeStepsCommand.getImgURL());
+
         if (recipeStepsCommand.getImageFile() != null && recipeStepsCommand.getImageFile().getSize() > 0)
             recipeSteps.setImageURL(s3Services.uploadFile(recipeStepsCommand.getImageFile().getOriginalFilename(), "recipe", recipeStepsCommand.getImageFile()));
 

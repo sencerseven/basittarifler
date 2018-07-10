@@ -22,6 +22,10 @@ public class RecipeToRecipeCommandConverterTest {
     @Mock
     NutritionToNutritionCommandConverter nutritionToNutritionCommandConverter;
 
+    IngredientToIngredientCommandConverter ingredientToIngredientCommandConverter;
+
+    RecipeTipsToRecipeTipsCommmandConverter recipeTipsToRecipeTipsCommmandConverter;
+
     public static final Long ID= 1L;
 
 
@@ -29,7 +33,12 @@ public class RecipeToRecipeCommandConverterTest {
     public void setUp() throws Exception {
         categoryToCategoryCommandConverter = new CategoryToCategoryCommandConverter();
         recipeStepsToRecipeStepsCommandConverter = new RecipeStepsToRecipeStepsCommandConverter();
-        converter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter,recipeStepsToRecipeStepsCommandConverter,recipeImagesToRecipeImagesCommandConverter,nutritionToNutritionCommandConverter);
+        converter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter,
+                recipeStepsToRecipeStepsCommandConverter,
+                recipeImagesToRecipeImagesCommandConverter,
+                nutritionToNutritionCommandConverter,
+                ingredientToIngredientCommandConverter,
+                recipeTipsToRecipeTipsCommmandConverter);
 
     }
 

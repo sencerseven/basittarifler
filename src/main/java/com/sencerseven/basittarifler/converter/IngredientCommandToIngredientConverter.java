@@ -25,7 +25,10 @@ public class IngredientCommandToIngredientConverter implements Converter<Ingredi
         ingredient.setDescription(ingredientCommand.getDescription());
 
         if(ingredientCommand.getIngredientDetailsCommands() != null && ingredientCommand.getIngredientDetailsCommands().size() > 0)
-            ingredientCommand.getIngredientDetailsCommands().forEach(ingredientDetailsCommand -> ingredient.addIngredientDetails(ingredientDetailsCommandToIngredienDetailsConverter.convert(ingredientDetailsCommand)));
+            ingredientCommand.getIngredientDetailsCommands()
+                    .stream()
+                    .filter(ingredientDetailsCommand -> (ingredientDetailsCommand.getDescription() != null) )
+                    .forEach(ingredientDetailsCommand -> ingredient.addIngredientDetails(ingredientDetailsCommandToIngredienDetailsConverter.convert(ingredientDetailsCommand)));
 
         return ingredient;
 

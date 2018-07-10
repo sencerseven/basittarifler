@@ -9,6 +9,12 @@ import org.springframework.stereotype.Component;
 public class IngredientToIngredientCommandConverter implements Converter<Ingredient,IngredientCommand> {
 
 
+    IngredientDetailsToIngredientDetailsCommandConverter ingredientDetailsToIngredientDetailsCommandConverter;
+
+    public IngredientToIngredientCommandConverter(IngredientDetailsToIngredientDetailsCommandConverter ingredientDetailsToIngredientDetailsCommandConverter) {
+        this.ingredientDetailsToIngredientDetailsCommandConverter = ingredientDetailsToIngredientDetailsCommandConverter;
+    }
+
     @Override
     public IngredientCommand convert(Ingredient ingredient) {
         if(ingredient == null)
@@ -17,6 +23,11 @@ public class IngredientToIngredientCommandConverter implements Converter<Ingredi
 
         ingredientCommand.setId(ingredient.getId());
         ingredientCommand.setDescription(ingredient.getDescription());
+
+
+        if (ingredient.getIngredientDetails() != null && ingredient.getIngredientDetails().size()>0){
+            ingredient.getIngredientDetails().forEach(ingredientDetails -> ingredientCommand.getIngredientDetailsCommands().add(ingredientDetailsToIngredientDetailsCommandConverter.convert(ingredientDetails)));
+        }
 
         return ingredientCommand;
 

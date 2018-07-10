@@ -61,14 +61,14 @@ public class Recipe implements Serializable {
    private Set<Category> categories = new HashSet<>();
 
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "recipe")
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "recipe",orphanRemoval=true)
     private Set<Ingredient> ingredients = new HashSet<>();
 
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "recipe")
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "recipe",orphanRemoval = true)
     private Set<RecipeSteps> recipeSteps = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "recipe")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "recipe",orphanRemoval = true)
     private Set<RecipeTips> recipeTips = new HashSet<>();
 
     @ManyToOne
@@ -78,8 +78,14 @@ public class Recipe implements Serializable {
     private Set<Comment> comments = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval=true)
     private Set<RecipeImages> recipeImages = new HashSet<>();
+
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
+    @JoinTable(name = "TAGS_RECIPE"
+            ,joinColumns = @JoinColumn(name = "recipe_id")
+            ,inverseJoinColumns = @JoinColumn(name = "tags_id"))
+    private Set<Tags> tags = new HashSet<>();
 
     public Recipe addCategory(Category category){
         category.getRecipes().add(this);
@@ -133,6 +139,12 @@ public class Recipe implements Serializable {
     public Recipe addCuisine(Cuisine cuisine){
         cuisine.setRecipe(this);
         this.cuisine = cuisine;
+        return this;
+    }
+
+    public Recipe addTags(Tags tags){
+        tags.getRecipes().add(this);
+        this.tags.add(tags);
         return this;
     }
 

@@ -8,6 +8,8 @@ import com.sencerseven.basittarifler.service.CuisineService;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+
 @Component
 public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, Recipe> {
 
@@ -60,17 +62,25 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, 
             source.getCategories().forEach(category -> recipe.getCategories().add(categoryService.getById(category.getId())));
 
         if (source.getRecipeSteps() != null && source.getRecipeSteps().size() > 0)
-            source.getRecipeSteps().forEach(recipeSteps -> recipe.addRecipeSteps(recipeStepsCommandToRecipeStepsConverter.convert(recipeSteps)));
+            source.getRecipeSteps()
+                    .stream()
+                    .filter(recipeStepsCommand -> (recipeStepsCommand.getImgURL() != null || (recipeStepsCommand.getImageFile() != null && recipeStepsCommand.getImageFile().getSize()>0)))
+                    .forEach(recipeSteps -> recipe.addRecipeSteps(recipeStepsCommandToRecipeStepsConverter.convert(recipeSteps)));
 
         if (source.getRecipeTipsCommands() != null && source.getRecipeTipsCommands().size() > 0)
-            source.getRecipeTipsCommands().forEach(recipeTipsCommand -> recipe.addRecipeTips(recipeTipsCommandToRecipeTipsConverter.convert(recipeTipsCommand)));
+            source.getRecipeTipsCommands().stream().filter(recipeTipsCommand -> recipeTipsCommand.getDescription() != null).forEach(recipeTipsCommand -> recipe.addRecipeTips(recipeTipsCommandToRecipeTipsConverter.convert(recipeTipsCommand)));
 
         if(source.getRecipeImagesCommands() != null && source.getRecipeImagesCommands().size()>0){
-            source.getRecipeImagesCommands().forEach(recipeImagesCommand -> recipe.addRecipeImages(recipeImagesCommandToRecipeImagesConverter.convert(recipeImagesCommand)));
+            source.getRecipeImagesCommands()
+                    .stream()
+                    .filter(recipeImagesCommand -> (recipeImagesCommand.getImageUrl() != null || (recipeImagesCommand.getImageFile() != null && recipeImagesCommand.getImageFile().getSize()>0)))
+                    .forEach(recipeImagesCommand -> recipe.addRecipeImages(recipeImagesCommandToRecipeImagesConverter.convert(recipeImagesCommand)));
         }
 
         if(source.getIngredientCommands() != null && source.getIngredientCommands().size() > 0 ){
-            source.getIngredientCommands().forEach(ingredientCommand -> recipe.addIngredient(ingredientCommandToIngredientConverter.convert(ingredientCommand)));
+            source.getIngredientCommands().stream()
+                    .filter(ingredientCommand -> (ingredientCommand.getDescription() != null && !ingredientCommand.getDescription().equals("")))
+                    .forEach(ingredientCommand -> recipe.addIngredient(ingredientCommandToIngredientConverter.convert(ingredientCommand)));
         }
 
         if(source.getCuisineCommand() != null && source.getCuisineCommand().getId() != null)

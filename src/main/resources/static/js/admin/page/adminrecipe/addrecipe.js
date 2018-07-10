@@ -5,12 +5,6 @@ $(function() {
         readUrl(this);
     });
 
-    $('a').click(function(e) {
-        e.preventDefault();
-        return false;
-    });
-
-
     var recipeMaddeSlider = $('#recipeSlider');
     var recipeMaddeCountSlider = $('#recipeSlider .row').length;
 
@@ -108,13 +102,6 @@ $(function() {
         });
 
     });
-
-
-       $('a').click(function(e) {
-            e.preventDefault();
-            return false;
-        });
-
 
     var recipeIngredient = $('#recipeIngredient');
 

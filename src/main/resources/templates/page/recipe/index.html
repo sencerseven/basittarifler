@@ -273,7 +273,7 @@
                                 <li><span>Zorluk Derecesi : </span><span th:text="${recipe.difficulty}">Advanced</span></li>
                             </ul>
                             <div class="separator-post"></div>
-                            <p th:text="${recipe.recipeText}">
+                            <p th:utext="${recipe.recipeText}">
                                 Rinse the chicken pieces in cold water and pat dry. Place the chicken in a large,
                                 resealable zip-top bag and pour in the marinade. Toss the chicken inside the bag to
                                 cover evenly with the marinade and refrigerate for 12 hours or as long as overnight
@@ -461,7 +461,7 @@
                             </div>
                         </div>
 
-                        <div class="about-chef">
+                        <div class="about-chef hidden-print">
                             <h3 class="lined">Yazar Hakkında</h3>
                             <div class="listing">
                                 <div class="image">

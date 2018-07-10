@@ -49,20 +49,30 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <label class="col-lg-12 col-form-label" for="recipe-text">Yemek Yazısı <span
+                                <label class="col-lg-12 col-form-label" >Yemek Yazısı <span
                                         class="text-danger">*</span></label>
-                                <div class="col-lg-6">
-                                    <textarea placeholder="" id="recipe-text" th:field="*{recipeText}"
-                                              class="form-control"></textarea>
+                                <div class="col-lg-12">
+                                    <textarea class="textarea_editor form-control w-100" rows="15" th:field="*{recipeText}" placeholder="Enter text ..." style="height:200px"></textarea>
                                     <span class="text-danger"></span>
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
-                                <label class="col-lg-12 col-form-label" for="recipe-text">Yemek Zorluk <span
+                            <div class="col-md-4">
+                                <label class="col-lg-12 col-form-label" for="recipe-text">Kategori<span
                                         class="text-danger">*</span></label>
-                                <div class="col-lg-6">
-                                    <select th:field="*{cuisineCommand.id}">
+                                <div class="col-lg-12">
+                                    <select class="select2 w-100" th:field="*{categories[0].id}" required>
+                                        <option value="">Please select</option>
+                                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.categoryName}"></option>
+                                    </select>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="col-md-12 col-form-label" for="recipe-text">Mutfak</label>
+                                <div class="col-md-12">
+                                    <select class="select2 w-100" th:field="*{cuisineCommand.id}">
                                         <option value="">Please select</option>
                                         <option th:each="cuisine : ${cuisines}" th:value="${cuisine.id}" th:text="${cuisine.cuisine}"></option>
                                     </select>
@@ -70,11 +80,10 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
-                                <label class="col-lg-12 col-form-label" for="recipe-text">Yemek Zorluk <span
-                                        class="text-danger">*</span></label>
-                                <div class="col-lg-6">
-                                    <select th:field="*{difficulty}">
+                            <div class="col-md-4">
+                                <label class="col-md-12 col-form-label" for="recipe-text">Yemek Zorluk</label>
+                                <div class="col-md-12">
+                                    <select class="select2 w-100" th:field="*{difficulty}">
                                         <option value="">Please select</option>
                                         <option th:each="level : ${difficulty}" th:value="${level}" th:text="${level}"></option>
                                     </select>
@@ -82,14 +91,11 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
-                                <label class="col-lg-12 col-form-label" for="recipe-text">Kategori<span
-                                        class="text-danger">*</span></label>
-                                <div class="col-lg-6">
-                                    <select th:field="*{categories[0].id}">
-                                        <option value="">Please select</option>
-                                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.categoryName}"></option>
-                                    </select>
+
+                            <div class="col-md-4">
+                                <label class="col-md-12 col-form-label" for="recipe-text">Yemek Zorluk</label>
+                                <div class="col-md-12">
+
                                     <span class="text-danger"></span>
                                 </div>
                             </div>

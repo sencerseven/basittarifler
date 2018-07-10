@@ -263,7 +263,7 @@
                                 </p>
                                 <div class="meta-listing">
                                     <ul class="post-meta">
-                                        <li class="author"><a href="recipe-listing.html#" th:text="${recipe.getUsers().getUserName()}">John Doe</a></li>
+                                        <li class="author"><a href="recipe-listing.html#" th:if="${not #lists.isEmpty(recipe.getUsers())}" th:text="${recipe.getUsers().getUserName()}">John Doe</a></li>
                                         <li class="calendar" th:text="${recipe.createdAt}">23/10/2015</li>
                                     </ul>
                                     <div class="rating-box">

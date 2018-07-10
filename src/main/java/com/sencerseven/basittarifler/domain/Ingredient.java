@@ -25,7 +25,7 @@ public class Ingredient implements Serializable {
     @ManyToOne
     private Recipe recipe;
 
-    @OneToMany(mappedBy = "ingredient",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ingredient",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<IngredientDetails> ingredientDetails = new HashSet<>();
 
 

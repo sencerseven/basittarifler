@@ -16,12 +16,16 @@ public class RecipeToRecipeCommandConverter implements Converter<Recipe,RecipeCo
     RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter;
     RecipeImagesToRecipeImagesCommandConverter recipeImagesToRecipeImagesCommandConverter;
     NutritionToNutritionCommandConverter nutritionToNutritionCommandConverter;
+    IngredientToIngredientCommandConverter ingredientToIngredientCommandConverter;
+    RecipeTipsToRecipeTipsCommmandConverter recipeTipsToRecipeTipsCommmandConverter;
 
-    public RecipeToRecipeCommandConverter(CategoryToCategoryCommandConverter categoryToCategoryCommandConverter, RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter, RecipeImagesToRecipeImagesCommandConverter recipeImagesToRecipeImagesCommandConverter, NutritionToNutritionCommandConverter nutritionToNutritionCommandConverter) {
+    public RecipeToRecipeCommandConverter(CategoryToCategoryCommandConverter categoryToCategoryCommandConverter, RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter, RecipeImagesToRecipeImagesCommandConverter recipeImagesToRecipeImagesCommandConverter, NutritionToNutritionCommandConverter nutritionToNutritionCommandConverter, IngredientToIngredientCommandConverter ingredientToIngredientCommandConverter, RecipeTipsToRecipeTipsCommmandConverter recipeTipsToRecipeTipsCommmandConverter) {
         this.categoryToCategoryCommandConverter = categoryToCategoryCommandConverter;
         this.recipeStepsToRecipeStepsCommandConverter = recipeStepsToRecipeStepsCommandConverter;
         this.recipeImagesToRecipeImagesCommandConverter = recipeImagesToRecipeImagesCommandConverter;
         this.nutritionToNutritionCommandConverter = nutritionToNutritionCommandConverter;
+        this.ingredientToIngredientCommandConverter = ingredientToIngredientCommandConverter;
+        this.recipeTipsToRecipeTipsCommmandConverter = recipeTipsToRecipeTipsCommmandConverter;
     }
 
     @Synchronized
@@ -55,8 +59,16 @@ public class RecipeToRecipeCommandConverter implements Converter<Recipe,RecipeCo
             source.getRecipeImages().forEach(recipeImages -> recipeCommand.getRecipeImagesCommands().add(recipeImagesToRecipeImagesCommandConverter.convert(recipeImages)));
         }
 
+        if(source.getIngredients() != null && source.getIngredients().size()>0){
+            source.getIngredients().forEach(ingredient -> recipeCommand.getIngredientCommands().add(ingredientToIngredientCommandConverter.convert(ingredient)));
+        }
+
         if(source.getNutrition() != null)
             recipeCommand.setNutritionCommand(nutritionToNutritionCommandConverter.convert(source.getNutrition()));
+
+
+        if(source.getRecipeTips() != null && source.getRecipeTips().size()>0)
+            source.getRecipeTips().forEach(recipeTips -> recipeCommand.getRecipeTipsCommands().add(recipeTipsToRecipeTipsCommmandConverter.convert(recipeTips)));
 
 
         return  recipeCommand;
