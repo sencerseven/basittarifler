@@ -1,6 +1,7 @@
 $(function() {
 
 
+
     $(".imgInput").on("change",function() {
         readUrl(this);
     });

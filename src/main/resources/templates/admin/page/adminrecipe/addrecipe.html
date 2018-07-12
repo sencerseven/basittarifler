@@ -81,9 +81,9 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label class="col-md-12 col-form-label" for="recipe-text">Yemek Zorluk</label>
+                                <label class="col-md-12 col-form-label" for="recipeDifficulty">Yemek Zorluk</label>
                                 <div class="col-md-12">
-                                    <select class="select2 w-100" th:field="*{difficulty}">
+                                    <select class="select2 w-100" th:field="*{difficulty}" id="recipeDifficulty">
                                         <option value="">Please select</option>
                                         <option th:each="level : ${difficulty}" th:value="${level}" th:text="${level}"></option>
                                     </select>
@@ -92,13 +92,17 @@
                             </div>
 
 
-                            <div class="col-md-4">
-                                <label class="col-md-12 col-form-label" for="recipe-text">Yemek Zorluk</label>
+                            <div class="col-md-12">
+                                <label class="col-md-12 col-form-label" for="tags">Tags</label>
                                 <div class="col-md-12">
+                                    <select class="tags2 w-100" multiple id="tags" th:field="*{tagsCommands.tagsName}">
+                                        <option value="">Please select</option>
+                                    </select>
 
                                     <span class="text-danger"></span>
                                 </div>
                             </div>
+
 
 
                         </div>

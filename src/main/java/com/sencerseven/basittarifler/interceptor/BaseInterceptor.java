@@ -55,6 +55,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             }else{
                 viewUrl = "page/" +controllerName+"/"+actionName;
                 jsUrl = "/js/page/"+controllerName+"/"+actionName+".js";
+                cssUrl = "/css/page/"+controllerName+"/"+actionName+".css";
             }
 
             modelAndView.addObject("view",viewUrl);

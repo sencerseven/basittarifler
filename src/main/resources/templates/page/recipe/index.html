@@ -431,15 +431,12 @@
                             </div>
 
                             <div class="separator-post"></div>
-                            <div class="tags-icons">
+                            <div class="tags-icons" th:if="${recipe.tags != null}">
                                 <div class="row">
                                     <div class="col-sm-7">
                                         <div class="details-tags">
                                             <ul>
-                                                <li><a href="recipe-detail.html#">garlic</a></li>
-                                                <li><a href="recipe-detail.html#">pizza</a></li>
-                                                <li><a href="recipe-detail.html#">potato</a></li>
-                                                <li><a href="recipe-detail.html#">roasted</a></li>
+                                                <li th:each="tag,key : ${#strings.arraySplit(recipe.tags.tagsName,',')}"><a th:href="@{'/recipelist/search?tags='+${tag}}" th:text="${tag}">garlic</a></li>
                                             </ul>
                                         </div>
                                     </div>

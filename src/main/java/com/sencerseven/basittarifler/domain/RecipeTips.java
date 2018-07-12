@@ -13,7 +13,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(exclude = "recipe")
 @Entity
 public class RecipeTips implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

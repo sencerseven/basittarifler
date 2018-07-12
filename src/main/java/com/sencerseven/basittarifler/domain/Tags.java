@@ -1,14 +1,14 @@
 package com.sencerseven.basittarifler.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Tags {
 
@@ -16,19 +16,15 @@ public class Tags {
     @Id
     private Long id;
 
-    @Column(unique = true)
-    private String tags;
+    private String tagsName;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
-    @JoinTable(name = "TAGS_RECIPE"
-        ,joinColumns = @JoinColumn(name = "tags_id")
-        ,inverseJoinColumns = @JoinColumn(name = "recipe_id"))
-    Set<Recipe> recipes = new HashSet<>();
+    @OneToOne(optional = false)
+    Recipe recipe;
 
     public Tags() {
     }
 
     public Tags(String tags) {
-        this.tags = tags;
+        this.tagsName = tags;
     }
 }

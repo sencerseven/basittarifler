@@ -44,6 +44,9 @@ public class RecipeCommandToRecipeConverterTest {
     CuisineService cuisineService;
 
     @Mock
+    TagsCommandToTagsConverter tagsCommandToTagsConverter;
+
+    @Mock
     S3Services s3Services;
 
     public static final Long ID= 1L;
@@ -62,7 +65,8 @@ public class RecipeCommandToRecipeConverterTest {
                 ingredientCommandToIngredientConverter,
                 categoryService,
                 cuisineCommandToCuisineConverter,
-                cuisineService);
+                cuisineService,
+                tagsCommandToTagsConverter);
 
     }
 
@@ -88,6 +92,7 @@ public class RecipeCommandToRecipeConverterTest {
 
         RecipeStepsCommand recipeStepsCommand = new RecipeStepsCommand();
         recipeStepsCommand.setId(ID);
+        recipeStepsCommand.setImgURL("test.jpg");
         recipeCommand.getRecipeSteps().add(recipeStepsCommand);
 
         Recipe recipe = converter.convert(recipeCommand);

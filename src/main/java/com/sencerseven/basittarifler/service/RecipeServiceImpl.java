@@ -140,11 +140,18 @@ public class RecipeServiceImpl implements RecipeService {
         Recipe recipe = recipeCommandToRecipeConverter.convert(recipeCommand);
         recipe.addUsers(detachUser);
 
-        Optional<Recipe> save = Optional.of(recipeRepository.save(recipe));
+        Optional<Recipe> save = Optional.of(recipeRepository.saveAndFlush(recipe));
 
         if(save.isPresent())
             return recipeToRecipeCommandConverter.convert(save.get());
         return null;
     }
 
+    @Override
+    public Page<Recipe> findRecipeByTagsContaining(int page,int size,String tags) {
+        if(tags == null || tags.equals(""))
+            return null;
+
+        return recipeRepository.findRecipesByTags_TagsNameContaining(PageRequest.of(page,size),tags);
+    }
 }

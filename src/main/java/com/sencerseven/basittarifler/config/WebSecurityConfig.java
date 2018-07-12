@@ -66,7 +66,7 @@ public class WebSecurityConfig {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
 
-            http.authorizeRequests().antMatchers("/admin/**")
+            http.antMatcher("/admin/**").authorizeRequests().anyRequest()
                     .hasRole("ADMIN")
                     .and()
                     .formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").permitAll()
@@ -86,7 +86,6 @@ public class WebSecurityConfig {
     }
 
     @Configuration
-    @Order(2)
     public static class HomeSecurity extends WebSecurityConfigurerAdapter{
 
         @Autowired
@@ -126,7 +125,8 @@ public class WebSecurityConfig {
         protected void configure(HttpSecurity http) throws Exception {
 
             http.authorizeRequests()
-                    .antMatchers("/h2-console","/h2-console/**").permitAll()
+                    .antMatchers("/recipe/add").hasAnyRole("ADMIN","USER")
+                    .antMatchers("/h2-console","/h2-console/**","/login").permitAll()
                     .and()
                     .formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").permitAll()
                     .and()

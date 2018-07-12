@@ -37,6 +37,12 @@
     <link rel="stylesheet" href="/css/main.css" th:src="@{/css/main.css}"/>
 
     <link rel="stylesheet" href="/js/flexslider/flexslider.css" th:src="@{/js/flexslider/flexslider.css}"/>
+
+    <link href="css/helper.css" rel="stylesheet" th:href="@{/css/helper.css}">
+
+    <link href="css/style.css" rel="stylesheet" th:href="@{${css}}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 </head>
 <!--/*@thymesVar id="recipes" type="java.util.List"*/-->
 <!--/*@thymesVar id="recipe" type="com.sencerseven.basittarifler.domain.Recipe"*/-->
@@ -63,6 +69,8 @@
 <div th:replace="fragment/footer"></div>
 <!--footer ends-->
 
+
+
 <script src="/js/jquery-1.11.3.min.js" th:src="@{/js/jquery-1.11.3.min.js}"></script>
 <script src="/js/jquery-ui.js" th:src="@{/js/jquery-ui.js}"></script>
 <script src="/js/flexslider/jquery.flexslider-min.js" th:src="@{/js/flexslider/jquery.flexslider-min.js}"></script>
@@ -73,8 +81,13 @@
 <script src="/js/jquery.form.js"  th:src="@{/js/jquery.form.js}"></script>
 <script src="/js/jquery.validate.min.js"  th:src="@{/js/jquery.validate.min.js}"></script>
 <script src="/js/jquery.swipebox.js"  th:src="@{/js/jquery.swipebox.js}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 <script src="/js/custom.js"  th:src="@{/js/custom.js}"></script>
 <script src=""  th:src="@{${js}}"></script>
+
+
 
 </body>
 </html>

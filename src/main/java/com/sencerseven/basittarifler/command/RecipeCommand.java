@@ -47,4 +47,6 @@ public class RecipeCommand {
 
     CuisineCommand cuisineCommand;
 
+    TagsCommand tagsCommands;
+
 }

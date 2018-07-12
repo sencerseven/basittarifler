@@ -40,4 +40,6 @@ public interface RecipeService {
     Page<Recipe> findRecipeByCategoriesInOrderByCreatedAtDesc(int page, int size, Set<Category> categories);
 
     RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand,UsersCommand usersCommand);
+
+    Page<Recipe >findRecipeByTagsContaining(int page,int size,String tags);
 }

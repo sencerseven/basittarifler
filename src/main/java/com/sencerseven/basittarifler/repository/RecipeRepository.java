@@ -32,5 +32,9 @@ public interface RecipeRepository extends JpaRepository<Recipe,Long> {
     Page<Recipe> findRecipeByCategoriesInOrderByCreatedAtDesc(Pageable pageable,Set<Category> categories);
 
 
+    Page<Recipe> findRecipesByTags_TagsNameContaining(Pageable pageable,String tags);
+    List<Recipe> findRecipeByTags_TagsNameContaining(String tags);
+
+
 
 }

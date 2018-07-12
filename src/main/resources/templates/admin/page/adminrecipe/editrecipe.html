@@ -93,10 +93,11 @@
                             </div>
 
                             <div class="col-md-12">
-                                <label class="col-md-12 col-form-label" for="recipe-text">Yemek Zorluk</label>
+                                <label class="col-md-12 col-form-label" for="recipe-text">Tags</label>
                                 <div class="col-md-12">
-                                    <select class="tags2 w-100" multiple>
-                                        <option value="">Please select</option>
+
+                                    <select  th:field="*{tagsCommands.selectTagList}" class="tags2 w-100" th:multiple="multiple">
+                                        <option value="" th:each="tagsName,key : ${#strings.arraySplit(recipeCommand.tagsCommands.tagsName,',')}" th:value="${tagsName}" th:text="${tagsName}" th:selected="selected">test</option>
                                     </select>
 
                                     <span class="text-danger"></span>

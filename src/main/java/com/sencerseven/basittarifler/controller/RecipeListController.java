@@ -62,4 +62,19 @@ public class RecipeListController {
         return "index";
     }
 
+    @GetMapping("search")
+    public String tagsearchAction(Model model,@RequestParam(value="tags")String tags, @RequestParam(value = "page",required = false,defaultValue = "1")int id){
+        Page<Recipe> recipeList = recipeService.findRecipeByTagsContaining(id-1,10,tags);
+        List<Recipe> recipePopuler = recipeService.getAllPopulerRecipe(0,3);
+        Set<Category> categories = categoryService.getCategoriesByMenuActive(0,10,true);
+
+        model.addAttribute("recipePage",recipeList);
+        model.addAttribute("recipeCount",recipeService.countAllBy());
+        model.addAttribute("recipePopular",recipePopuler);
+        model.addAttribute("categories",categories);
+
+
+        return "index";
+    }
+
 }

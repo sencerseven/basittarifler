@@ -51,6 +51,9 @@ public class RecipeControllerTest {
     @Mock
     Model model;
 
+    @Mock
+    CuisineService cuisineService;
+
     RecipeController recipeController;
 
     private static final Long ID = 1L;
@@ -58,7 +61,7 @@ public class RecipeControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeController = new RecipeController(recipeService,recipeStepsService,recipeTipsService,commentService,categoryService,s3Services);
+        recipeController = new RecipeController(recipeService,recipeStepsService,recipeTipsService,commentService,categoryService,s3Services,cuisineService);
 
     }
 

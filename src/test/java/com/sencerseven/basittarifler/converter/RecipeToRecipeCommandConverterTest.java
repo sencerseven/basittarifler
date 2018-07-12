@@ -22,6 +22,9 @@ public class RecipeToRecipeCommandConverterTest {
     @Mock
     NutritionToNutritionCommandConverter nutritionToNutritionCommandConverter;
 
+    @Mock
+    TagsToTagsCommandConverter tagsToTagsCommandConverter;
+
     IngredientToIngredientCommandConverter ingredientToIngredientCommandConverter;
 
     RecipeTipsToRecipeTipsCommmandConverter recipeTipsToRecipeTipsCommmandConverter;
@@ -38,7 +41,8 @@ public class RecipeToRecipeCommandConverterTest {
                 recipeImagesToRecipeImagesCommandConverter,
                 nutritionToNutritionCommandConverter,
                 ingredientToIngredientCommandConverter,
-                recipeTipsToRecipeTipsCommmandConverter);
+                recipeTipsToRecipeTipsCommmandConverter,
+                tagsToTagsCommandConverter);
 
     }
 

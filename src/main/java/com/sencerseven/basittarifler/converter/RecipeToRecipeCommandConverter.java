@@ -18,14 +18,16 @@ public class RecipeToRecipeCommandConverter implements Converter<Recipe,RecipeCo
     NutritionToNutritionCommandConverter nutritionToNutritionCommandConverter;
     IngredientToIngredientCommandConverter ingredientToIngredientCommandConverter;
     RecipeTipsToRecipeTipsCommmandConverter recipeTipsToRecipeTipsCommmandConverter;
+    TagsToTagsCommandConverter tagsToTagsCommandConverter;
 
-    public RecipeToRecipeCommandConverter(CategoryToCategoryCommandConverter categoryToCategoryCommandConverter, RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter, RecipeImagesToRecipeImagesCommandConverter recipeImagesToRecipeImagesCommandConverter, NutritionToNutritionCommandConverter nutritionToNutritionCommandConverter, IngredientToIngredientCommandConverter ingredientToIngredientCommandConverter, RecipeTipsToRecipeTipsCommmandConverter recipeTipsToRecipeTipsCommmandConverter) {
+    public RecipeToRecipeCommandConverter(CategoryToCategoryCommandConverter categoryToCategoryCommandConverter, RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter, RecipeImagesToRecipeImagesCommandConverter recipeImagesToRecipeImagesCommandConverter, NutritionToNutritionCommandConverter nutritionToNutritionCommandConverter, IngredientToIngredientCommandConverter ingredientToIngredientCommandConverter, RecipeTipsToRecipeTipsCommmandConverter recipeTipsToRecipeTipsCommmandConverter, TagsToTagsCommandConverter tagsToTagsCommandConverter) {
         this.categoryToCategoryCommandConverter = categoryToCategoryCommandConverter;
         this.recipeStepsToRecipeStepsCommandConverter = recipeStepsToRecipeStepsCommandConverter;
         this.recipeImagesToRecipeImagesCommandConverter = recipeImagesToRecipeImagesCommandConverter;
         this.nutritionToNutritionCommandConverter = nutritionToNutritionCommandConverter;
         this.ingredientToIngredientCommandConverter = ingredientToIngredientCommandConverter;
         this.recipeTipsToRecipeTipsCommmandConverter = recipeTipsToRecipeTipsCommmandConverter;
+        this.tagsToTagsCommandConverter = tagsToTagsCommandConverter;
     }
 
     @Synchronized
@@ -70,6 +72,9 @@ public class RecipeToRecipeCommandConverter implements Converter<Recipe,RecipeCo
         if(source.getRecipeTips() != null && source.getRecipeTips().size()>0)
             source.getRecipeTips().forEach(recipeTips -> recipeCommand.getRecipeTipsCommands().add(recipeTipsToRecipeTipsCommmandConverter.convert(recipeTips)));
 
+
+        if(source.getTags() != null)
+            recipeCommand.setTagsCommands(tagsToTagsCommandConverter.convert(source.getTags()));
 
         return  recipeCommand;
 

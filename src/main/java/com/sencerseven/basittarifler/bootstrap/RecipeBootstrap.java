@@ -217,6 +217,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         recipe4.addRecipeTips(new RecipeTips("Oda sıcaklığında tereyağı kullanmaya özen gösterin.Kurabiye hamuru toparlanıp ele yapışmayacak bir kıvam alana kadar azar azar un eklemeyi sürdürün."));
         recipe4.setUsers(users);
 
+        recipe4.addTags(new Tags("oldu"));
+
 
         recipes.add(recipe4);
 

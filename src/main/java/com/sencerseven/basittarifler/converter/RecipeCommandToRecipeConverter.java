@@ -5,7 +5,9 @@ import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.functions.BasitTarifHelpers;
 import com.sencerseven.basittarifler.service.CategoryService;
 import com.sencerseven.basittarifler.service.CuisineService;
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -23,8 +25,9 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, 
     CategoryService categoryService;
     CuisineCommandToCuisineConverter cuisineCommandToCuisineConverter;
     CuisineService cuisineService;
+    TagsCommandToTagsConverter tagsCommandToTagsConverter;
 
-    public RecipeCommandToRecipeConverter(CategoryCommandToCategoryConverter categoryCommandToCategoryConverter, RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter, NutritionCommandToNutritionConverter nutritionCommandToNutritionConverter, RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter, RecipeImagesCommandToRecipeImagesConverter recipeImagesCommandToRecipeImagesConverter, IngredientCommandToIngredientConverter ingredientCommandToIngredientConverter, CategoryService categoryService, CuisineCommandToCuisineConverter cuisineCommandToCuisineConverter, CuisineService cuisineService) {
+    public RecipeCommandToRecipeConverter(CategoryCommandToCategoryConverter categoryCommandToCategoryConverter, RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter, NutritionCommandToNutritionConverter nutritionCommandToNutritionConverter, RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter, RecipeImagesCommandToRecipeImagesConverter recipeImagesCommandToRecipeImagesConverter, IngredientCommandToIngredientConverter ingredientCommandToIngredientConverter, CategoryService categoryService, CuisineCommandToCuisineConverter cuisineCommandToCuisineConverter, CuisineService cuisineService, TagsCommandToTagsConverter tagsCommandToTagsConverter) {
         this.categoryCommandToCategoryConverter = categoryCommandToCategoryConverter;
         this.recipeStepsCommandToRecipeStepsConverter = recipeStepsCommandToRecipeStepsConverter;
         this.nutritionCommandToNutritionConverter = nutritionCommandToNutritionConverter;
@@ -34,8 +37,11 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, 
         this.categoryService = categoryService;
         this.cuisineCommandToCuisineConverter = cuisineCommandToCuisineConverter;
         this.cuisineService = cuisineService;
+        this.tagsCommandToTagsConverter = tagsCommandToTagsConverter;
     }
 
+    @Synchronized
+    @Nullable
     @Override
     public Recipe convert(RecipeCommand source) {
         if (source == null)
@@ -86,6 +92,10 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, 
         if(source.getCuisineCommand() != null && source.getCuisineCommand().getId() != null)
             recipe.addCuisine(cuisineService.getById(source.getCuisineCommand().getId()));
 
+
+        if(source.getTagsCommands() != null){
+            recipe.addTags(tagsCommandToTagsConverter.convert(source.getTagsCommands()));
+        }
 
         return recipe;
     }
