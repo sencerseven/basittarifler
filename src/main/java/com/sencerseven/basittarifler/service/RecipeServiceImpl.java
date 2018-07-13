@@ -140,7 +140,7 @@ public class RecipeServiceImpl implements RecipeService {
         Recipe recipe = recipeCommandToRecipeConverter.convert(recipeCommand);
         recipe.addUsers(detachUser);
 
-        Optional<Recipe> save = Optional.of(recipeRepository.saveAndFlush(recipe));
+        Optional<Recipe> save = Optional.of(recipeRepository.save(recipe));
 
         if(save.isPresent())
             return recipeToRecipeCommandConverter.convert(save.get());

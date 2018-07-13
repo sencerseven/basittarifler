@@ -113,7 +113,7 @@ public class RecipeRepositoryTest {
 
     @Test
     public void findRecipeByTagsContaining(){
-        Page<Recipe> page = recipeRepository.findRecipesByTags_TagsNameContaining(PageRequest.of(1,2),"oldu");
+        Page<Recipe> page = recipeRepository.findRecipesByTags_TagsNameContaining(PageRequest.of(1,1),"oldu");
         assertEquals(1,page.getSize());
 
     }
