@@ -2,7 +2,9 @@ package com.sencerseven.basittarifler.converter;
 
 import com.sencerseven.basittarifler.command.RecipeImagesCommand;
 import com.sencerseven.basittarifler.domain.RecipeImages;
+import com.sencerseven.basittarifler.functions.BasitTariflerHelpers;
 import com.sencerseven.basittarifler.service.S3Services;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +12,9 @@ import org.springframework.stereotype.Component;
 public class RecipeImagesCommandToRecipeImagesConverter implements Converter<RecipeImagesCommand,RecipeImages> {
 
     S3Services s3Services;
+
+    @Autowired
+    BasitTariflerHelpers basitTariflerHelpers;
 
     public RecipeImagesCommandToRecipeImagesConverter(S3Services s3Services) {
         this.s3Services = s3Services;
@@ -28,7 +33,9 @@ public class RecipeImagesCommandToRecipeImagesConverter implements Converter<Rec
         recipeImages.setUrl(recipeImagesCommand.getImageUrl());
 
         if(recipeImagesCommand.getImageFile() != null && recipeImagesCommand.getImageFile().getSize() > 0)
-        recipeImages.setUrl(s3Services.uploadFile(recipeImagesCommand.getImageFile().getOriginalFilename(), "recipe", recipeImagesCommand.getImageFile()));
+        recipeImages.setUrl(s3Services.uploadFile(recipeImagesCommand.getImageFile().getOriginalFilename(),
+                "recipe",
+                basitTariflerHelpers.addLogo(recipeImagesCommand.getImageFile())));
 
         return recipeImages;
     }

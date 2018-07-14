@@ -2,15 +2,15 @@ package com.sencerseven.basittarifler.converter;
 
 import com.sencerseven.basittarifler.command.RecipeCommand;
 import com.sencerseven.basittarifler.domain.Recipe;
-import com.sencerseven.basittarifler.functions.BasitTarifHelpers;
+import com.sencerseven.basittarifler.functions.BasitTariflerHelpers;
+import com.sencerseven.basittarifler.functions.BasitTariflerHelpersImpl;
 import com.sencerseven.basittarifler.service.CategoryService;
 import com.sencerseven.basittarifler.service.CuisineService;
 import lombok.Synchronized;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
 
 @Component
 public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, Recipe> {
@@ -26,6 +26,10 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, 
     CuisineCommandToCuisineConverter cuisineCommandToCuisineConverter;
     CuisineService cuisineService;
     TagsCommandToTagsConverter tagsCommandToTagsConverter;
+
+    @Autowired
+    BasitTariflerHelpers basitTariflerHelpers;
+
 
     public RecipeCommandToRecipeConverter(CategoryCommandToCategoryConverter categoryCommandToCategoryConverter, RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter, NutritionCommandToNutritionConverter nutritionCommandToNutritionConverter, RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter, RecipeImagesCommandToRecipeImagesConverter recipeImagesCommandToRecipeImagesConverter, IngredientCommandToIngredientConverter ingredientCommandToIngredientConverter, CategoryService categoryService, CuisineCommandToCuisineConverter cuisineCommandToCuisineConverter, CuisineService cuisineService, TagsCommandToTagsConverter tagsCommandToTagsConverter) {
         this.categoryCommandToCategoryConverter = categoryCommandToCategoryConverter;
@@ -54,7 +58,7 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, 
         recipe.setRecipeText(source.getRecipeText());
         recipe.setRecipeTitle(source.getRecipeTitle());
         recipe.setDifficulty(source.getDifficulty());
-        recipe.setRecipeUrl(BasitTarifHelpers.toSlug(source.getRecipeTitle()));
+        recipe.setRecipeUrl(basitTariflerHelpers.toSlug(source.getRecipeTitle()));
         recipe.setPerson(source.getPerson());
         recipe.setPortion(source.getPortion());
         recipe.setCookMin(source.getCookMin());
