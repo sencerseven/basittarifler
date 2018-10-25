@@ -139,7 +139,7 @@ $(function() {
                 return '';
             }
         }
-        
+
         var stripNumber = function (level) {
             var index = level.indexOf('-');
             if(index > -1) {
@@ -240,7 +240,7 @@ $(function() {
         count = $(".recipeStep").length;
 
         var newMajesticItem = '<li style="display: none">' +
-            '<div class="add-fields row">' +
+            '<div class="add-fields">' +
             ' <span class="handler-list"><i class="fa fa-arrows"></i></span>' +
             '<input type="text" id="steps" name="recipeSteps['+count+'].description" class="recipeStep"/> ' +
             '<input type="file" class="imgInput" name="recipeSteps['+count+'].imageFile" />' +
@@ -266,7 +266,7 @@ $(function() {
         count = $(".recipeSlider").length;
 
         var newMajesticItem = '<li style="display: none">' +
-            '<div class="add-fields row">' +
+            '<div class="add-fields">' +
             ' <span class="handler-list"><i class="fa fa-arrows"></i></span>' +
             '<input type="text" id="steps" name="recipeImagesCommands['+count+'].description" class="recipeSlider"/> ' +
             '<input type="file" class="imgInput" name="recipeImagesCommands['+count+'].imageFile" />' +

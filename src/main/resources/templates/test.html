@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="utf-8">
+
+    <title>bootstrap-wysihtml5</title>
+
+
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="src/bootstrap-wysihtml5.css"></link>
+
+
+    <link rel="stylesheet" type="text/css" href="src/bootstrap-wysihtml5.css" th:href="@{/css/bootstrap.min.css}"></link>
+    <link rel="stylesheet" type="text/css" href="src/bootstrap-wysihtml5.css" th:href="@{/css/bootstrap-wysihtml5.css}"></link>
+
+</head>
+<body>
+<div class="container">
+    <div class="hero-unit" style="margin-top:40px">
+        <h1 style="font-size:58px">bootstrap-wysihtml5 <small>Simple, beautiful wysiwyg editors</small></h1>
+        <hr/>
+        <textarea class="textarea" placeholder="Enter text ..." style="width: 810px; height: 200px"></textarea>
+    </div>
+
+</div>
+
+
+<script src="lib/js/wysihtml5-0.3.0.js" th:src="@{/js/wysihtml5-0.3.0.js}"></script>
+<script src="lib/js/jquery-1.7.2.min.js" th:src="@{/js/jquery-1.7.2.min.js}"></script>
+<script src="src/bootstrap-wysihtml5.js" th:src="@{/js/bootstrap-wysihtml5.js}"></script>
+
+<script>
+    $('.textarea').wysihtml5();
+</script>
+
+<script type="text/javascript" charset="utf-8">
+    $(prettyPrint);
+</script>
+
+</body>
+</html>

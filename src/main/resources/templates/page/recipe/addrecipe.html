@@ -128,14 +128,14 @@
                         <fieldset class="recipeSlider-set">
                             <ul class="list-sortable slider">
                                 <li>
-                                    <div class="add-fields row">
+                                    <div class="add-fields">
                                         <span class="handler-list"><i class="fa fa-arrows"></i></span>
                                         <input type="text" id="steps" th:field="*{recipeImagesCommands[0].description}" class="recipeSlider"/>
 
                                         <input type="file" class="imgInput" th:field="*{recipeImagesCommands[0].imageFile}"/>
                                         <img class="image_upload_preview" src="http://placehold.it/100x100"
                                              alt="your image" style="height:100px; width:100px;"/>
-                                        <span class="del-list"><i class="fa fa-trash"></i></span>
+
                                     </div>
 
                                 </li>
@@ -294,14 +294,14 @@
                         <fieldset class="ingredientStep-set">
                             <ul class="list-sortable steps">
                                 <li>
-                                    <div class="add-fields row">
+                                    <div class="add-fields">
                                         <span class="handler-list"><i class="fa fa-arrows"></i></span>
                                         <input type="text" id="steps" th:field="*{recipeSteps[0].description}" class="recipeStep"/>
 
                                         <input type="file" class="imgInput" th:field="*{recipeSteps[0].imageFile}"/>
                                         <img class="image_upload_preview" src="http://placehold.it/100x100"
                                               alt="your image" style="height:100px; width:100px;"/>
-                                        <span class="del-list"><i class="fa fa-trash"></i></span>
+
                                     </div>
 
                                 </li>
@@ -320,12 +320,12 @@
                         </h2>-->
 
                         <fieldset class="ingredient-set">
-                            <ul class="list-sortable ingredients-list">
+                            <ul class="list-sortable ingredients-list" style="padding:10px;">
                                 <li>
                                     <div class="add-fields">
                                         <span class="handler-list"><i class="fa fa-arrows"></i></span>
                                         <input type="text" id="ingredients" th:field="*{recipeTipsCommands[0].description}" class="ingredients"/>
-                                        <span class="del-list"><i class="fa fa-trash"></i></span>
+
                                     </div>
                                 </li>
                             </ul>
