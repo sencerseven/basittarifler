@@ -111,7 +111,7 @@
                         <div class="single-recipe-detail">
                             <div class="wrapper-recipe-heading">
                                 <div class="heading">
-                                    <h2 th:text="${recipe.recipeTitle}">Chocolate Earl Gray Pots de Creme Recipe</h2>
+                                    <h2 th:text="${recipe.title}">Chocolate Earl Gray Pots de Creme Recipe</h2>
                                     <div class="rating-box">
                                         <span class="rating-icons">
                                             <svg class="icon-container" width="25" height="19"
@@ -510,7 +510,7 @@
                                         </div>
                                         <div class="outer-detail">
                                             <div class="detail">
-                                                <h3><a href="recipe-detail.html#" th:href="@{'/recipe/' + ${recipeUsers.id}}" th:text="${recipeUsers.recipeTitle}">Pasto Pizza with fillas
+                                                <h3><a href="recipe-detail.html#" th:href="@{'/recipe/' + ${recipeUsers.id}}" th:text="${recipeUsers.title}">Pasto Pizza with fillas
                                                     Cheese Toppings</a></h3>
 
                                                 <div class="short-separator"></div>
@@ -723,7 +723,7 @@
                                         </a>
                                     </div>
                                     <div class="detail">
-                                        <a href="recipe-detail.html#" th:text="${recipe.recipeDescription}">Pimento
+                                        <a href="recipe-detail.html#" th:text="${recipe.description}">Pimento
                                             Cheese Potato Skins</a>
                                         <span class="post-date">March 21,2015</span>
                                     </div>

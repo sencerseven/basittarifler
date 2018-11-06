@@ -76,8 +76,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         Recipe recipe = new Recipe();
         recipe.setCreatedAt(new Date());
-        recipe.setRecipeTitle("Spicy Grilled Chicken Taco");
-        recipe.setRecipeDescription("Spicy Grilled Chicken Taco");
+        recipe.setTitle("Spicy Grilled Chicken Taco");
+        recipe.setDescription("Spicy Grilled Chicken Taco");
         recipe.setRecipeText("1 Prepare a gas or charcoal grill for medium-high");
         recipe.setViewCount(3);
 
@@ -139,8 +139,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         Recipe recipe2 = new Recipe();
         recipe2.setCreatedAt(new Date());
-        recipe2.setRecipeTitle("Ve İşte Kısırların Şahı Hatay İçi");
-        recipe2.setRecipeDescription("Spicy Grilled Chicken Taco");
+        recipe2.setTitle("Ve İşte Kısırların Şahı Hatay İçi");
+        recipe2.setDescription("Spicy Grilled Chicken Taco");
         recipe2.setRecipeText("1 Prepare a gas or charcoal grill for medium-high");
         recipe2.setViewCount(3);
 
@@ -166,8 +166,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         Recipe recipe3 = new Recipe();
         recipe3.setCreatedAt(new Date());
-        recipe3.setRecipeTitle("Beşamel Soslu Patates Oturtma");
-        recipe3.setRecipeDescription("Spicy Grilled Chicken Taco");
+        recipe3.setTitle("Beşamel Soslu Patates Oturtma");
+        recipe3.setDescription("Spicy Grilled Chicken Taco");
         recipe3.setRecipeText("1 Prepare a gas or charcoal grill for medium-high");
         recipe3.setViewCount(3);
 
@@ -193,8 +193,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         Recipe recipe4 = new Recipe();
         recipe4.setCreatedAt(new Date());
-        recipe4.setRecipeTitle("Sebzeli Mercimek Çorbası");
-        recipe4.setRecipeDescription("Spicy Grilled Chicken Taco");
+        recipe4.setTitle("Sebzeli Mercimek Çorbası");
+        recipe4.setDescription("Spicy Grilled Chicken Taco");
         recipe4.setRecipeText("1 Prepare a gas or charcoal grill for medium-high");
         recipe4.setViewCount(3);
 
@@ -224,8 +224,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         Recipe recipe5 = new Recipe();
         recipe5.setCreatedAt(new Date());
-        recipe5.setRecipeTitle("Tart Kalıbında Muhallebili Kek");
-        recipe5.setRecipeDescription("Spicy Grilled Chicken Taco");
+        recipe5.setTitle("Tart Kalıbında Muhallebili Kek");
+        recipe5.setDescription("Spicy Grilled Chicken Taco");
         recipe5.setRecipeText("1 Prepare a gas or charcoal grill for medium-high");
         recipe5.setViewCount(3);
 
@@ -251,8 +251,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         Recipe recipe6 = new Recipe();
         recipe6.setCreatedAt(new Date());
-        recipe6.setRecipeTitle("Patates Kızartması");
-        recipe6.setRecipeDescription("Spicy Grilled Chicken Taco");
+        recipe6.setTitle("Patates Kızartması");
+        recipe6.setDescription("Spicy Grilled Chicken Taco");
         recipe6.setRecipeText("1 Prepare a gas or charcoal grill for medium-high");
         recipe6.setViewCount(3);
 

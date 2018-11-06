@@ -123,8 +123,8 @@
                                 </a>
                             </div>
                             <div class="detail">
-                                <h4><a href="recipe-listing.html#" th:href="@{'/recipe/' + ${recipe.id}}" th:text="${recipe.recipeTitle}">pasto pizza with fillas cheez toppings</a></h4>
-                                <p th:text="${recipe.recipeDescription}">
+                                <h4><a href="recipe-listing.html#" th:href="@{'/recipe/' + ${recipe.id}}" th:text="${recipe.title}">pasto pizza with fillas cheez toppings</a></h4>
+                                <p th:text="${recipe.description}">
                                     Nam ornare arcu turpis, nc congu Curabitur quis euismod. Nam ornare arcu turpis, nec congu Curabitur quis euismod. Nam ornare gsfg
                                 </p>
                                 <div class="meta-listing">
@@ -231,7 +231,7 @@
                                 </a>
                             </div>
                             <div class="detail">
-                                <h4><a href="recipe-listing.html#" th:href="@{'/recipe/' + ${recipe.id}}" th:text="${recipe.recipeTitle}">pasto pizza with fillas cheez toppings</a></h4>
+                                <h4><a href="recipe-listing.html#" th:href="@{'/recipe/' + ${recipe.id}}" th:text="${recipe.title}">pasto pizza with fillas cheez toppings</a></h4>
                                 <p>
                                     Nam ornare arcu turpis, nec congu Curabitur quis euismod. Nam ornare arcu turpis, nec congu Curabitur quis euismod. Nam ornare gsfg
                                 </p>
@@ -379,7 +379,7 @@
                                         </a>
                                     </div>
                                     <div class="detail">
-                                        <a href="recipe-listing.html#" th:href="@{'/recipe/'+${recipe.id}}" th:text="${recipe.recipeTitle}">Pimento Cheese Potato Skins</a>
+                                        <a href="recipe-listing.html#" th:href="@{'/recipe/'+${recipe.id}}" th:text="${recipe.title}">Pimento Cheese Potato Skins</a>
                                         <span class="post-date" th:text="${recipe.createdAt}">March 21,2015</span>
                                     </div>
                                 </li>

@@ -17,13 +17,8 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(exclude = {"recipeTips", "ingredient", "categories", "recipeSteps", "users", "recipeStats", "nutrition", "cuisine", "tags"})
 @Entity
-public class Recipe implements Serializable {
+public class Recipe extends BasePost implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String recipeTitle;
 
     private String recipeDescription;
 
@@ -47,10 +42,6 @@ public class Recipe implements Serializable {
 
     @Column(columnDefinition = "int default 0")
     private int cookMin;
-
-
-    @Temporal(TemporalType.DATE)
-    private Date createdAt;
 
     @OneToOne(cascade = CascadeType.ALL)
     Nutrition nutrition;

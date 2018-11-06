@@ -40,8 +40,8 @@ public class RecipeToRecipeCommandConverter implements Converter<Recipe,RecipeCo
        final RecipeCommand recipeCommand = new RecipeCommand();
 
         recipeCommand.setId(source.getId());
-        recipeCommand.setRecipeTitle(source.getRecipeTitle());
-        recipeCommand.setRecipeDescription(source.getRecipeDescription());
+        recipeCommand.setRecipeTitle(source.getTitle());
+        recipeCommand.setRecipeDescription(source.getDescription());
         recipeCommand.setCreated_at(source.getCreatedAt());
         recipeCommand.setRecipeText(source.getRecipeText());
 

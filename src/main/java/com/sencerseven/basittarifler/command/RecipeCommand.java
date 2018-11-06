@@ -1,7 +1,5 @@
 package com.sencerseven.basittarifler.command;
 
-import com.sencerseven.basittarifler.domain.Ingredient;
-import com.sencerseven.basittarifler.domain.RecipeImages;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

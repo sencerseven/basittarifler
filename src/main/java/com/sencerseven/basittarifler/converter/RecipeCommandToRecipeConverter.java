@@ -54,9 +54,9 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, 
         Recipe recipe = new Recipe();
 
         recipe.setId(source.getId());
-        recipe.setRecipeDescription(source.getRecipeDescription());
+        recipe.setDescription(source.getRecipeDescription());
         recipe.setRecipeText(source.getRecipeText());
-        recipe.setRecipeTitle(source.getRecipeTitle());
+        recipe.setTitle(source.getRecipeTitle());
         recipe.setDifficulty(source.getDifficulty());
         recipe.setRecipeUrl(basitTariflerHelpers.toSlug(source.getRecipeTitle()));
         recipe.setPerson(source.getPerson());
