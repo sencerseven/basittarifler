@@ -28,4 +28,5 @@ public class Cuisine {
         this.cuisine = cuisine;
         this.recipe = recipe;
     }
+
 }

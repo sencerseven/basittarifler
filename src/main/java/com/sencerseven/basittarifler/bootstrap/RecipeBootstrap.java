@@ -80,7 +80,12 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         recipe.setDescription("Ispanak Borani Tarifi");
         recipe.setRecipeText("Mükemmel Ispanaklı Borani ");
         recipe.setViewCount(40);
+        recipe.setDifficulty("Orta-Zor");
 
+        recipe.setPerson(4);
+        recipe.setPortion(2);
+        recipe.setPrepMin(40);
+        recipe.setCookMin(90);
 
         recipe.getCategories().add(categoryOptional.get());
 
