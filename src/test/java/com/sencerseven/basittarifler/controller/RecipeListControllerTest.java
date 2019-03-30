@@ -3,6 +3,7 @@ package com.sencerseven.basittarifler.controller;
 import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.service.CategoryService;
+import com.sencerseven.basittarifler.service.PostsService;
 import com.sencerseven.basittarifler.service.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,6 +41,9 @@ public class RecipeListControllerTest {
     @Mock
     CategoryService categoryService;
 
+    @Mock
+    PostsService postsService;
+
     RecipeListController recipeListController;
 
     @Mock
@@ -50,7 +54,7 @@ public class RecipeListControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeListController = new RecipeListController(recipeService,categoryService);
+        recipeListController = new RecipeListController(recipeService,categoryService,postsService);
     }
 
     @Test
@@ -174,7 +178,12 @@ public class RecipeListControllerTest {
         ArgumentCaptor<Set<Category>> categorySetCaptor = ArgumentCaptor.forClass(HashSet.class);
 
 
-        String view = recipeListController.indexAction(model,1);
+        String view = null;
+        try {
+            view = recipeListController.indexAction(model,1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         assertEquals("index",view);
 

@@ -382,17 +382,24 @@
                                         <div class="step-single">
                                             <div class="step-image">
                                                 <a href="/images/temp-/images/slide-recipe-detail.jpg"
-                                                   th:href="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                   rel="recipe-slider-1" class="swipebox"><img class="img-thumbnail" style="width: 220px; height: 162px"
+                                                         th:if="${recipeStep.imageURL == null}"
+                                                         th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
                                                                 +'.'+${@environment.getProperty('s3.domain_name')}
                                                                 +'/'+${@environment.getProperty('s3.bucket')}
-                                                                +'/'+${recipeStep.imageURL}}"
-                                                   rel="recipe-slider-1" class="swipebox"><img class="img-thumbnail" style="width: 220px; height: 162px"
+                                                                +'/no-thumbnail.png'}"
+                                                        alt="image"/>
+                                                    <img class="img-thumbnail" style="width: 220px; height: 162px"
+                                                         th:if="${recipeStep.imageURL != null}"
                                                          th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
                                                                 +'.'+${@environment.getProperty('s3.domain_name')}
                                                                 +'/'+${@environment.getProperty('s3.bucket')}
                                                                 +'/'+${recipeStep.imageURL}}"
-                                                        alt="image"/></a>
+                                                         alt="image"/>
+
+                                                </a>
                                             </div>
+
                                             <div class="step-detail">
                                                 <h3 th:text="${iter.count + '. Adım'}"> Adım</h3>
                                                 <p th:text="${recipeStep.description}">
@@ -505,8 +512,14 @@
                                     <!--single recipe-->
                                     <div class="col-md-4" th:each="recipeUsers : ${recipesUsers}" th:if="${not (recipe.id == recipeUsers.id)}">
                                         <div class="recipe-image">
-                                            <a href="recipe-detail.html#"><img src="/images/temp-/images/main-recipe1.jpg"
-                                                                               alt="image"></a>
+                                            <a href="recipe-detail.html#">
+                                                <img  style="height: 100%;" th:if="${recipeUsers.getRecipeImages().size() == 0}"
+                                                     th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                    +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                    +'/'+${@environment.getProperty('s3.bucket')}
+                                                                    +'/no-thumbnail.png'}"
+                                                     alt="image"/>
+                                            </a>
                                         </div>
                                         <div class="outer-detail">
                                             <div class="detail">
@@ -725,7 +738,7 @@
                                     <div class="detail">
                                         <a href="recipe-detail.html#" th:text="${recipe.description}">Pimento
                                             Cheese Potato Skins</a>
-                                        <span class="post-date">March 21,2015</span>
+                                        <span class="post-date" th:text="${recipe.createdAt}">March 21,2015</span>
                                     </div>
                                 </li>
                             </ul>

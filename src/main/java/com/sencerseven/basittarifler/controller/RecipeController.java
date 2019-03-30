@@ -30,6 +30,8 @@ public class RecipeController {
     CategoryService categoryService;
     S3Services s3Services;
     CuisineService cuisineService;
+    BKodService bKodService;
+
 
 
     public RecipeController(RecipeService recipeService,
@@ -38,7 +40,8 @@ public class RecipeController {
                             CommentService commentService,
                             CategoryService categoryService,
                             S3Services s3Services,
-                            CuisineService cuisineService) {
+                            CuisineService cuisineService,
+                            BKodService bKodService) {
 
         this.recipeService = recipeService;
         this.recipeStepsService = recipeStepsService;
@@ -47,6 +50,7 @@ public class RecipeController {
         this.categoryService = categoryService;
         this.s3Services = s3Services;
         this.cuisineService = cuisineService;
+        this.bKodService = bKodService;
     }
 
     @GetMapping("{id}")
@@ -62,6 +66,7 @@ public class RecipeController {
         List<Recipe> recipesUsers = recipeService.getRecipesByUsers(0, 3, recipe.getUsers());
         List<Comment> commentList = commentService.getCommentsByRecipeOrderByCreatedAtAsc(recipe);
         Set<Category> categories = categoryService.getCategoriesByMenuActive(0,10,true);
+        Set<BKod> bKods = bKodService.findAllByBkod(0,10,"measurement");
 
 
         Page<Recipe> tagss = recipeService.findRecipeByTagsContaining(0,10,"oldu");
@@ -78,6 +83,7 @@ public class RecipeController {
         model.addAttribute("recipesUsers", recipesUsers);
         model.addAttribute("recipeComment", commentList);
         model.addAttribute("recipesPopuler", recipesPopuler);
+        model.addAttribute("bKods",bKods);
 
         model.addAttribute("commentCommand", new CommentCommand());
         model.addAttribute("categories", categories);

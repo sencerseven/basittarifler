@@ -420,56 +420,19 @@
                         </div>
                         <!--latest news widget-->
                         <div class="widget latest-news-widget">
-                            <h2>Latest News</h2>
+                            <h2>Blog</h2>
                             <ul>
-                                <li>
+                                <li th:each="post : ${posts}">
                                     <div class="thumb">
                                         <a href="recipe-listing.html#">
-                                            <img src="images/temp-images/widget-thumbnail.jpg" alt="thumbnail"/>
+                                            <img th:src="${post.postsImages.get(0).url}" src="images/temp-images/widget-thumbnail.jpg" alt="thumbnail"/>
                                         </a>
                                     </div>
                                     <div class="detail">
-                                        <a href="recipe-listing.html#">Pimento Cheese Potato Skins</a>
-                                        <span class="post-date">March 21,2015</span>
+                                        <a href="recipe-listing.html#" th:text="${post.title}">Pimento Cheese Potato Skins</a>
+                                        <span class="post-date" th:text="${}">March 21,2015</span>
                                     </div>
                                 </li>
-
-                                <li>
-                                    <div class="thumb">
-                                        <a href="recipe-listing.html#">
-                                            <img src="images/temp-images/widget-thumbnail.jpg" alt="thumbnail"/>
-                                        </a>
-                                    </div>
-                                    <div class="detail">
-                                        <a href="recipe-listing.html#">Pimento Cheese Potato Skins</a>
-                                        <span class="post-date">March 21,2015</span>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="thumb">
-                                        <a href="recipe-listing.html#">
-                                            <img src="images/temp-images/widget-thumbnail.jpg" alt="thumbnail"/>
-                                        </a>
-                                    </div>
-                                    <div class="detail">
-                                        <a href="recipe-listing.html#">Pimento Cheese Potato Skins</a>
-                                        <span class="post-date">March 21,2015</span>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="thumb">
-                                        <a href="recipe-listing.html#">
-                                            <img src="images/temp-images/widget-thumbnail.jpg" alt="thumbnail"/>
-                                        </a>
-                                    </div>
-                                    <div class="detail">
-                                        <a href="recipe-listing.html#">Pimento Cheese Potato Skins</a>
-                                        <span class="post-date">March 21,2015</span>
-                                    </div>
-                                </li>
-
                             </ul>
                         </div>
                         <!--latest news widget ends-->

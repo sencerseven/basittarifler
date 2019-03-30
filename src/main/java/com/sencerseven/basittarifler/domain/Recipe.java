@@ -107,6 +107,9 @@ public class Recipe extends BasePost implements Serializable {
     }
 
     public Recipe addRecipeSteps(RecipeSteps recipeSteps) {
+        if(recipeSteps == null)
+            return null;
+
         recipeSteps.setRecipe(this);
         this.recipeSteps.add(recipeSteps);
         return this;

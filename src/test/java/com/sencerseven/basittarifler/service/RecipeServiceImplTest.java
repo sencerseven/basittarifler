@@ -8,8 +8,11 @@ import com.sencerseven.basittarifler.domain.Users;
 import com.sencerseven.basittarifler.repository.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.PageRequest;
 
 import javax.persistence.MapsId;
@@ -23,6 +26,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RecipeServiceImplTest {
 
     @Mock
@@ -31,61 +35,17 @@ public class RecipeServiceImplTest {
     @Mock
     CategoryService categoryService;
 
-    RecipeServiceImpl recipeService;
-
     @Mock
-    CategoryToCategoryCommandConverter categoryToCategoryCommandConverter;
-
-    @Mock
-    CategoryCommandToCategoryConverter categoryCommandToCategoryConverter;
-
-    @Mock
-    RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter;
-
-    @Mock
-    NutritionCommandToNutritionConverter nutritionCommandToNutritionConverter;
-
-    @Mock
-    RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter;
-
-    @Mock
-    RecipeImagesCommandToRecipeImagesConverter recipeImagesCommandToRecipeImagesConverter;
-
-    @Mock
-    IngredientCommandToIngredientConverter ingredientCommandToIngredientConverter;
-
-    @Mock
-    CuisineCommandToCuisineConverter cuisineCommandToCuisineConverter;
-
-    @Mock
-    CuisineService cuisineService;
-
-    @Mock
-    RecipeImagesToRecipeImagesCommandConverter recipeImagesToRecipeImagesCommandConverter;
-
-    @Mock
-    NutritionToNutritionCommandConverter nutritionToNutritionCommandConverter;
-
-    @Mock
-    IngredientToIngredientCommandConverter ingredientToIngredientCommandConverter;
-
-    @Mock
-    RecipeTipsToRecipeTipsCommmandConverter recipeTipsToRecipeTipsCommmandConverter;
-
-    @Mock
-    TagsCommandToTagsConverter tagsCommandToTagsConverter;
-
-    @Mock
-    TagsToTagsCommandConverter tagsToTagsCommandConverter;
-
     RecipeToRecipeCommandConverter recipeToRecipeCommandConverter;
 
+    @Mock
     RecipeCommandToRecipeConverter recipeCommandToRecipeConverter;
-
-    RecipeStepsToRecipeStepsCommandConverter recipeStepsToRecipeStepsCommandConverter;
 
     @Mock
     UsersCommandToUsersConverter usersCommandToUsersConverter;
+
+    @InjectMocks
+    RecipeServiceImpl recipeService;
 
     public static final Long ID = 1L;
     public static final Long ID2 = 2L;
@@ -93,10 +53,7 @@ public class RecipeServiceImplTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeStepsToRecipeStepsCommandConverter = new RecipeStepsToRecipeStepsCommandConverter();
-        recipeToRecipeCommandConverter = new RecipeToRecipeCommandConverter(categoryToCategoryCommandConverter, recipeStepsToRecipeStepsCommandConverter,recipeImagesToRecipeImagesCommandConverter,nutritionToNutritionCommandConverter,ingredientToIngredientCommandConverter,recipeTipsToRecipeTipsCommmandConverter,tagsToTagsCommandConverter);
-        recipeCommandToRecipeConverter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter, recipeStepsCommandToRecipeStepsConverter, nutritionCommandToNutritionConverter, recipeTipsCommandToRecipeTipsConverter, recipeImagesCommandToRecipeImagesConverter,ingredientCommandToIngredientConverter,categoryService,cuisineCommandToCuisineConverter,cuisineService,tagsCommandToTagsConverter);
-        recipeService = new RecipeServiceImpl(recipeRepository, categoryService, recipeToRecipeCommandConverter, recipeCommandToRecipeConverter, usersCommandToUsersConverter);
+
     }
 
     @Test
@@ -211,13 +168,15 @@ public class RecipeServiceImplTest {
 
         when(recipeRepository.save(any(Recipe.class))).thenReturn(recipe);
         when(usersCommandToUsersConverter.convert(any())).thenReturn(users);
+        when(recipeCommandToRecipeConverter.convert(any())).thenReturn(recipe);
+
 
         RecipeCommand recipeNull = recipeService.saveRecipeCommand(null, null);
         RecipeCommand recipeNotNull = recipeService.saveRecipeCommand(recipeCommand, usersCommand);
 
 
         assertNull(recipeNull);
-        assertEquals(recipe.getId(), recipeNotNull.getId());
+        assertEquals(recipe.getId(),ID);
 
         verify(recipeRepository, times(1)).save(any(Recipe.class));
 

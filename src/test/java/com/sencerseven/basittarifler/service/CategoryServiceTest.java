@@ -7,8 +7,11 @@ import com.sencerseven.basittarifler.exceptions.NotFoundException;
 import com.sencerseven.basittarifler.repository.CategoryRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.*;
@@ -19,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CategoryServiceTest {
 
     @Mock
@@ -27,6 +31,7 @@ public class CategoryServiceTest {
     @Mock
     CategoryCommandToCategoryConverter categoryCommandToCategoryConverter;
 
+    @InjectMocks
     CategoryServiceImpl categoryService;
 
     private static final Long ID =1L;
@@ -35,7 +40,6 @@ public class CategoryServiceTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        categoryService = new CategoryServiceImpl(categoryRepository);
     }
 /*
     @Test
