@@ -106,6 +106,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>spring-basittarifler</finalName>
     </build>
 
 
