@@ -2,7 +2,6 @@ package com.sencerseven.basittarifler.service;
 
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.domain.RecipeSteps;
-import com.sencerseven.basittarifler.repository.RecipeRepository;
 import com.sencerseven.basittarifler.repository.RecipeStepsRepository;
 import org.springframework.stereotype.Service;
 

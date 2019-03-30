@@ -1,6 +1,5 @@
 package com.sencerseven.basittarifler.config;
 
-import com.sencerseven.basittarifler.model.CustomUserDetails;
 import com.sencerseven.basittarifler.repository.UserRepository;
 import com.sencerseven.basittarifler.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.servlet.http.HttpServletResponse;
 
 @EnableWebSecurity
 @EnableJpaRepositories(basePackageClasses = UserRepository.class)

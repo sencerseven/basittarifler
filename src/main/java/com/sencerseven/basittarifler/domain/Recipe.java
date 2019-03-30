@@ -3,12 +3,9 @@ package com.sencerseven.basittarifler.domain;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Synchronized;
-import org.hibernate.annotations.Synchronize;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;

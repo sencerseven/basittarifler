@@ -3,7 +3,6 @@ package com.sencerseven.basittarifler.converter;
 import com.sencerseven.basittarifler.command.RoleCommand;
 import com.sencerseven.basittarifler.command.UsersCommand;
 import com.sencerseven.basittarifler.domain.Users;
-import org.hibernate.validator.constraints.br.TituloEleitoral;
 import org.junit.Before;
 import org.junit.Test;
 

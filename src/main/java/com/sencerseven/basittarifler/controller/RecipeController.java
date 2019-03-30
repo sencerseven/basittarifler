@@ -7,7 +7,6 @@ import com.sencerseven.basittarifler.domain.*;
 import com.sencerseven.basittarifler.model.JsonResponder;
 import com.sencerseven.basittarifler.service.*;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

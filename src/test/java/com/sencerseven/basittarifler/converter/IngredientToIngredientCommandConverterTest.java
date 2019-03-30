@@ -2,7 +2,6 @@ package com.sencerseven.basittarifler.converter;
 
 import com.sencerseven.basittarifler.command.IngredientCommand;
 import com.sencerseven.basittarifler.domain.Ingredient;
-import com.sencerseven.basittarifler.domain.IngredientDetails;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

@@ -2,7 +2,9 @@ package com.sencerseven.basittarifler.service;
 
 import com.sencerseven.basittarifler.command.RecipeCommand;
 import com.sencerseven.basittarifler.command.UsersCommand;
-import com.sencerseven.basittarifler.converter.*;
+import com.sencerseven.basittarifler.converter.RecipeCommandToRecipeConverter;
+import com.sencerseven.basittarifler.converter.RecipeToRecipeCommandConverter;
+import com.sencerseven.basittarifler.converter.UsersCommandToUsersConverter;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.domain.Users;
 import com.sencerseven.basittarifler.repository.RecipeRepository;
@@ -15,7 +17,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.PageRequest;
 
-import javax.persistence.MapsId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

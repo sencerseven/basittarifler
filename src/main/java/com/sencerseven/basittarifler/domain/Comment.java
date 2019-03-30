@@ -3,7 +3,6 @@ package com.sencerseven.basittarifler.domain;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
 import java.io.Serializable;

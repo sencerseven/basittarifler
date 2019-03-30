@@ -12,15 +12,21 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-public class Role implements Serializable {
+public class BKod implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
 
-    private String role;
+    private String bkod;
 
-    public Role() {
+    private String bvalue;
+
+    private String bdesc;
+
+    public BKod(String bkod, String bvalue, String bdesc) {
+        this.bkod = bkod;
+        this.bvalue = bvalue;
+        this.bdesc = bdesc;
     }
 }

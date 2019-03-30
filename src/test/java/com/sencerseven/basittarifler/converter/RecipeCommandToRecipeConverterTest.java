@@ -3,14 +3,10 @@ package com.sencerseven.basittarifler.converter;
 import com.sencerseven.basittarifler.command.CategoryCommand;
 import com.sencerseven.basittarifler.command.RecipeCommand;
 import com.sencerseven.basittarifler.command.RecipeStepsCommand;
-import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
-import com.sencerseven.basittarifler.domain.RecipeSteps;
 import com.sencerseven.basittarifler.functions.BasitTariflerHelpers;
-import com.sencerseven.basittarifler.model.MultipartImage;
 import com.sencerseven.basittarifler.service.CategoryService;
 import com.sencerseven.basittarifler.service.CuisineService;
-import com.sencerseven.basittarifler.service.S3Services;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,11 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RecipeCommandToRecipeConverterTest {

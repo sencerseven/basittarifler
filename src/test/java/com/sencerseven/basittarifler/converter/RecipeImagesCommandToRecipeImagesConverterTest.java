@@ -3,7 +3,6 @@ package com.sencerseven.basittarifler.converter;
 import com.sencerseven.basittarifler.command.RecipeImagesCommand;
 import com.sencerseven.basittarifler.domain.RecipeImages;
 import com.sencerseven.basittarifler.service.S3Services;
-import org.assertj.core.api.BDDAssertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -11,7 +10,6 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 
