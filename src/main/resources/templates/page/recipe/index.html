@@ -734,12 +734,18 @@
                                     <div class="thumb">
 
                                         <a href="recipe-detail.html#" th:href="${'/' + recipe.id}">
-                                            <img class="img-thumbnail" style="height: 100%;" th:if="${recipe.getRecipeImages() == null}"
-                                                 th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
-                                                                +'.'+${@environment.getProperty('s3.domain_name')}
-                                                                +'/'+${@environment.getProperty('s3.bucket')}
-                                                                +'/no-thumbnail.png'}"
-                                                 alt="image"/>
+                                            <img  style="height: 100%;" th:if="${recipe.getRecipeImages().size() == 0}"
+                                                  th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                    +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                    +'/'+${@environment.getProperty('s3.bucket')}
+                                                                    +'/no-thumbnail.png'}"
+                                                  alt="image"/>
+                                            <img  style="height: 100%;" th:if="${not (recipe.getRecipeImages().size() == 0)}"
+                                                  th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                    +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                    +'/'+${@environment.getProperty('s3.bucket')}
+                                                                    +'/'+${recipe.recipeImages[0].url}}"
+                                                  alt="image"/>
                                         </a>
                                     </div>
                                     <div class="detail">
