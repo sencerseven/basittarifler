@@ -9,7 +9,7 @@ $(document).ready(function() {
             "order": [
                 [2, 'asc']
             ],
-            "displayLength": 10,
+            "displayLength": 25,
             "drawCallback": function(settings) {
                 var api = this.api();
                 var rows = api.rows({

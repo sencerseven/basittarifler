@@ -119,12 +119,25 @@
                         <div class="listing" th:each="recipe,key : ${recipePage.getContent()}" th:if="${key.index < (recipePage.size/2)}">
                             <div class="image">
                                 <a href="recipe-listing.html#" th:href="@{'/recipe/' + ${recipe.id}}">
-                                    <img src="images/temp-images/listing-2.jpg" alt="image"/>
+                                    <img class="img-thumbnail" style="height: 54px;" th:if="${recipe.getRecipeImages().size() > 0}"
+                                         th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/'+${recipe.recipeImages[0].url}}"
+                                         alt="image"/>
+
+                                    <img class="img-thumbnail" style="height: 100%;" th:if="${recipe.getRecipeImages().size() == 0}"
+                                         th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/no-thumbnail.png'}"
+                                         alt="image"/>
+
                                 </a>
                             </div>
                             <div class="detail">
-                                <h4><a href="recipe-listing.html#" th:href="@{'/recipe/' + ${recipe.id}}" th:text="${recipe.recipeTitle}">pasto pizza with fillas cheez toppings</a></h4>
-                                <p th:text="${recipe.recipeDescription}">
+                                <h4><a href="recipe-listing.html#" th:href="@{'/recipe/' + ${recipe.id}}" th:text="${recipe.title}">pasto pizza with fillas cheez toppings</a></h4>
+                                <p th:text="${recipe.description}">
                                     Nam ornare arcu turpis, nc congu Curabitur quis euismod. Nam ornare arcu turpis, nec congu Curabitur quis euismod. Nam ornare gsfg
                                 </p>
                                 <div class="meta-listing">
@@ -227,17 +240,30 @@
                         <div class="listing" th:each="recipe,key : ${recipePage.getContent()}" th:if="${key.index >= (recipePage.size/2)}">
                             <div class="image">
                                 <a href="recipe-listing.html#" th:href="@{'/recipe/' + ${recipe.id}}">
-                                    <img src="images/temp-images/listing-1.jpg" alt="image"/>
+                                    <img class="img-thumbnail" style="height: 454px;" th:if="${recipe.getRecipeImages().size() > 0}"
+                                         th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/'+${recipe.recipeImages[0].url}}"
+                                         alt="image"/>
+
+                                    <img class="img-thumbnail" style="height: 100%;" th:if="${recipe.getRecipeImages().size() == 0}"
+                                         th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/no-thumbnail.png'}"
+                                         alt="image"/>
+
                                 </a>
                             </div>
                             <div class="detail">
-                                <h4><a href="recipe-listing.html#" th:href="@{'/recipe/' + ${recipe.id}}" th:text="${recipe.recipeTitle}">pasto pizza with fillas cheez toppings</a></h4>
-                                <p>
+                                <h4><a href="recipe-listing.html#" th:href="@{'/recipe/' + ${recipe.id}}" th:text="${recipe.title}">pasto pizza with fillas cheez toppings</a></h4>
+                                <p th:text="${recipe.description}">
                                     Nam ornare arcu turpis, nec congu Curabitur quis euismod. Nam ornare arcu turpis, nec congu Curabitur quis euismod. Nam ornare gsfg
                                 </p>
                                 <div class="meta-listing">
                                     <ul class="post-meta">
-                                        <li class="author"><a href="recipe-listing.html#" th:text="${recipe.getUsers().getUserName()}">John Doe</a></li>
+                                        <li class="author"><a href="recipe-listing.html#" th:if="${not #lists.isEmpty(recipe.getUsers())}" th:text="${recipe.getUsers().getUserName()}">John Doe</a></li>
                                         <li class="calendar" th:text="${recipe.createdAt}">23/10/2015</li>
                                     </ul>
                                     <div class="rating-box">
@@ -379,7 +405,7 @@
                                         </a>
                                     </div>
                                     <div class="detail">
-                                        <a href="recipe-listing.html#" th:href="@{'/recipe/'+${recipe.id}}" th:text="${recipe.recipeTitle}">Pimento Cheese Potato Skins</a>
+                                        <a href="recipe-listing.html#" th:href="@{'/recipe/'+${recipe.id}}" th:text="${recipe.title}">Pimento Cheese Potato Skins</a>
                                         <span class="post-date" th:text="${recipe.createdAt}">March 21,2015</span>
                                     </div>
                                 </li>
@@ -394,56 +420,19 @@
                         </div>
                         <!--latest news widget-->
                         <div class="widget latest-news-widget">
-                            <h2>Latest News</h2>
+                            <h2>Blog</h2>
                             <ul>
-                                <li>
+                                <li th:each="post : ${posts}">
                                     <div class="thumb">
                                         <a href="recipe-listing.html#">
-                                            <img src="images/temp-images/widget-thumbnail.jpg" alt="thumbnail"/>
+                                            <img th:src="${post.postsImages.get(0).url}" src="images/temp-images/widget-thumbnail.jpg" alt="thumbnail"/>
                                         </a>
                                     </div>
                                     <div class="detail">
-                                        <a href="recipe-listing.html#">Pimento Cheese Potato Skins</a>
-                                        <span class="post-date">March 21,2015</span>
+                                        <a href="recipe-listing.html#" th:text="${post.title}">Pimento Cheese Potato Skins</a>
+                                        <span class="post-date" th:text="${}">March 21,2015</span>
                                     </div>
                                 </li>
-
-                                <li>
-                                    <div class="thumb">
-                                        <a href="recipe-listing.html#">
-                                            <img src="images/temp-images/widget-thumbnail.jpg" alt="thumbnail"/>
-                                        </a>
-                                    </div>
-                                    <div class="detail">
-                                        <a href="recipe-listing.html#">Pimento Cheese Potato Skins</a>
-                                        <span class="post-date">March 21,2015</span>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="thumb">
-                                        <a href="recipe-listing.html#">
-                                            <img src="images/temp-images/widget-thumbnail.jpg" alt="thumbnail"/>
-                                        </a>
-                                    </div>
-                                    <div class="detail">
-                                        <a href="recipe-listing.html#">Pimento Cheese Potato Skins</a>
-                                        <span class="post-date">March 21,2015</span>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="thumb">
-                                        <a href="recipe-listing.html#">
-                                            <img src="images/temp-images/widget-thumbnail.jpg" alt="thumbnail"/>
-                                        </a>
-                                    </div>
-                                    <div class="detail">
-                                        <a href="recipe-listing.html#">Pimento Cheese Potato Skins</a>
-                                        <span class="post-date">March 21,2015</span>
-                                    </div>
-                                </li>
-
                             </ul>
                         </div>
                         <!--latest news widget ends-->

@@ -111,7 +111,7 @@
                         <div class="single-recipe-detail">
                             <div class="wrapper-recipe-heading">
                                 <div class="heading">
-                                    <h2 th:text="${recipe.recipeTitle}">Chocolate Earl Gray Pots de Creme Recipe</h2>
+                                    <h2 th:text="${recipe.title}">Chocolate Earl Gray Pots de Creme Recipe</h2>
                                     <div class="rating-box">
                                         <span class="rating-icons">
                                             <svg class="icon-container" width="25" height="19"
@@ -193,8 +193,7 @@
                                     </div>
                                 </div>
                                 <div class="recipe-media">
-                                    <a class="button-dark watch-video swipebox" href="https://vimeo.com/15306847">Watch
-                                        Video</a>
+                                    <a class="button-dark watch-video swipebox" href="https://vimeo.com/15306847">Video İzle</a>
                                 </div>
                             </div>
 
@@ -203,54 +202,22 @@
                                     <div class="top-slider">
                                         <div id="single-slider-flex" class="flexslider slider-detail">
                                             <ul class="slides">
-                                                <li>
+                                                <li th:each="images : ${recipe.getRecipeImages()}">
                                                     <a rel="recipe-slider-1"
-                                                       href="/images/temp-/images/slide-recipe-detail.jpg"
+                                                       th:href="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/'+${images.url}}"
                                                        class="swipebox">
-                                                        <img src="/images/temp-/images/slide-recipe-detail.jpg"
-                                                             alt="Recipe Single Image"/>
+                                                        <img class="img-thumbnail" style="height: 454px;"
+                                                             th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/'+${images.url}}"
+                                                             alt="image"/>
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a rel="recipe-slider-1"
-                                                       href="/images/temp-/images/slide-recipe-detail.jpg"
-                                                       class="swipebox">
-                                                        <img src="/images/temp-/images/slide-recipe-detail.jpg"
-                                                             alt="Recipe Single Image"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a rel="recipe-slider-1"
-                                                       href="/images/temp-/images/slide-recipe-detail.jpg"
-                                                       class="swipebox">
-                                                        <img src="/images/temp-/images/slide-recipe-detail.jpg"
-                                                             alt="Recipe Single Image"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a rel="recipe-slider-1"
-                                                       href="/images/temp-/images/slide-recipe-detail.jpg"
-                                                       class="swipebox">
-                                                        <img src="/images/temp-/images/slide-recipe-detail.jpg"
-                                                             alt="Recipe Single Image"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a rel="recipe-slider-1"
-                                                       href="/images/temp-/images/slide-recipe-detail.jpg"
-                                                       class="swipebox">
-                                                        <img src="/images/temp-/images/slide-recipe-detail.jpg"
-                                                             alt="Recipe Single Image"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a rel="recipe-slider-1"
-                                                       href="/images/temp-/images/slide-recipe-detail.jpg"
-                                                       class="swipebox">
-                                                        <img src="/images/temp-/images/slide-recipe-detail.jpg"
-                                                             alt="Recipe Single Image"/>
-                                                    </a>
-                                                </li>
+
                                             </ul>
                                         </div>
                                         <span class="custom-arrows wider">
@@ -263,18 +230,16 @@
                                     <div id="recipe-slider-carousel">
                                         <div id="recipe-carousel-flex">
                                             <ul class="slides">
-                                                <li><img src="/images/temp-/images/slider-detail-thumb.jpg"
-                                                         alt="Recipe Carousel Thumbnail"/></li>
-                                                <li><img src="/images/temp-/images/slider-detail-thumb.jpg"
-                                                         alt="Recipe Carousel Thumbnail"/></li>
-                                                <li><img src="/images/temp-/images/slider-detail-thumb.jpg"
-                                                         alt="Recipe Carousel Thumbnail"/></li>
-                                                <li><img src="/images/temp-/images/slider-detail-thumb.jpg"
-                                                         alt="Recipe Carousel Thumbnail"/></li>
-                                                <li><img src="/images/temp-/images/slider-detail-thumb.jpg"
-                                                         alt="Recipe Carousel Thumbnail"/></li>
-                                                <li><img src="/images/temp-/images/slider-detail-thumb.jpg"
-                                                         alt="Recipe Carousel Thumbnail"/></li>
+                                                <li th:each="images : ${recipe.getRecipeImages()}">
+
+                                                <img class="img-thumbnail" style="width:100px; height:59px;"
+                                                     th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/'+${images.url}}"
+                                                     alt="image"/>
+                                                </li>
+
                                             </ul>
                                         </div>
                                         <span class="custom-arrows wider">
@@ -288,11 +253,11 @@
                                 <ul class="recipe-specs">
                                     <li><span class="count" th:text="${recipe.getPerson()}">5</span><span class="text">Kişilik</span></li>
                                     <li><span class="count" th:text="${recipe.getPortion()}">7</span><span class="text">Porsiyon</span></li>
-                                    <li><span class="count">20<span>m</span></span><span
+                                    <li><span class="count" th:text="${recipe.getPrepMin()}">20<span>m</span></span><span
                                             class="text">Hazırlanma Süresi</span></li>
-                                    <li><span class="count">30<span>m</span></span><span
+                                    <li><span class="count" th:text="${recipe.getCookMin()}">30<span>m</span></span><span
                                             class="text">Pişirme Süresi</span></li>
-                                    <li><span class="count">50<span>m</span></span><span class="text">Toplam Süre</span>
+                                    <li><span class="count" th:with="total=${recipe.getPrepMin() + recipe.getCookMin()}" th:text="${total}">50<span>m</span></span><span class="text">Toplam Süre</span>
                                     </li>
                                 </ul>
                             </div>
@@ -300,16 +265,15 @@
 
 
                         <div class="recipe-detail-body">
-                            <a href="recipe-detail.html#" class="print-button"><i class="fa fa-print"></i>Print
-                                Recipe</a>
+                            <a href="recipe-detail.html#" class="print-button"><i class="fa fa-print"></i>Tarifi Yazdır</a>
 
                             <ul class="pre-tags">
-                                <li><span>Cuisine : </span>Chinese</li>
-                                <li><span>Course : </span>Side Dish</li>
-                                <li><span>Skill Level : </span>Advanced</li>
+                                <li><span>Mutfak : </span><span th:if="${not (recipe.cuisine == null)}" th:text="${recipe.cuisine.cuisine}">Chinese</span></li>
+                                <li><span>Kategori : </span><span th:text="${recipe.categories[0].categoryName}">Side Dish</span></li>
+                                <li><span>Zorluk Derecesi : </span><span th:text="${recipe.difficulty}">Advanced</span></li>
                             </ul>
                             <div class="separator-post"></div>
-                            <p th:text="${recipe.recipeText}">
+                            <p th:utext="${recipe.recipeText}">
                                 Rinse the chicken pieces in cold water and pat dry. Place the chicken in a large,
                                 resealable zip-top bag and pour in the marinade. Toss the chicken inside the bag to
                                 cover evenly with the marinade and refrigerate for 12 hours or as long as overnight
@@ -334,7 +298,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="nutritional">
+                                <div class="nutritional" th:if="${not #lists.isEmpty(recipe.nutrition)}">
                                     <h3>Besin Değerleri</h3>
                                     <div class="nutrition-detail">
                                         <div class="left-box">
@@ -345,7 +309,7 @@
                                         <div class="right-box">
                                             Doymuş Yağ
                                             <br/>
-                                            <span th:text="${recipe.nutrition.getSaturedFat()}">39.5g</span>
+                                            <span th:text="${recipe.nutrition.getSaturatedFat()}">39.5g</span>
                                         </div>
                                     </div>
                                     <div class="separator-post"></div>
@@ -358,7 +322,7 @@
                                         <div class="right-box">
                                             Sodyum
                                             <br/>
-                                            <span th:text="${recipe.nutrition.getSodium()}">10g</span>
+                                            <span th:text="${recipe.nutrition.getSugar()}">10g</span>
                                         </div>
                                     </div>
                                     <div class="separator-post"></div>
@@ -418,17 +382,24 @@
                                         <div class="step-single">
                                             <div class="step-image">
                                                 <a href="/images/temp-/images/slide-recipe-detail.jpg"
-                                                   th:href="@{'https://s3.'+${@environment.getProperty('s3.region')}
-                                                                +'.'+${@environment.getProperty('s3.domain_name')}
-                                                                +'/'+${@environment.getProperty('s3.bucket')}
-                                                                +'/profile/'+${recipeStep.imageURL}}"
                                                    rel="recipe-slider-1" class="swipebox"><img class="img-thumbnail" style="width: 220px; height: 162px"
+                                                         th:if="${recipeStep.imageURL == null}"
                                                          th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
                                                                 +'.'+${@environment.getProperty('s3.domain_name')}
                                                                 +'/'+${@environment.getProperty('s3.bucket')}
-                                                                +'/profile/'+${recipeStep.imageURL}}"
-                                                        alt="image"/></a>
+                                                                +'/no-thumbnail.png'}"
+                                                        alt="image"/>
+                                                    <img class="img-thumbnail" style="width: 220px; height: 162px"
+                                                         th:if="${recipeStep.imageURL != null}"
+                                                         th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/'+${recipeStep.imageURL}}"
+                                                         alt="image"/>
+
+                                                </a>
                                             </div>
+
                                             <div class="step-detail">
                                                 <h3 th:text="${iter.count + '. Adım'}"> Adım</h3>
                                                 <p th:text="${recipeStep.description}">
@@ -467,15 +438,12 @@
                             </div>
 
                             <div class="separator-post"></div>
-                            <div class="tags-icons">
+                            <div class="tags-icons" th:if="${recipe.tags != null}">
                                 <div class="row">
                                     <div class="col-sm-7">
                                         <div class="details-tags">
                                             <ul>
-                                                <li><a href="recipe-detail.html#">garlic</a></li>
-                                                <li><a href="recipe-detail.html#">pizza</a></li>
-                                                <li><a href="recipe-detail.html#">potato</a></li>
-                                                <li><a href="recipe-detail.html#">roasted</a></li>
+                                                <li th:each="tag,key : ${#strings.arraySplit(recipe.tags.tagsName,',')}"><a th:href="@{'/recipelist/search?tags='+${tag}}" th:text="${tag}">garlic</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -497,7 +465,7 @@
                             </div>
                         </div>
 
-                        <div class="about-chef">
+                        <div class="about-chef hidden-print">
                             <h3 class="lined">Yazar Hakkında</h3>
                             <div class="listing">
                                 <div class="image">
@@ -544,12 +512,25 @@
                                     <!--single recipe-->
                                     <div class="col-md-4" th:each="recipeUsers : ${recipesUsers}" th:if="${not (recipe.id == recipeUsers.id)}">
                                         <div class="recipe-image">
-                                            <a href="recipe-detail.html#"><img src="/images/temp-/images/main-recipe1.jpg"
-                                                                               alt="image"></a>
+                                            <a href="recipe-detail.html#">
+                                                <img  style="height: 100%;" th:if="${recipeUsers.getRecipeImages().size() == 0}"
+                                                     th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                    +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                    +'/'+${@environment.getProperty('s3.bucket')}
+                                                                    +'/no-thumbnail.png'}"
+                                                     alt="image"/>
+
+                                                <img  style="height: 100%;" th:if="${not (recipeUsers.getRecipeImages().size() == 0)}"
+                                                      th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                    +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                    +'/'+${@environment.getProperty('s3.bucket')}
+                                                                    +'/'+${recipeUsers.recipeImages[0].url}}"
+                                                      alt="image"/>
+                                            </a>
                                         </div>
                                         <div class="outer-detail">
                                             <div class="detail">
-                                                <h3><a href="recipe-detail.html#" th:href="@{'/recipe/' + ${recipeUsers.id}}" th:text="${recipeUsers.recipeTitle}">Pasto Pizza with fillas
+                                                <h3><a href="recipe-detail.html#" th:href="@{'/recipe/' + ${recipeUsers.id}}" th:text="${recipeUsers.title}">Pasto Pizza with fillas
                                                     Cheese Toppings</a></h3>
 
                                                 <div class="short-separator"></div>
@@ -751,14 +732,20 @@
 
                                 <li th:each="recipe : ${recipesPopuler}">
                                     <div class="thumb">
+
                                         <a href="recipe-detail.html#" th:href="${'/' + recipe.id}">
-                                            <img src="/images/temp-/images/widget-thumbnail.jpg" alt="thumbnail"/>
+                                            <img class="img-thumbnail" style="height: 100%;" th:if="${recipe.getRecipeImages() == null}"
+                                                 th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/no-thumbnail.png'}"
+                                                 alt="image"/>
                                         </a>
                                     </div>
                                     <div class="detail">
-                                        <a href="recipe-detail.html#" th:text="${recipe.recipeDescription}">Pimento
+                                        <a href="recipe-detail.html#" th:text="${recipe.description}">Pimento
                                             Cheese Potato Skins</a>
-                                        <span class="post-date">March 21,2015</span>
+                                        <span class="post-date" th:text="${recipe.createdAt}">March 21,2015</span>
                                     </div>
                                 </li>
                             </ul>

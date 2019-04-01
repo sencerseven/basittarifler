@@ -1,10 +1,8 @@
 package com.sencerseven.basittarifler.model;
 
 import com.sencerseven.basittarifler.command.UsersCommand;
-import com.sencerseven.basittarifler.domain.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -20,7 +18,7 @@ public class CustomUserDetails extends UsersCommand implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
        return getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_"+getRoles()))
+                .map(role -> new SimpleGrantedAuthority("ROLE_"+role.getRole()))
                 .collect(Collectors.toList());
     }
 

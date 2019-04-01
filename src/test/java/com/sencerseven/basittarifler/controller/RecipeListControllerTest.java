@@ -3,6 +3,7 @@ package com.sencerseven.basittarifler.controller;
 import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.service.CategoryService;
+import com.sencerseven.basittarifler.service.PostsService;
 import com.sencerseven.basittarifler.service.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +11,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,13 +20,11 @@ import org.springframework.ui.Model;
 import java.util.*;
 import java.util.function.Function;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -40,6 +38,9 @@ public class RecipeListControllerTest {
     @Mock
     CategoryService categoryService;
 
+    @Mock
+    PostsService postsService;
+
     RecipeListController recipeListController;
 
     @Mock
@@ -50,7 +51,7 @@ public class RecipeListControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeListController = new RecipeListController(recipeService,categoryService);
+        recipeListController = new RecipeListController(recipeService,categoryService,postsService);
     }
 
     @Test
@@ -174,7 +175,12 @@ public class RecipeListControllerTest {
         ArgumentCaptor<Set<Category>> categorySetCaptor = ArgumentCaptor.forClass(HashSet.class);
 
 
-        String view = recipeListController.indexAction(model,1);
+        String view = null;
+        try {
+            view = recipeListController.indexAction(model,1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         assertEquals("index",view);
 

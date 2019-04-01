@@ -5,15 +5,13 @@ import com.sencerseven.basittarifler.converter.CategoryCommandToCategoryConverte
 import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.exceptions.NotFoundException;
 import com.sencerseven.basittarifler.repository.CategoryRepository;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {

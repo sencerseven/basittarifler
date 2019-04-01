@@ -13,6 +13,8 @@ public class RecipeStepsCommand {
 
     private String description;
 
+    private String imgURL;
+
     private MultipartFile imageFile;
 
     private int viewRows;

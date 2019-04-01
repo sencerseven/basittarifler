@@ -1,6 +1,5 @@
 package com.sencerseven.basittarifler.command;
 
-import com.sencerseven.basittarifler.domain.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

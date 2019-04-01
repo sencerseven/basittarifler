@@ -3,35 +3,47 @@ package com.sencerseven.basittarifler.converter;
 import com.sencerseven.basittarifler.command.CategoryCommand;
 import com.sencerseven.basittarifler.command.RecipeCommand;
 import com.sencerseven.basittarifler.command.RecipeStepsCommand;
-import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
-import com.sencerseven.basittarifler.domain.RecipeSteps;
+import com.sencerseven.basittarifler.functions.BasitTariflerHelpers;
 import com.sencerseven.basittarifler.service.CategoryService;
-import com.sencerseven.basittarifler.service.S3Services;
+import com.sencerseven.basittarifler.service.CuisineService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RecipeCommandToRecipeConverterTest {
 
-    RecipeCommandToRecipeConverter converter;
+    @Mock
     CategoryCommandToCategoryConverter categoryCommandToCategoryConverter;
+    @Mock
     RecipeStepsCommandToRecipeStepsConverter recipeStepsCommandToRecipeStepsConverter;
-
     @Mock
     NutritionCommandToNutritionConverter nutritionCommandToNutritionConverter;
-
     @Mock
     RecipeTipsCommandToRecipeTipsConverter recipeTipsCommandToRecipeTipsConverter;
-
+    @Mock
+    RecipeImagesCommandToRecipeImagesConverter recipeImagesCommandToRecipeImagesConverter;
+    @Mock
+    IngredientCommandToIngredientConverter ingredientCommandToIngredientConverter;
     @Mock
     CategoryService categoryService;
-
     @Mock
-    S3Services s3Services;
+    CuisineCommandToCuisineConverter cuisineCommandToCuisineConverter;
+    @Mock
+    CuisineService cuisineService;
+    @Mock
+    TagsCommandToTagsConverter tagsCommandToTagsConverter;
+    @Mock
+    BasitTariflerHelpers basitTariflerHelpers;
+    @InjectMocks
+    RecipeCommandToRecipeConverter converter;
 
     public static final Long ID= 1L;
 
@@ -39,20 +51,17 @@ public class RecipeCommandToRecipeConverterTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        categoryCommandToCategoryConverter = new CategoryCommandToCategoryConverter(categoryService);
-        recipeStepsCommandToRecipeStepsConverter = new RecipeStepsCommandToRecipeStepsConverter(s3Services);
-        converter = new RecipeCommandToRecipeConverter(categoryCommandToCategoryConverter,recipeStepsCommandToRecipeStepsConverter,nutritionCommandToNutritionConverter,recipeTipsCommandToRecipeTipsConverter);
 
     }
 
     @Test
-    public void testNullObject(){
+    public void nullTest(){
         assertNull(converter.convert(null));
 
     }
 
     @Test
-    public void testEmptyObject(){
+    public void emptyTest(){
         assertNotNull(converter.convert(new RecipeCommand()));
     }
 
@@ -67,13 +76,15 @@ public class RecipeCommandToRecipeConverterTest {
 
         RecipeStepsCommand recipeStepsCommand = new RecipeStepsCommand();
         recipeStepsCommand.setId(ID);
+        recipeStepsCommand.setImgURL("test.jpg");
         recipeCommand.getRecipeSteps().add(recipeStepsCommand);
+
 
         Recipe recipe = converter.convert(recipeCommand);
 
-        assertEquals(ID,recipe.getId());
+        assertEquals(recipe.getId(),ID);
         assertEquals(recipe.getCategories().size(),1);
-        assertEquals(recipe.getRecipeSteps().size(),1);
+        assertNotNull(recipe.getRecipeSteps());
 
 
     }

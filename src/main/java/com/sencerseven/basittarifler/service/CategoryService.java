@@ -3,7 +3,6 @@ package com.sencerseven.basittarifler.service;
 import com.sencerseven.basittarifler.command.CategoryCommand;
 import com.sencerseven.basittarifler.domain.Category;
 
-import java.util.List;
 import java.util.Set;
 
 public interface CategoryService {

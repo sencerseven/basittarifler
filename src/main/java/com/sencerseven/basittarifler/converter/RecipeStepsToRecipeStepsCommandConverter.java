@@ -18,6 +18,8 @@ public class RecipeStepsToRecipeStepsCommandConverter implements Converter<Recip
 
         recipeStepsCommand.setViewRows(recipeSteps.getViewRows());
 
+        recipeStepsCommand.setImgURL(recipeSteps.getImageURL());
+
         return recipeStepsCommand;
     }
 }

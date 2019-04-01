@@ -311,7 +311,7 @@
 
 
 
-    $('.add-button.add-steps').on("click",function(event){
+   /* $('.add-button.add-steps').on("click",function(event){
         event.preventDefault();
         var newMajesticItem = '<li style="display: none">' +
             '<div class="add-fields">' +
@@ -326,6 +326,7 @@
         $('.list-sortable.steps').children("li").slideDown();
         bindMajesticItem();
     });
+    */
 
     function bindMajesticItem(){
 
@@ -493,6 +494,12 @@
             $(this).addClass("fadeInDown");
         });
     });
+
+    $(".select2").select2({
+        theme: "classic"
+    });
+
+
 
 })(jQuery);
 

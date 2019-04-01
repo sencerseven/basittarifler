@@ -4,7 +4,6 @@ import com.sencerseven.basittarifler.command.CommentCommand;
 import com.sencerseven.basittarifler.command.UsersCommand;
 import com.sencerseven.basittarifler.domain.Comment;
 import com.sencerseven.basittarifler.domain.Recipe;
-import com.sencerseven.basittarifler.domain.Users;
 
 import java.util.List;
 

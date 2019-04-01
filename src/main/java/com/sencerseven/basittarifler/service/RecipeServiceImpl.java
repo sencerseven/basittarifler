@@ -17,13 +17,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -147,4 +144,11 @@ public class RecipeServiceImpl implements RecipeService {
         return null;
     }
 
+    @Override
+    public Page<Recipe> findRecipeByTagsContaining(int page,int size,String tags) {
+        if(tags == null || tags.equals(""))
+            return null;
+
+        return recipeRepository.findRecipesByTags_TagsNameContaining(PageRequest.of(page,size),tags);
+    }
 }

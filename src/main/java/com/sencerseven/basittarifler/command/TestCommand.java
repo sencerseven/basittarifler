@@ -1,9 +1,5 @@
 package com.sencerseven.basittarifler.command;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.io.Serializable;
 
 public class TestCommand implements Serializable{

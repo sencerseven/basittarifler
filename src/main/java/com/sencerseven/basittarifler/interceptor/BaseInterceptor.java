@@ -1,7 +1,6 @@
 package com.sencerseven.basittarifler.interceptor;
 
 import com.sencerseven.basittarifler.command.UsersCommand;
-import com.sencerseven.basittarifler.domain.Users;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.method.HandlerMethod;
@@ -10,7 +9,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.security.Principal;
 import java.util.Locale;
 
 public class BaseInterceptor extends HandlerInterceptorAdapter {
@@ -55,6 +53,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             }else{
                 viewUrl = "page/" +controllerName+"/"+actionName;
                 jsUrl = "/js/page/"+controllerName+"/"+actionName+".js";
+                cssUrl = "/css/page/"+controllerName+"/"+actionName+".css";
             }
 
             modelAndView.addObject("view",viewUrl);

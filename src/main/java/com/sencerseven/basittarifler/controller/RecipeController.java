@@ -6,6 +6,7 @@ import com.sencerseven.basittarifler.command.UsersCommand;
 import com.sencerseven.basittarifler.domain.*;
 import com.sencerseven.basittarifler.model.JsonResponder;
 import com.sencerseven.basittarifler.service.*;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,9 @@ public class RecipeController {
     CommentService commentService;
     CategoryService categoryService;
     S3Services s3Services;
+    CuisineService cuisineService;
+    BKodService bKodService;
+
 
 
     public RecipeController(RecipeService recipeService,
@@ -34,13 +38,18 @@ public class RecipeController {
                             RecipeTipsService recipeTipsService,
                             CommentService commentService,
                             CategoryService categoryService,
-                            S3Services s3Services) {
+                            S3Services s3Services,
+                            CuisineService cuisineService,
+                            BKodService bKodService) {
+
         this.recipeService = recipeService;
         this.recipeStepsService = recipeStepsService;
         this.recipeTipsService = recipeTipsService;
         this.commentService = commentService;
         this.categoryService = categoryService;
         this.s3Services = s3Services;
+        this.cuisineService = cuisineService;
+        this.bKodService = bKodService;
     }
 
     @GetMapping("{id}")
@@ -56,7 +65,10 @@ public class RecipeController {
         List<Recipe> recipesUsers = recipeService.getRecipesByUsers(0, 3, recipe.getUsers());
         List<Comment> commentList = commentService.getCommentsByRecipeOrderByCreatedAtAsc(recipe);
         Set<Category> categories = categoryService.getCategoriesByMenuActive(0,10,true);
+        Set<BKod> bKods = bKodService.findAllByBkod(0,10,"measurement");
 
+
+        Page<Recipe> tagss = recipeService.findRecipeByTagsContaining(0,10,"oldu");
 
         List<Recipe> recipesPopuler = recipeService.getAllPopulerRecipe(0,3);
         recipeService.updateByUserCommand(recipe,users);
@@ -70,12 +82,42 @@ public class RecipeController {
         model.addAttribute("recipesUsers", recipesUsers);
         model.addAttribute("recipeComment", commentList);
         model.addAttribute("recipesPopuler", recipesPopuler);
+        model.addAttribute("bKods",bKods);
 
         model.addAttribute("commentCommand", new CommentCommand());
         model.addAttribute("categories", categories);
 
 
         return "index";
+    }
+
+    @GetMapping("add")
+    public String addRecipeAction(Model model){
+
+        Set<Category> categorySet = categoryService.getCategories();
+        RecipeCommand recipeCommand = new RecipeCommand();
+        List<Cuisine> cuisineList = cuisineService.findAll();
+        model.addAttribute("recipeCommand",recipeCommand);
+        model.addAttribute("categories",categorySet);
+        model.addAttribute("cuisines",cuisineList);
+        model.addAttribute("difficulty",Level.values());
+
+        return "index";
+    }
+
+    @PostMapping(value = "add")
+    public String addRecipeAction(RecipeCommand recipeCommand,
+                                  @AuthenticationPrincipal UsersCommand usersCommand,
+                                  BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+
+            return "index";
+        }
+
+        recipeService.saveRecipeCommand(recipeCommand,usersCommand);
+
+        return "redirect:/";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/addcomment/{id}",

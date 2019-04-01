@@ -2,7 +2,9 @@ package com.sencerseven.basittarifler.converter;
 
 import com.sencerseven.basittarifler.command.CommentCommand;
 import com.sencerseven.basittarifler.domain.Comment;
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -17,6 +19,8 @@ public class CommentCommandToCommentConverter implements Converter<CommentComman
         this.recipeCommandToRecipeConverter = recipeCommandToRecipeConverter;
     }
 
+    @Synchronized
+    @Nullable
     @Override
     public Comment convert(CommentCommand commentCommand) {
         if(commentCommand == null)

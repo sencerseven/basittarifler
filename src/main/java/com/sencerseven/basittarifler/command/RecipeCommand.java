@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,6 +21,8 @@ public class RecipeCommand {
 
     private String recipeText;
 
+    private String difficulty;
+
     private Date created_at;
 
     private int person;
@@ -32,8 +36,17 @@ public class RecipeCommand {
 
     NutritionCommand nutritionCommand;
 
-    Set<CategoryCommand> categories = new HashSet<>();
+    List<CategoryCommand> categories = new ArrayList<>();
     List<RecipeStepsCommand> recipeSteps = new ArrayList<>();
 
     List<RecipeTipsCommand> recipeTipsCommands = new ArrayList<>();
+
+    List<RecipeImagesCommand> recipeImagesCommands = new ArrayList<>();
+
+    List<IngredientCommand> ingredientCommands = new ArrayList<>();
+
+    CuisineCommand cuisineCommand;
+
+    TagsCommand tagsCommands;
+
 }

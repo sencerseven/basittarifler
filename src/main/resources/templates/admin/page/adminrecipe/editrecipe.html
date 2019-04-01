@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+
+    <script src="js/lib/jquery/jquery.min.js" th:src="@{/js/lib/jquery/jquery.min.js}"></script>
+    <!-- Form validation -->
+    <script src="js/lib/form-validation/jquery.validate.min.js"
+            th:src="@{/js/lib/form-validation/jquery.validate.min.js}"></script>
+    <script src="js/lib/form-validation/jquery.validate-init.js"
+            th:src="@{/js/lib/form-validation/jquery.validate-init.js}"></script>
+
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+</head>
+<body>
+<!-- Start Page Content -->
+<!--/*@thymesVar id="recipeCommand" type="com.sencerseven.basittarifler.command.RecipeCommand"*/-->
+<div class="row justify-content-center">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-validation">
+                    <form class="form-valide" th:action="@{/admin/recipe/add}" th:method="post"
+                          th:object="${recipeCommand}" enctype="multipart/form-data">
+                        <input type="hidden" th:field="*{id}"/>
+                        <p><h4>Tarif Genel</h4></p>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label class="col-lg-12 col-form-label" for="recipe-title">Yemek Başlık <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="text" placeholder="" id="recipe-title" th:field="*{recipeTitle}"
+                                           class="form-control" required>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="col-lg-12 col-form-label" for="recipe-desc">Yemek Önyazı <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="text" placeholder="" id="recipe-desc" th:field="*{recipeDescription}"
+                                           class="form-control" required>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="col-md-12 col-form-label" for="recipe-text">Yemek Yazısı <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-md-12">
+                                    <textarea th:field="*{recipeText}" class="textarea_editor form-control w-100" rows="15" placeholder="Enter text ..." style="height:300px"></textarea>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="col-lg-12 col-form-label" for="recipe-text">Kategori<span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-12">
+                                    <select class="select2 w-100" th:field="*{categories[0].id}" required>
+                                        <option value="">Please select</option>
+                                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.categoryName}"></option>
+                                    </select>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="col-md-12 col-form-label" for="recipe-text">Mutfak</label>
+                                <div class="col-md-12">
+                                    <select class="select2 w-100" th:field="*{cuisineCommand.id}">
+                                        <option value="">Please select</option>
+                                        <option th:each="cuisine : ${cuisines}" th:value="${cuisine.id}" th:text="${cuisine.cuisine}"></option>
+                                    </select>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="col-md-12 col-form-label" for="recipe-text">Yemek Zorluk<span class="text-danger">*</span></label>
+                                <div class="col-md-12">
+                                    <select class="select2 w-100" th:field="*{difficulty}">
+                                        <option value="">Please select</option>
+                                        <option th:each="level : ${difficulty}" th:value="${level}" th:text="${level}"></option>
+                                    </select>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="col-md-12 col-form-label" for="recipe-text">Tags</label>
+                                <div class="col-md-12">
+
+                                    <select  th:field="*{tagsCommands.selectTagList}" class="tags2 w-100" th:multiple="multiple">
+                                        <option value="" th:each="tagsName,key : ${#strings.arraySplit(recipeCommand.tagsCommands.tagsName,',')}" th:value="${tagsName}" th:text="${tagsName}" th:selected="selected">test</option>
+                                    </select>
+
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <hr/>
+                        <p><h4>Slider Resim</h4></p>
+                        <h2>
+                            <button type="button" id="addRecipeSlider" class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
+                                <i class="ti-plus"></i> Resim Ekle
+                            </button>
+                        </h2>
+                        <div id="recipeSlider">
+                            <div class="form-group row" th:each="images,key : ${recipeCommand.recipeImagesCommands}">
+
+                                <input type="hidden" th:field="*{recipeImagesCommands[__${key.index}__].id}"/>
+                                <label class="col-md-3 col-form-label" for="val-suggestions">1. Resim : <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-md-3">
+                                    <textarea class="form-control" id="val-suggestions" th:field="*{recipeImagesCommands[__${key.index}__].description}"
+                                              name="" rows="5"
+                                              placeholder="1. Resim Açıklaması"></textarea>
+                                    <button href="" class="btn button-default remSlider">Sil</button>
+                                    <span class="text-danger"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="hidden" th:field="*{recipeImagesCommands[__${key.index}__].imageUrl}" />
+                                    <input type="file" class="imgInput" th:field="*{recipeImagesCommands[__${key.index}__].imageFile}"/>
+                                    <img class="image_upload_preview" src="http://placehold.it/100x100"
+                                         style="height:100px; width:100px;" alt="your image"
+                                         th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/'+${images.getImageUrl()}}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+                        <p><h4>Tarif Bilgi</h4></p>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label class="col-lg-12 col-form-label" for="val-kisi">Kişi <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="text" placeholder="" id="val-kisi" th:field="*{person}"
+                                           class="form-control" required>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-lg-12 col-form-label" for="val-porsiyon">Porsiyon <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="number" placeholder="" id="val-porsiyon" th:field="*{portion}"
+                                           class="form-control" required>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-lg-12 col-form-label" for="val-hsure">Hazırlanma Süresi <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="number" placeholder="" id="val-hsure" th:field="*{prepMin}"
+                                           class="form-control" required>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-lg-12 col-form-label" for="val-psure">Pişirme Süresi <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="number" placeholder="" id="val-psure" th:field="*{cookMin}"
+                                           class="form-control" required>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <hr/>
+                        <p><h4>Besin Değerleri</h4></p>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label class="col-lg-12 col-form-label" for="val-kisi">Protein <span
+                                        class="text-danger">*</span></label>
+                                <input type="hidden" th:field="*{nutritionCommand.id}"/>
+                                <div class="col-lg-6">
+                                    <input type="number" placeholder="" id="val-kisi"
+                                           th:field="*{nutritionCommand.protine}" class="form-control">
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-lg-12 col-form-label" for="val-porsiyon">Karbonhidrad <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="number" placeholder="" id="val-porsiyon"
+                                           th:field="*{nutritionCommand.carbonhydrate}" class="form-control">
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-lg-12 col-form-label" for="val-hsure">Enerji <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="number" placeholder="" id="val-hsure"
+                                           th:field="*{nutritionCommand.energy}" class="form-control">
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-lg-12 col-form-label" for="val-psure">Lif <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="number" placeholder="" id="val-psure"
+                                           th:field="*{nutritionCommand.fiber}" class="form-control">
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label class="col-lg-12 col-form-label" for="val-kisi">Şeker <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="number" placeholder="" id="val-kisi"
+                                           th:field="*{nutritionCommand.sugar}" class="form-control">
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-lg-12 col-form-label" for="val-porsiyon">Kolestrol <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="number" placeholder="" id="val-porsiyon"
+                                           th:field="*{nutritionCommand.cholesterol}" class="form-control">
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-lg-12 col-form-label" for="val-hsure">Doymuş Yağ <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="number" placeholder="" id="val-hsure"
+                                           th:field="*{nutritionCommand.saturatedFat}" class="form-control">
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-lg-12 col-form-label" for="val-psure">Toplam Yağ <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="number" placeholder="" id="val-psure"
+                                           th:field="*{nutritionCommand.fat}" class="form-control">
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <hr/>
+
+                        <h2>
+
+                        </h2>
+                        <div id="recipeIngredient">
+                            <p><h4>Tarif Malzemeler</h4></p>
+                            <button type="button" class="level_1" id="baslikEkle">
+                                <i class="ti-plus"></i>Başlık Ekle
+                            </button>
+
+                            <div style="border:3px dashed #ddd; padding :10px; background-color: #fbffff; margin-top: 2px;" class="ingredient" th:if="${not #lists.isEmpty(recipeCommand.ingredientCommands)}" th:each="ingredient,key : ${recipeCommand.ingredientCommands}">
+                                <input type="hidden" th:field="*{ingredientCommands[__${key.index}__].id}" />
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="val-suggestions">Başlık<span class="text-danger">*</span></label>
+                                    <div class="col-md-3">
+                                        <textarea class="form-control" id="val-suggestions" th:field="*{ingredientCommands[__${key.index}__].description}" rows="5" placeholder="Başlık"></textarea>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-default remScnt" onClick="$(this).closest('.ingredient').remove()">Sil</button>
+
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <button type="button" onclick="spawn()" th:class="${'level_1-' + (key.index+1)}">
+                                    <i class="ti-plus">Malzeme Detay</i>
+                                </button>
+
+
+                                <div th:each="ingredientDetails,keyDetails : ${ingredient.getIngredientDetailsCommands()}" th:class="${'col-md-12 level_1-' + (key.index+1) + ' ingredientDetails'}">
+                                    <input type="hidden" th:field="*{ingredientCommands[__${key.index}__].ingredientDetailsCommands[__${keyDetails.index}__].id}" />
+                                    <div class="form-group row" style="border:2px dashed #ddd; padding :10px; margin-top: 2px;">
+                                    <label class="col-md-3 col-form-label" for="val-suggestions">Malzeme<span class="text-danger">*</span></label>
+                                        <div class="col-md-3">
+                                            <input class="form-control" id="val-suggestions" th:field="*{ingredientCommands[__${key.index}__].ingredientDetailsCommands[__${keyDetails.index}__].description}" placeholder="Başlık" />
+                                            <button type="button" class="btn btn-default sil" onClick="$(this).closest('.ingredientDetails').remove();" >Sil</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <hr/>
+                        <p><h4>Tarif Hakkında</h4></p>
+                        <h2>
+                            <button type="button" id="addRecipeMadde" class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
+                                <i class="ti-plus"></i> Adım Ekle
+                            </button>
+                        </h2>
+                        <div id="recipeMadde">
+                            <div class="form-group row" th:each="recipeStep,key : ${recipeCommand.recipeSteps}">
+                                <input type="hidden" th:field="*{recipeSteps[__${key.index}__].id}" />
+                                <label class="col-md-3 col-form-label" for="val-suggestions"><span th:text="${'Adım ' + (key.index+1) + ' :'}">Adım 1 : <span><span
+                                        class="text-danger">*</span></label>
+                                <div class="col-md-3">
+                                    <textarea class="form-control" id="val-suggestions" th:field="*{recipeSteps[__${key.index}__].description}"
+                                              name="" rows="5"
+                                              placeholder="1. Adımı Giriniz."></textarea>
+                                    <button class="btn button-default remMadde" onclick="$(this).closest('.row').remove()">Sil</button>
+                                    <span class="text-danger"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="hidden" th:field="*{recipeSteps[__${key.index}__].imgURL}"/>
+                                    <input type="file" class="imgInput" th:field="*{recipeSteps[__${key.index}__].imageFile}"/>
+                                    <img class="image_upload_preview" src="http://placehold.it/100x100"
+                                         th:src="@{'https://s3.'+${@environment.getProperty('s3.region')}
+                                                                +'.'+${@environment.getProperty('s3.domain_name')}
+                                                                +'/'+${@environment.getProperty('s3.bucket')}
+                                                                +'/'+${recipeStep.getImgURL()}}"
+                                         style="height:100px; width:100px;" alt="your image"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr/>
+                        <p><h4>Dikkat Edilmesi Gerekenler</h4></p>
+                        <h2>
+                            <button type="button" id="addRecipeTips" class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5">
+                                <i class="ti-plus"></i> Adım Ekle
+                            </button>
+                        </h2>
+                        <div id="recipeTips">
+                            <div class="form-group row" th:each="recipeTip,key : ${recipeCommand.recipeTipsCommands}">
+                                <input type="hidden" th:field="*{recipeTipsCommands[__${key.index}__].id}"/>
+                                <label class="col-md-3 col-form-label" for="val-suggestions"><span th:text="${'Adım ' +(key.index+1)+ ' :'}">Adım 1 : </span><span
+                                        class="text-danger">*</span></label>
+                                <div class="col-md-3">
+                                    <textarea class="form-control" id="val-suggestions" th:field="*{recipeTipsCommands[__${key.index}__].description}"
+                                              name="" rows="5"
+                                              placeholder="1. Adımı Giriniz" th:placeholder="${(key.index+1) + ' Adımı Giriniz'}"></textarea>
+                                    <button class="btn button-default remTips" onclick="$(this).closest('.row').remove()">Sil</button>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-8 ml-auto">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End PAge Content -->
+
+
+</body>
+</html>

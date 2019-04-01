@@ -6,9 +6,6 @@ import com.sencerseven.basittarifler.domain.Users;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +27,10 @@ public interface RecipeRepository extends JpaRepository<Recipe,Long> {
     Long countAllBy();
 
     Page<Recipe> findRecipeByCategoriesInOrderByCreatedAtDesc(Pageable pageable,Set<Category> categories);
+
+
+    Page<Recipe> findRecipesByTags_TagsNameContaining(Pageable pageable,String tags);
+    List<Recipe> findRecipeByTags_TagsNameContaining(String tags);
 
 
 

@@ -14,6 +14,13 @@
     <!--jquery ui stylesheet-->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
+
+
+    <link rel="stylesheet" type="text/css" href="lib/css/prettify.css" th:href="@{/css/prettify.css}"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.css" th:href="@{/css/lib/html5-editor/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="src/bootstrap-wysihtml5.css" th:href="@{/css/lib/html5-editor/bootstrap-wysihtml5.css}"/>
+
+
     <!-- site favicon -->
     <link rel="icon" href="/images/favicon.png" th:src="@{/images/favicon.png}"/>
 
@@ -29,14 +36,27 @@
     <link rel="stylesheet" href="/css/slick.css" th:src="@{/css/slick.css}"/>
     <link rel="stylesheet" href="/css/slick-theme.css" th:src="@{/css/slick-theme.css}"/>
     <!--bootstrap stylesheets-->
-    <link rel="stylesheet" href="/css/bootstrap.css" th:src="@{/css/bootstrap.css}"/>
-    <link rel="stylesheet" href="/css/bootstrap-theme.css" th:src="@{/css/bootstrap-theme.css}"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.css" th:href="@{/css/bootstrap-theme.css}"/>
     <!--animate stylesheet-->
     <link rel="stylesheet" href="/css/animate.css" th:src="@{/css/animate.css}"/>
     <!--main stylesheet-->
     <link rel="stylesheet" href="/css/main.css" th:src="@{/css/main.css}"/>
 
     <link rel="stylesheet" href="/js/flexslider/flexslider.css" th:src="@{/js/flexslider/flexslider.css}"/>
+
+
+
+    <link href="css/helper.css" rel="stylesheet" th:href="@{/css/helper.css}">
+
+    <link href="css/style.css" rel="stylesheet" th:href="@{${css}}">
+
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+
+
 </head>
 <!--/*@thymesVar id="recipes" type="java.util.List"*/-->
 <!--/*@thymesVar id="recipe" type="com.sencerseven.basittarifler.domain.Recipe"*/-->
@@ -63,7 +83,18 @@
 <div th:replace="fragment/footer"></div>
 <!--footer ends-->
 
-<script src="/js/jquery-1.11.3.min.js" th:src="@{/js/jquery-1.11.3.min.js}"></script>
+
+
+<script src="/js/jquery-1.11.3.min.js" th:src="@{/js/jquery-1.7.2.min.js}"></script>
+
+<script src="src/bootstrap-wysihtml5.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+<script src="lib/js/prettify.js" th:src="@{/js/prettify.js}"></script>
+<script src="lib/js/wysihtml5-0.3.0.js" th:src="@{/js/wysihtml5-0.3.0.js}"></script>
+<script src="src/bootstrap-wysihtml5.js" th:src="@{/js/bootstrap-wysihtml5.js}"></script>
+
+
+
 <script src="/js/jquery-ui.js" th:src="@{/js/jquery-ui.js}"></script>
 <script src="/js/flexslider/jquery.flexslider-min.js" th:src="@{/js/flexslider/jquery.flexslider-min.js}"></script>
 <script src="/js/slick.min.js" th:src="@{/js/slick.min.js}"></script>
@@ -73,8 +104,16 @@
 <script src="/js/jquery.form.js"  th:src="@{/js/jquery.form.js}"></script>
 <script src="/js/jquery.validate.min.js"  th:src="@{/js/jquery.validate.min.js}"></script>
 <script src="/js/jquery.swipebox.js"  th:src="@{/js/jquery.swipebox.js}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 <script src="/js/custom.js"  th:src="@{/js/custom.js}"></script>
 <script src=""  th:src="@{${js}}"></script>
+
+
+<script>
+$('.textarea_editor').wysihtml5()
+</script>
 
 </body>
 </html>

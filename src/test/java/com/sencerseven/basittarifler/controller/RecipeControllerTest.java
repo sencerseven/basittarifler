@@ -5,10 +5,9 @@ import com.sencerseven.basittarifler.domain.*;
 import com.sencerseven.basittarifler.service.*;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.*;
-import org.omg.CORBA.INTERNAL;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -17,11 +16,12 @@ import org.springframework.ui.Model;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -51,6 +51,12 @@ public class RecipeControllerTest {
     @Mock
     Model model;
 
+    @Mock
+    CuisineService cuisineService;
+
+    @Mock
+    BKodService bKodService;
+
     RecipeController recipeController;
 
     private static final Long ID = 1L;
@@ -58,7 +64,7 @@ public class RecipeControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeController = new RecipeController(recipeService,recipeStepsService,recipeTipsService,commentService,categoryService,s3Services);
+        recipeController = new RecipeController(recipeService,recipeStepsService,recipeTipsService,commentService,categoryService,s3Services,cuisineService,bKodService);
 
     }
 

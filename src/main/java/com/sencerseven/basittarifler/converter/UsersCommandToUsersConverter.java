@@ -1,12 +1,8 @@
 package com.sencerseven.basittarifler.converter;
 
-import com.sencerseven.basittarifler.command.RoleCommand;
 import com.sencerseven.basittarifler.command.UsersCommand;
-import com.sencerseven.basittarifler.domain.Role;
 import com.sencerseven.basittarifler.domain.Users;
 import lombok.Synchronized;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;

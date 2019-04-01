@@ -6,9 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import javax.persistence.Temporal;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CommentCommandToCommentConverterTest {
 

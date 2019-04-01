@@ -5,7 +5,6 @@ import com.sencerseven.basittarifler.converter.UsersToUsersCommandConverter;
 import com.sencerseven.basittarifler.domain.Users;
 import com.sencerseven.basittarifler.model.CustomUserDetails;
 import com.sencerseven.basittarifler.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

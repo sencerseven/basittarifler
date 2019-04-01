@@ -2,7 +2,9 @@ package com.sencerseven.basittarifler.converter;
 
 import com.sencerseven.basittarifler.command.CommentCommand;
 import com.sencerseven.basittarifler.domain.Comment;
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,6 +19,8 @@ public class CommentToCommentCommandConverter implements Converter<Comment,Comme
         this.usersToUsersCommandConverter = usersToUsersCommandConverter;
     }
 
+    @Synchronized
+    @Nullable
     @Override
     public CommentCommand convert(Comment comment) {
         if(comment == null)

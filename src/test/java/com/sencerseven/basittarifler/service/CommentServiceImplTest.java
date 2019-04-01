@@ -3,25 +3,20 @@ package com.sencerseven.basittarifler.service;
 import com.sencerseven.basittarifler.converter.CommentCommandToCommentConverter;
 import com.sencerseven.basittarifler.converter.CommentToCommentCommandConverter;
 import com.sencerseven.basittarifler.converter.UsersCommandToUsersConverter;
-import com.sencerseven.basittarifler.converter.UsersCommandToUsersConverterTest;
 import com.sencerseven.basittarifler.domain.Comment;
 import com.sencerseven.basittarifler.domain.Recipe;
-import com.sencerseven.basittarifler.domain.Users;
 import com.sencerseven.basittarifler.repository.CommentRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CommentServiceImplTest {
 
