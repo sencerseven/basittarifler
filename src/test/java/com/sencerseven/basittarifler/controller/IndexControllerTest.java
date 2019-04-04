@@ -1,6 +1,7 @@
 package com.sencerseven.basittarifler.controller;
 
 import com.sencerseven.basittarifler.domain.Recipe;
+import com.sencerseven.basittarifler.service.CategoryService;
 import com.sencerseven.basittarifler.service.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +31,15 @@ public class IndexControllerTest {
     RecipeService recipeService;
 
     @Mock
+    CategoryService categoryService;
+
+    @Mock
     Model model;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        controller = new IndexController(recipeService);
+        controller = new IndexController(recipeService,categoryService);
     }
 
     @Test

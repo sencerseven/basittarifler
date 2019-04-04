@@ -24,14 +24,15 @@ public class IndexController {
 
     RecipeService recipeService;
 
-    @Autowired
+
     CategoryService categoryService;
 
     @Autowired
     UsersService usersService;
 
-    public IndexController(RecipeService recipeService) {
+    public IndexController(RecipeService recipeService,CategoryService categoryService) {
         this.recipeService = recipeService;
+        this.categoryService = categoryService;
     }
 
     @RequestMapping(value = {"/"})
