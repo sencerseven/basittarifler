@@ -43,6 +43,8 @@ public class Category implements Serializable {
             , inverseJoinColumns = @JoinColumn(name = "recipe_id"))
     Set<Recipe> recipes = new HashSet<>();
 
+    private boolean mainPageStatus;
+
     public Category addChildren(Category category) {
         this.getChildrenCategory().add(category);
         category.setParentCategory(this);

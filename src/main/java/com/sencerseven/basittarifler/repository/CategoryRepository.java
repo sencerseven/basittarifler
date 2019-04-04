@@ -19,6 +19,9 @@ public interface CategoryRepository extends CrudRepository<Category,Long> {
 
     Optional<Category> findCategoriesByIdAndCategoryUrl(Long catId, String catUrl);
 
+    List<Category> findCategoriesByMainPageStatus(Pageable pageable, Boolean active);
+
+
     @Modifying
     @Query("delete from Category c where c.id = ?1")
     void deleteCategoryById(Long id);

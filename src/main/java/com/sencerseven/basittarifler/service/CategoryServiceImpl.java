@@ -2,6 +2,7 @@ package com.sencerseven.basittarifler.service;
 
 import com.sencerseven.basittarifler.command.CategoryCommand;
 import com.sencerseven.basittarifler.converter.CategoryCommandToCategoryConverter;
+import com.sencerseven.basittarifler.converter.CategoryToCategoryCommandConverter;
 import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.exceptions.NotFoundException;
 import com.sencerseven.basittarifler.repository.CategoryRepository;
@@ -12,16 +13,19 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
     CategoryRepository categoryRepository;
     CategoryCommandToCategoryConverter categoryCommandToCategoryConverter;
+    CategoryToCategoryCommandConverter categoryToCategoryCommandConverter;
 
     public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
         this.categoryCommandToCategoryConverter = new CategoryCommandToCategoryConverter(this);
+        this.categoryToCategoryCommandConverter = new CategoryToCategoryCommandConverter();
     }
 
     @Override
@@ -75,6 +79,14 @@ public class CategoryServiceImpl implements CategoryService {
 
         return null;
     }
+
+    @Override
+    public Set<CategoryCommand> getCategoriesByMainPageStatus(int page, int size, boolean status) {
+        Set<CategoryCommand> categories = new HashSet<>();
+        categories = categoryRepository.findCategoriesByMainPageStatus(PageRequest.of(page,size),status).stream().map(category -> categoryToCategoryCommandConverter.convert(category)).collect(Collectors.toSet());
+        return categories;
+    }
+
     @Transactional
     @Override
     public void deleteCategory(Long id) {

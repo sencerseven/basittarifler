@@ -17,5 +17,7 @@ public interface CategoryService {
 
     Category saveCategoryCommand(CategoryCommand categoryCommand);
 
+    Set<CategoryCommand> getCategoriesByMainPageStatus(int page,int size, boolean status);
+
     void deleteCategory(Long id);
 }

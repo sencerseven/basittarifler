@@ -1,7 +1,10 @@
 package com.sencerseven.basittarifler.controller;
 
+import com.sencerseven.basittarifler.command.CategoryCommand;
 import com.sencerseven.basittarifler.command.UsersCommand;
+import com.sencerseven.basittarifler.domain.Category;
 import com.sencerseven.basittarifler.domain.Recipe;
+import com.sencerseven.basittarifler.service.CategoryService;
 import com.sencerseven.basittarifler.service.RecipeService;
 import com.sencerseven.basittarifler.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class IndexController {
 
     RecipeService recipeService;
+
+    @Autowired
+    CategoryService categoryService;
 
     @Autowired
     UsersService usersService;
@@ -31,8 +38,11 @@ public class IndexController {
     public String indexAction(Model model){
         List<Recipe> recipes = recipeService.getLimitRecipes(PageRequest.of(0,3));
         List<Recipe> populerRecipes = recipeService.getAllPopulerRecipe(0,3);
+        Set<CategoryCommand> menuList =  categoryService.getCategoriesByMainPageStatus(0,4,true);
+
         model.addAttribute("recipes",recipes);
         model.addAttribute("pupulerRecipes",populerRecipes);
+        model.addAttribute("menuList",menuList);
 
         return ("index");
 

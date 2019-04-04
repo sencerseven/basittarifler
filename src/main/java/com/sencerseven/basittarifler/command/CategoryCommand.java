@@ -23,6 +23,10 @@ public class CategoryCommand {
 
     private CategoryCommand parentCategory;
 
+    private boolean mainPageStatus;
+
     private boolean menuActive;
+
+    private String categoryUrl;
 
 }

@@ -36,6 +36,7 @@ public class CategoryCommandToCategoryConverter implements Converter<CategoryCom
         category.setCategoryName(categoryCommand.getCategoryName());
         category.setMenuActive(categoryCommand.isMenuActive());
         category.setCategoryUrl(basitTariflerHelpers.toSlug(categoryCommand.getCategoryName()));
+        category.setMainPageStatus(categoryCommand.isMainPageStatus());
 
 
         if (categoryCommand.getParentCategory() != null && categoryCommand.getParentCategory().getId() != null) {
