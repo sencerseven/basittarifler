@@ -11,7 +11,7 @@ INSERT INTO CATEGORY(category_name,category_description,menu_active,main_page_st
 INSERT INTO CATEGORY(category_name,category_description,menu_active,main_page_status,category_url,parent_category_id) VALUES ('omletler','omletler',true,true,'omletler',2);
 
 
-INSERT INTO RECIPE(created_at,description,title,view_count,users_id) VALUES (DATE '2018-03-10','Sodalı Kırpık Börek ','Sodalı Kırpık Börek',5,1);
+INSERT INTO RECIPE(created_at,description,title,view_count,user_id) VALUES (DATE '2018-03-10','Sodalı Kırpık Börek ','Sodalı Kırpık Börek',5,1);
 INSERT INTO RECIPE(created_at,description,title,view_count) VALUES (DATE '2018-06-10','Sodalı Börek Tarifi (Videolu)','Sodalı Börek Tarifi (Videolu)',6);
 
 
