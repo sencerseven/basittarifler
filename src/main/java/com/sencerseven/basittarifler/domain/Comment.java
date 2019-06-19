@@ -29,6 +29,7 @@ public class Comment implements Serializable {
     private Users users;
 
     @ManyToOne
+    @JoinColumn(name = "RECIPE_ID")
     private Recipe recipe;
 
     public Comment() {
