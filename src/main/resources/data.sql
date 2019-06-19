@@ -4,11 +4,11 @@ INSERT INTO ROLE(role) VALUES ('ADMIN');
 
 INSERT INTO USER_ROLE(user_id,role_id) VALUES (1,1);
 
-INSERT INTO CATEGORY(category_name,category_description,menu_active,main_page_status,category_url) VALUES ('Öğlen Yemeği','Öğlen Yemeği',true,true,'oglen-yemegi');
-INSERT INTO CATEGORY(category_name,category_description,menu_active,main_page_status,category_url) VALUES ('Akşam Yemeği','Akşam Yemeği',true,true,'aksam-yemegi');
-INSERT INTO CATEGORY(category_name,category_description,menu_active,main_page_status,category_url) VALUES ('Kahvaltı','Kahvaltı',true,true,'kahvalti');
-INSERT INTO CATEGORY(category_name,category_description,menu_active,main_page_status,category_url,parent_category_id) VALUES ('atıştırmalık','atıştırmalık',true,true,'atistirmalik',2);
-INSERT INTO CATEGORY(category_name,category_description,menu_active,main_page_status,category_url,parent_category_id) VALUES ('omletler','omletler',true,true,'omletler',2);
+INSERT INTO CATEGORY(id,category_name,category_description,menu_active,main_page_status,category_url) VALUES (1,'Öğlen Yemeği','Öğlen Yemeği',true,true,'oglen-yemegi');
+INSERT INTO CATEGORY(id,category_name,category_description,menu_active,main_page_status,category_url) VALUES (2,'Akşam Yemeği','Akşam Yemeği',true,true,'aksam-yemegi');
+INSERT INTO CATEGORY(id,category_name,category_description,menu_active,main_page_status,category_url) VALUES (3,'Kahvaltı','Kahvaltı',true,true,'kahvalti');
+INSERT INTO CATEGORY(id,category_name,category_description,menu_active,main_page_status,category_url,parent_category_id) VALUES (4,'atıştırmalık','atıştırmalık',true,true,'atistirmalik',2);
+INSERT INTO CATEGORY(id,category_name,category_description,menu_active,main_page_status,category_url,parent_category_id) VALUES (5,'omletler','omletler',true,true,'omletler',2);
 
 
 INSERT INTO RECIPE(created_at,description,title,view_count,user_id) VALUES (DATE '2018-03-10','Sodalı Kırpık Börek ','Sodalı Kırpık Börek',5,1);
