@@ -22,7 +22,7 @@ public class UsersDetail implements Serializable {
     private String profileImg;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="user_id")
+    @JoinColumn(name ="USER_ID")
     Users users;
 
     public UsersDetail() {

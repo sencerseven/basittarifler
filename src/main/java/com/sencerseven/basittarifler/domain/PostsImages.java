@@ -21,6 +21,7 @@ public class PostsImages {
     private String description;
 
     @ManyToOne
+    @JoinColumn(name = "POSTS_ID")
     private Posts posts;
 
     public PostsImages(String url, String description, Posts posts) {

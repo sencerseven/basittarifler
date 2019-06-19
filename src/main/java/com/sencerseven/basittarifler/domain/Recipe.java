@@ -41,9 +41,11 @@ public class Recipe extends BasePost implements Serializable {
     private int cookMin;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "NUTRITION_ID")
     Nutrition nutrition;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CUISINE_ID")
     Cuisine cuisine;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})

@@ -35,6 +35,7 @@ public class Nutrition implements Serializable {
     private String sugar;
 
     @OneToOne
+    @JoinColumn(name = "RECIPE_ID")
     private Recipe recipe;
 
     public Nutrition() {

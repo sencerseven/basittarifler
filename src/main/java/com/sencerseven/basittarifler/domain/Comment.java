@@ -25,6 +25,7 @@ public class Comment implements Serializable {
     private Date createdAt;
 
     @ManyToOne
+    @JoinColumn(name = "USER_ID")
     private Users users;
 
     @ManyToOne

@@ -19,6 +19,7 @@ public class Tags {
     private String tagsName;
 
     @OneToOne(optional = false)
+    @JoinColumn(name = "RECIPE_ID")
     Recipe recipe;
 
     public Tags() {
