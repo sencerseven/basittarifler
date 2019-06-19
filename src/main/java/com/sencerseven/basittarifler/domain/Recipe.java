@@ -65,6 +65,7 @@ public class Recipe extends BasePost implements Serializable {
     private Set<RecipeTips> recipeTips = new LinkedHashSet<>();
 
     @ManyToOne
+    @Column(name = "USER_ID")
     private Users users;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
