@@ -1,14 +1,14 @@
-INSERT INTO users(email,password,user_name,last_name,active) VALUES ('sencer@sencer.com','123','sencer','seven',1);
+INSERT INTO users(id,email,password,user_name,last_name,active) VALUES (1,'sencer@sencer.com','123','sencer','seven',1);
 INSERT INTO users_detail(description,profile_img,user_id) VALUES ('Bu benim description yazımdır.','sencerseven.png','1');
-INSERT INTO role(role) VALUES ('ADMIN');
+INSERT INTO role(id,role) VALUES (1,'ADMIN');
 
 INSERT INTO user_role(user_id,role_id) VALUES (1,1);
 
-INSERT INTO category(id,category_name,category_description,menu_active,main_page_status,category_url) VALUES (1,'Öğlen Yemeği','Öğlen Yemeği',true,true,'oglen-yemegi');
-INSERT INTO category(id,category_name,category_description,menu_active,main_page_status,category_url) VALUES (2,'Akşam Yemeği','Akşam Yemeği',true,true,'aksam-yemegi');
-INSERT INTO category(id,category_name,category_description,menu_active,main_page_status,category_url) VALUES (3,'Kahvaltı','Kahvaltı',true,true,'kahvalti');
-INSERT INTO category(id,category_name,category_description,menu_active,main_page_status,category_url,parent_category_id) VALUES (4,'atıştırmalık','atıştırmalık',true,true,'atistirmalik',2);
-INSERT INTO category(id,category_name,category_description,menu_active,main_page_status,category_url,parent_category_id) VALUES (5,'omletler','omletler',true,true,'omletler',2);
+INSERT INTO category(category_name,category_description,menu_active,main_page_status,category_url) VALUES ('Öğlen Yemeği','Öğlen Yemeği',true,true,'oglen-yemegi');
+INSERT INTO category(category_name,category_description,menu_active,main_page_status,category_url) VALUES ('Akşam Yemeği','Akşam Yemeği',true,true,'aksam-yemegi');
+INSERT INTO category(category_name,category_description,menu_active,main_page_status,category_url) VALUES ('Kahvaltı','Kahvaltı',true,true,'kahvalti');
+INSERT INTO category(category_name,category_description,menu_active,main_page_status,category_url,parent_category_id) VALUES ('atıştırmalık','atıştırmalık',true,true,'atistirmalik',2);
+INSERT INTO category(category_name,category_description,menu_active,main_page_status,category_url,parent_category_id) VALUES ('omletler','omletler',true,true,'omletler',2);
 
 
 INSERT INTO recipe(created_at,description,title,view_count,user_id) VALUES (DATE '2018-03-10','Sodalı Kırpık Börek ','Sodalı Kırpık Börek',5,1);
