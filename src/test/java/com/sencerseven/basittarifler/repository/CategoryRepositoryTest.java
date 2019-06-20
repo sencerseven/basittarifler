@@ -28,7 +28,7 @@ public class CategoryRepositoryTest {
         Recipe recipe = new Recipe();
         recipe.setId(1L);
 
-        Optional<Category> category = categoryRepository.findByCategoryDescription("Öğlen Yemeği");
+        Optional<Category> category = categoryRepository.findByCategoryDescription("Oğlen Yemegi");
 
         assertEquals(recipe.getId(),category.get().getId());
 
