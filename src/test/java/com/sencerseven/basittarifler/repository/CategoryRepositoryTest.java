@@ -33,7 +33,7 @@ public class CategoryRepositoryTest {
         assertEquals(recipe.getId(),category.get().getId());
 
     }
-
+*/
 
     @Test
     public void findCategoriesByMenuActive() throws Exception{
@@ -76,5 +76,5 @@ public class CategoryRepositoryTest {
 
         assertEquals(ID,ID);
     }
-*/
+
 }
