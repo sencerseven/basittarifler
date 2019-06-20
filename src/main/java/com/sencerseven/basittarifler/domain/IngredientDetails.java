@@ -22,7 +22,6 @@ public class IngredientDetails implements Serializable {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "INGREDIENT_ID")
     Ingredient ingredient;
 
 

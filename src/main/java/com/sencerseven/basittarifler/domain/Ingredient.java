@@ -23,7 +23,6 @@ public class Ingredient implements Serializable {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "RECIPE_ID")
     private Recipe recipe;
 
     @OneToMany(mappedBy = "ingredient",cascade = CascadeType.ALL,orphanRemoval = true)

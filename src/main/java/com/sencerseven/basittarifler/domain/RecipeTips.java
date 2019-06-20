@@ -20,7 +20,6 @@ public class RecipeTips implements Serializable {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "RECIPE_ID")
     private Recipe recipe;
 
     private int viewRows;

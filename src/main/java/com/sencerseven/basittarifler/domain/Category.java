@@ -28,7 +28,6 @@ public class Category implements Serializable {
     private String categoryUrl;
 
     @ManyToOne
-    @JoinColumn(name = "PARENT_CATEGORY_ID")
     private Category parentCategory;
 
     @OneToMany(mappedBy = "parentCategory", cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE},

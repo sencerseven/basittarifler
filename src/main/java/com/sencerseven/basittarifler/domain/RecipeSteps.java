@@ -26,7 +26,6 @@ public class RecipeSteps implements Serializable {
     private int viewRows;
 
     @ManyToOne
-    @JoinColumn(name = "RECIPE_ID")
     private Recipe recipe;
 
     public RecipeSteps() {

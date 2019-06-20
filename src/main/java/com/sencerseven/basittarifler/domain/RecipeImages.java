@@ -22,7 +22,6 @@ public class RecipeImages {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "RECIPE_ID")
     private Recipe recipe;
 
     public RecipeImages() {

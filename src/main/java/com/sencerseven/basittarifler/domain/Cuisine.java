@@ -19,7 +19,6 @@ public class Cuisine {
     private String cuisine;
 
     @OneToOne
-    @JoinColumn(name = "RECIPE_ID")
     private Recipe recipe;
 
     public Cuisine() {
