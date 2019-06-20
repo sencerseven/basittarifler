@@ -20,6 +20,7 @@ public class UsersDetail implements Serializable {
 
     private String description;
 
+    @Column(name = "profile_img")
     private String profileImg;
 
     @OneToOne(fetch = FetchType.LAZY)
