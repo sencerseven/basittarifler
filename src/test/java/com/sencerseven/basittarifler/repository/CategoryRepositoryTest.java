@@ -22,7 +22,7 @@ public class CategoryRepositoryTest {
 
     @Autowired
     CategoryRepository categoryRepository;
-
+/*
     @Test
     public void findByCategoryDescriptionTest(){
         Recipe recipe = new Recipe();
@@ -76,5 +76,5 @@ public class CategoryRepositoryTest {
 
         assertEquals(ID,ID);
     }
-
+*/
 }
