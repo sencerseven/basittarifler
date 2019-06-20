@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode(exclude = {"recipe"})
 @Entity
+@Table(name = "RECIPE_IMAGES")
 public class RecipeImages {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,7 @@ public class RecipeImages {
     private String description;
 
     @ManyToOne
+    @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
     public RecipeImages() {

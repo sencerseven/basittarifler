@@ -14,6 +14,7 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(exclude = {"recipes", "categories", "parentCategory", "childrenCategory"})
 @Entity
+@Table(name = "CATEGORY")
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -28,6 +29,7 @@ public class Category implements Serializable {
     private String categoryUrl;
 
     @ManyToOne
+    @JoinColumn(name = "parent_category_id")
     private Category parentCategory;
 
     @OneToMany(mappedBy = "parentCategory", cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE},

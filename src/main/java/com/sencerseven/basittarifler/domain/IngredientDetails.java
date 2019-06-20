@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode(exclude = "ingredient")
 @Entity
+@Table(name = "INGREDIENT_DETAILS")
 public class IngredientDetails implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -22,6 +23,7 @@ public class IngredientDetails implements Serializable {
     private String description;
 
     @ManyToOne
+    @JoinColumn(name="ingredient_id")
     Ingredient ingredient;
 
 

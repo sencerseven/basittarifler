@@ -14,6 +14,7 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(exclude = {"postsImages"})
 @Entity
+@Table(name = "POSTS")
 public class Posts implements Serializable {
 
     private static final Long serialVersionUID = 1L;

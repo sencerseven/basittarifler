@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Setter
 @Getter
 @Entity
+@Table(name = "USERS_DETAIL")
 public class UsersDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -22,6 +23,7 @@ public class UsersDetail implements Serializable {
     private String profileImg;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_id")
     Users users;
 
     public UsersDetail() {

@@ -14,6 +14,7 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(exclude = {"recipeTips", "ingredient", "categories", "recipeSteps", "users", "recipeStats", "nutrition", "cuisine", "tags"})
 @Entity
+@Table(name = "RECIPE")
 public class Recipe extends BasePost implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -41,9 +42,11 @@ public class Recipe extends BasePost implements Serializable {
     private int cookMin;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "nutrition_id")
     Nutrition nutrition;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="cuisine_id")
     Cuisine cuisine;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
@@ -65,6 +68,7 @@ public class Recipe extends BasePost implements Serializable {
     private Set<RecipeTips> recipeTips = new LinkedHashSet<>();
 
     @ManyToOne
+    @JoinColumn(name = "users_id")
     private Users users;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -75,6 +79,7 @@ public class Recipe extends BasePost implements Serializable {
     private Set<RecipeImages> recipeImages = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tags_id")
     private Tags tags;
 
 

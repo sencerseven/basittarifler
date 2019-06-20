@@ -13,6 +13,7 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(exclude = {"recipe","ingredientDetails"})
 @Entity
+@Table(name="INGREDIENT")
 public class Ingredient implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -23,6 +24,7 @@ public class Ingredient implements Serializable {
     private String description;
 
     @ManyToOne
+    @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
     @OneToMany(mappedBy = "ingredient",cascade = CascadeType.ALL,orphanRemoval = true)

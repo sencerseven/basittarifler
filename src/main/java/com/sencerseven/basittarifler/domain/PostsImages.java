@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode(exclude = {"recipe"})
 @Entity
+@Table(name = "POSTS_IMAGES")
 public class PostsImages {
 
     @Id
@@ -21,6 +22,7 @@ public class PostsImages {
     private String description;
 
     @ManyToOne
+    @JoinColumn(name = "posts_id")
     private Posts posts;
 
     public PostsImages(String url, String description, Posts posts) {

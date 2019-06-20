@@ -12,6 +12,7 @@ import java.util.Date;
 @Getter
 @EqualsAndHashCode(exclude = {"users","recipe"})
 @Entity
+@Table(name = "COMMENT")
 public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -25,9 +26,11 @@ public class Comment implements Serializable {
     private Date createdAt;
 
     @ManyToOne
+    @JoinColumn(name = "users_id")
     private Users users;
 
     @ManyToOne
+    @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
     public Comment() {

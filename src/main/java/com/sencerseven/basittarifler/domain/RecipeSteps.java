@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode(exclude = "recipe")
 @Entity
+@Table(name = "RECIPE_STEPS")
 public class RecipeSteps implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -26,6 +27,7 @@ public class RecipeSteps implements Serializable {
     private int viewRows;
 
     @ManyToOne
+    @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
     public RecipeSteps() {

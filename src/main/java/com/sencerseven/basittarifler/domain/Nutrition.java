@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode(exclude = "recipe")
 @Entity
+@Table(name = "NUTRITION")
 public class Nutrition implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -35,6 +36,7 @@ public class Nutrition implements Serializable {
     private String sugar;
 
     @OneToOne
+    @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
     public Nutrition() {

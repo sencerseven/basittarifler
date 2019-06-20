@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode(exclude = {"recipe"})
 @Entity
+@Table(name = "TAGS")
 public class Tags {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +20,7 @@ public class Tags {
     private String tagsName;
 
     @OneToOne(optional = false)
+    @JoinColumn(name = "recipe_id")
     Recipe recipe;
 
     public Tags() {

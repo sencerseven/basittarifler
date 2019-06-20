@@ -31,13 +31,14 @@ public class Users implements Serializable {
     private int active;
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "USERS_ROLE",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.DETACH)
     private Set<Recipe> recipes = new HashSet<>();
 
     @OneToOne(mappedBy = "users" ,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "users_detail_id")
     UsersDetail usersDetail;
 
     @OneToMany(mappedBy = "users",fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
