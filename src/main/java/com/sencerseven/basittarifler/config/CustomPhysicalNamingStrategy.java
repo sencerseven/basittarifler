@@ -8,30 +8,30 @@ public class CustomPhysicalNamingStrategy implements PhysicalNamingStrategy {
 
     @Override
     public Identifier toPhysicalCatalogName(final Identifier identifier, final JdbcEnvironment jdbcEnv) {
-        return convertToSnakeCase(identifier);
+        return convertLowerUnderScore(identifier);
     }
 
     @Override
     public Identifier toPhysicalColumnName(final Identifier identifier, final JdbcEnvironment jdbcEnv) {
-        return convertToSnakeCase(identifier);
+        return convertLowerUnderScore(identifier);
     }
 
     @Override
     public Identifier toPhysicalSchemaName(final Identifier identifier, final JdbcEnvironment jdbcEnv) {
-        return convertToSnakeCase(identifier);
+        return convertLowerUnderScore(identifier);
     }
 
     @Override
     public Identifier toPhysicalSequenceName(final Identifier identifier, final JdbcEnvironment jdbcEnv) {
-        return convertToSnakeCase(identifier);
+        return convertLowerUnderScore(identifier);
     }
 
     @Override
     public Identifier toPhysicalTableName(final Identifier identifier, final JdbcEnvironment jdbcEnv) {
-        return convertToSnakeCase(identifier);
+        return upperUnderScore(identifier);
     }
 
-    private Identifier convertToSnakeCase(final Identifier identifier) {
+    private Identifier convertLowerUnderScore(final Identifier identifier) {
         if (identifier == null) {
             return identifier;
         }
@@ -43,5 +43,13 @@ public class CustomPhysicalNamingStrategy implements PhysicalNamingStrategy {
                 .toLowerCase();
         return Identifier.toIdentifier(newName);
     }
+    private Identifier upperUnderScore(final Identifier identifier) {
+        if (identifier == null) {
+            return identifier;
+        }
+        final String newName =  convertLowerUnderScore(identifier).getText().toUpperCase();
+        return Identifier.toIdentifier(newName);
+    }
+
 
 }
