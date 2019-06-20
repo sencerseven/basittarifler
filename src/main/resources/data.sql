@@ -1,4 +1,4 @@
-INSERT INTO USERS(id,email,password,user_name,last_name,active) VALUES (1,'sencer@sencer.com','123','sencer','seven',1);
+﻿INSERT INTO USERS(id,email,password,user_name,last_name,active) VALUES (1,'sencer@sencer.com','123','sencer','seven',1);
 INSERT INTO USERS_DETAIL(description,profile_img,users_id) VALUES ('description','sencerseven.png','1');
 INSERT INTO ROLE(id,role) VALUES (1,'ADMIN');
 
