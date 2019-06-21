@@ -2,7 +2,7 @@ package com.sencerseven.basittarifler.converter;
 
 import com.sencerseven.basittarifler.command.CategoryCommand;
 import com.sencerseven.basittarifler.domain.Category;
-import com.sencerseven.basittarifler.functions.BasitTariflerHelpers;
+import com.sencerseven.basittarifler.functions.BasitTariflerHelpersImpl;
 import com.sencerseven.basittarifler.service.CategoryService;
 import lombok.Synchronized;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class CategoryCommandToCategoryConverter implements Converter<CategoryCom
     CategoryService categoryService;
 
     
-    BasitTariflerHelpers basitTariflerHelpers = new BasitTariflerHelpers();
+    BasitTariflerHelpersImpl basitTariflerHelpers = new BasitTariflerHelpersImpl();
 
 
     public CategoryCommandToCategoryConverter(CategoryService categoryService) {
