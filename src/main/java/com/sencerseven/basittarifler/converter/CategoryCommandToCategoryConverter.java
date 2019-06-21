@@ -15,8 +15,8 @@ public class CategoryCommandToCategoryConverter implements Converter<CategoryCom
 
     CategoryService categoryService;
 
-    @Autowired
-    BasitTariflerHelpers basitTariflerHelpers;
+    
+    BasitTariflerHelpers basitTariflerHelpers = new BasitTariflerHelpers();
 
 
     public CategoryCommandToCategoryConverter(CategoryService categoryService) {
