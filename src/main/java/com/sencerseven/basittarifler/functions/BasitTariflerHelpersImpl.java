@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.text.Normalizer;
 import java.util.regex.Pattern;
 
-@Service
+
 public class BasitTariflerHelpersImpl implements BasitTariflerHelpers {
 
     @Override

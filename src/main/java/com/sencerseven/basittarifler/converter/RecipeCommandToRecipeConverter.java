@@ -3,6 +3,7 @@ package com.sencerseven.basittarifler.converter;
 import com.sencerseven.basittarifler.command.RecipeCommand;
 import com.sencerseven.basittarifler.domain.Recipe;
 import com.sencerseven.basittarifler.functions.BasitTariflerHelpers;
+import com.sencerseven.basittarifler.functions.BasitTariflerHelpersImpl;
 import com.sencerseven.basittarifler.service.CategoryService;
 import com.sencerseven.basittarifler.service.CuisineService;
 import lombok.Synchronized;
@@ -26,7 +27,7 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, 
     CuisineService cuisineService;
     TagsCommandToTagsConverter tagsCommandToTagsConverter;
 
-    @Autowired
+
     BasitTariflerHelpers basitTariflerHelpers;
 
 
@@ -41,6 +42,7 @@ public class RecipeCommandToRecipeConverter implements Converter<RecipeCommand, 
         this.cuisineCommandToCuisineConverter = cuisineCommandToCuisineConverter;
         this.cuisineService = cuisineService;
         this.tagsCommandToTagsConverter = tagsCommandToTagsConverter;
+        basitTariflerHelpers = new BasitTariflerHelpersImpl();
     }
 
     @Synchronized

@@ -3,6 +3,7 @@ package com.sencerseven.basittarifler.converter;
 import com.sencerseven.basittarifler.command.RecipeImagesCommand;
 import com.sencerseven.basittarifler.domain.RecipeImages;
 import com.sencerseven.basittarifler.functions.BasitTariflerHelpers;
+import com.sencerseven.basittarifler.functions.BasitTariflerHelpersImpl;
 import com.sencerseven.basittarifler.service.S3Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
@@ -13,11 +14,12 @@ public class RecipeImagesCommandToRecipeImagesConverter implements Converter<Rec
 
     S3Services s3Services;
 
-    @Autowired
+
     BasitTariflerHelpers basitTariflerHelpers;
 
     public RecipeImagesCommandToRecipeImagesConverter(S3Services s3Services) {
         this.s3Services = s3Services;
+        basitTariflerHelpers = new BasitTariflerHelpersImpl();
     }
 
     @Override

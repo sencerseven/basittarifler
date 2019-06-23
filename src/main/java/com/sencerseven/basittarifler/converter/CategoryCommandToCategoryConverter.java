@@ -16,11 +16,13 @@ public class CategoryCommandToCategoryConverter implements Converter<CategoryCom
     CategoryService categoryService;
 
     
-    BasitTariflerHelpersImpl basitTariflerHelpers = new BasitTariflerHelpersImpl();
+    BasitTariflerHelpersImpl basitTariflerHelpers;
 
 
     public CategoryCommandToCategoryConverter(CategoryService categoryService) {
         this.categoryService = categoryService;
+        basitTariflerHelpers = new BasitTariflerHelpersImpl();
+
     }
 
     @Synchronized
