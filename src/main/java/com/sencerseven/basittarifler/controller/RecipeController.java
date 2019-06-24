@@ -6,6 +6,9 @@ import com.sencerseven.basittarifler.command.UsersCommand;
 import com.sencerseven.basittarifler.domain.*;
 import com.sencerseven.basittarifler.model.JsonResponder;
 import com.sencerseven.basittarifler.service.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,6 +34,7 @@ public class RecipeController {
     CuisineService cuisineService;
     BKodService bKodService;
 
+    Logger log = LoggerFactory.getLogger(RecipeController.class);
 
 
     public RecipeController(RecipeService recipeService,
@@ -56,9 +60,11 @@ public class RecipeController {
     public String indexAction(@AuthenticationPrincipal UsersCommand users,@PathVariable String id,
                               Model model) throws NumberFormatException {
 
-
+        log.debug("Index Action - User -> " + users.getId());
         Recipe recipe = recipeService.getFindById(Long.valueOf(id));
+        log.debug("recipe" + recipe.getId());
         RecipeCommand recipeCommand = recipeService.getCommandFindById(Long.valueOf(id));
+        log.debug("recipe" + recipe.getId());
         List<RecipeSteps> recipeStepsList = recipeStepsService.getByRecipeOrderByViewRows(recipe);
         List<RecipeTips> recipeTipsList = recipeTipsService.getByRecipeOrderByViewRows(recipe);
         List<Recipe> recipeList = recipeService.getRecipeOrderByViewCountAndLimit(0, 3);
