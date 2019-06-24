@@ -42,7 +42,7 @@
                         <tbody>
                         <tr  th:each="recipe : ${recipes.getContent()}">
                             <td th:text="${recipe.id}">Tiger Nixon</td>
-                            <td th:text="${recipe.recipeTitle}">System Architect</td>
+                            <td th:text="${recipe.title}">System Architect</td>
                             <td><span th:each="category : ${recipe.getCategories()}" th:text="${category.getCategoryName()}"></span></td>
                             <td>
                                 <a href="" th:href="@{'/admin/recipe/edit/'+${recipe.id}}"><i class="fa fa-pencil-square-o"></i></a>
