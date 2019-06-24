@@ -1,6 +1,9 @@
 package com.sencerseven.basittarifler.interceptor;
 
 import com.sencerseven.basittarifler.command.UsersCommand;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.method.HandlerMethod;
@@ -17,13 +20,15 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
     public static final String actionDef = "Action";
 
     Locale locale = new Locale("en","US");
-
+    Logger log = LoggerFactory.getLogger(BaseInterceptor.class);
 
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         String controllerName ="";
         String actionName ="";
+        try{
+
         if(handler instanceof HandlerMethod && modelAndView != null){
             HandlerMethod handlerMethod = (HandlerMethod) handler;
 
@@ -76,6 +81,9 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 
         }
 
+        }catch (Exception e){
+            log.warn(e.getMessage());
+        }
 
 
 
