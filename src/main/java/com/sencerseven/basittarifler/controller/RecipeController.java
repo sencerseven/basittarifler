@@ -60,7 +60,7 @@ public class RecipeController {
     public String indexAction(@AuthenticationPrincipal UsersCommand users,@PathVariable String id,
                               Model model) throws NumberFormatException {
 
-        log.debug("Index Action - User -> " + users.getId());
+        //log.debug("Index Action - User -> " + users.getId());
         Recipe recipe = recipeService.getFindById(Long.valueOf(id));
         log.debug("recipe" + recipe.getId());
         RecipeCommand recipeCommand = recipeService.getCommandFindById(Long.valueOf(id));
@@ -71,7 +71,7 @@ public class RecipeController {
         List<Recipe> recipesUsers = recipeService.getRecipesByUsers(0, 3, recipe.getUsers());
         List<Comment> commentList = commentService.getCommentsByRecipeOrderByCreatedAtAsc(recipe);
         Set<Category> categories = categoryService.getCategoriesByMenuActive(0,10,true);
-        Set<BKod> bKods = bKodService.findAllByBkod(0,10,"measurement");
+        //Set<BKod> bKods = bKodService.findAllByBkod(0,10,"measurement");
 
 
         Page<Recipe> tagss = recipeService.findRecipeByTagsContaining(0,10,"oldu");
@@ -88,7 +88,7 @@ public class RecipeController {
         model.addAttribute("recipesUsers", recipesUsers);
         model.addAttribute("recipeComment", commentList);
         model.addAttribute("recipesPopuler", recipesPopuler);
-        model.addAttribute("bKods",bKods);
+        //model.addAttribute("bKods",bKods);
 
         model.addAttribute("commentCommand", new CommentCommand());
         model.addAttribute("categories", categories);
